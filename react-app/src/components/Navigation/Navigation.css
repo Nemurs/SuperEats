@@ -5,3 +5,48 @@
 .hidden {
   display: none;
 }
+
+.nav-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0px;
+}
+
+.home-sidebar-wrapper, .login-signup-wrapper, .cart-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20%;
+  column-gap: 5px;
+}
+
+.home-button {
+  background-color: transparent;
+  border: none;
+}
+
+.home-button > a {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+}
+
+/*DARK*/
+
+.nav-list.dark-background{
+  background-color: black;
+}
+
+.home-button.dark-background > a {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+}
+
+.home-button.dark-background > a >span {
+  color: #2dbe64;
+}

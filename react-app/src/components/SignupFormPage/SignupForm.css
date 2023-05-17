@@ -1,0 +1,71 @@
+.signup-form-wrapper{
+    height: 600px;
+    width: 350px;
+    padding: 20px;
+    align-self: center;
+}
+
+.signup-form-wrapper, .signup-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form{
+    row-gap: 10px;
+    width: 100%;
+}
+.signup-form > label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    width: 95%;
+}
+
+.city-state-fields, .firstName-lastName-fields{
+    display: flex;
+    /* column-gap: 10px; */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.city-state-fields > input, .firstName-lastName-fields > input{
+    height: 30px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.state-input{
+    width: 25%;
+}
+.city-input{
+    width: 65%;
+}
+
+.firstName-input, .lastName-input{
+    width: 45%;
+}
+
+.signup-form-text{
+    width: fit-content;
+    height: fit-content;
+    margin:5px;
+    font-weight: normal;
+}
+
+.signup-form > button{
+    width: 100%;
+    height: 40px;
+}
+
+.signup-form > label > input {
+    width: 100%;
+    height: 30px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    padding: 5px;
+}

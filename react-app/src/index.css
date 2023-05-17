@@ -1,1 +1,49 @@
-/* TODO Add site wide styles */
+body{
+    font-family: 'Uber Move Text', sans-serif;
+    margin: 0px;
+    border: none;
+}
+
+.black-button-round{
+    background-color: black;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 10px;
+}
+.black-button-square{
+    background-color: black;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.white-button-round{
+    background-color: white;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+span.bold{
+    font-weight: bold;
+}
+
+.site-wrapper{
+    background-image: none;
+    height: 100vh;
+    width: 100%;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    cursor: pointer;
+}
+
+.error-list-item{
+    color:red;
+}

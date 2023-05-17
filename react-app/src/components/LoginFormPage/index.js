@@ -22,35 +22,35 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+    <div className="login-form-wrapper">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1 className="login-form-text">Login</h1>
+        {errors.length ? (<ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="error-list-item">{error}</li>
           ))}
-        </ul>
+        </ul>) : <></>}
         <label>
-          Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email address"
             required
           />
         </label>
         <label>
-          Password
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="black-button-square">Continue</button>
       </form>
-    </>
+    </div>
   );
 }
 
