@@ -11,7 +11,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const location = useLocation();
-  console.log(location.pathname)
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -24,13 +24,12 @@ function App() {
           <Route exact path="/">
             <SplashPage/>
           </Route>
-
-          {/* <Route path="/login" >
+          <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route> */}
+          </Route>
         </Switch>
       )}
     </div>

@@ -1,7 +1,6 @@
 body{
     font-family: 'Uber Move Text', sans-serif;
     margin: 0px;
-    /* margin-top: -12px; */
     border: none;
 }
 
@@ -10,6 +9,13 @@ body{
     color: white;
     border: 1px solid transparent;
     border-radius: 20px;
+    padding: 10px;
+}
+.black-button-square{
+    background-color: black;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 10px;
     padding: 10px;
 }
 
@@ -30,8 +36,14 @@ span.bold{
     height: 100vh;
     width: 100%;
     margin: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
 button{
     cursor: pointer;
+}
+
+.error-list-item{
+    color:red;
 }
