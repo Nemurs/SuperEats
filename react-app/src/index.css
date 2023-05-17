@@ -1,1 +1,18 @@
-/* TODO Add site wide styles */
+body{
+    background-image: url("https://media.timeout.com/images/105950096/image.jpg");
+}
+.black-button-round{
+    background-color: black;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.white-button-round{
+    background-color: white;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 10px;
+}
