@@ -38,7 +38,7 @@ function Navigation({ isLoaded }) {
 	}
 
 	return (
-		<ul className={location.pathname === "/login" ? 'nav-list dark-background' : 'nav-list'}>
+		<ul className='nav-list'>
 			<div className='home-sidebar-wrapper'>
 				{sessionUser && (<li className='nav-list-item'>
 					<button className='white-button-round' onClick={(e) => clickToRedirect(e, "/")}>
