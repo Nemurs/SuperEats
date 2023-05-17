@@ -22,7 +22,7 @@ def phone_number_exists(form, field):
 
 class SignUpForm(FlaskForm):
     phone_number = StringField('phone_number', validators=[DataRequired(), phone_number_exists])
-    email = StringField('email', validators=[DataRequired(), Email(), user_exists])
+    email = StringField('email', validators=[DataRequired(), user_exists])
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])

@@ -1,6 +1,8 @@
 body{
-    background-image: url("https://media.timeout.com/images/105950096/image.jpg");
+    font-family: 'Uber Move Text', sans-serif;
+    margin:0px;
 }
+
 .black-button-round{
     background-color: black;
     color: white;
@@ -15,4 +17,19 @@ body{
     border: 1px solid transparent;
     border-radius: 20px;
     padding: 10px;
+}
+
+span.bold{
+    font-weight: bold;
+}
+
+.site-wrapper{
+    background-image: none;
+    height: 95vh;
+    width: 100%;
+    margin: 0px;
+}
+
+button{
+    cursor: pointer;
 }

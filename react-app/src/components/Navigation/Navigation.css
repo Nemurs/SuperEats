@@ -11,11 +11,25 @@
   justify-content: space-between;
   align-items: center;
   list-style: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.home-sidebar-wrapper, .login-signup-wrapper{
+.home-sidebar-wrapper, .login-signup-wrapper, .cart-wrapper{
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 20%;
+  column-gap: 5px;
+}
+
+.home-button {
+  background-color: transparent;
+  border: none;
+}
+
+.home-button > a {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
 }

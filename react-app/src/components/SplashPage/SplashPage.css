@@ -1,0 +1,19 @@
+.splash-text-wrapper{
+    width: fit-content;
+    margin-left: 8%;
+    margin-top: 20%;
+    height: fit-content;
+}
+
+.splash-greeting-text{
+    color: white;
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.site-wrapper.splash-page{
+    background-image: url("https://media.timeout.com/images/105950096/image.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
