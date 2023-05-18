@@ -13,7 +13,6 @@ const BusinessIndexItem = ({business}) =>  {
             </Link>
         </div>
     )
-
 }
 
 export default BusinessIndexItem

@@ -1,23 +1,24 @@
 .business-item {
-    width: 300px;
+    width: 325px;
     border: 1px solid transparent;
     transition: all 0.3s ease-in-out;
     position: relative;
+    padding: 10px;
   }
 
   .business-item:hover {
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     /* border: 1px solid #ccc; */
   }
 
-  .business-item:hover img{
-    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+  .business-item:hover{
+    box-shadow: 0px 0px 10px rgb(200, 200, 200);
     /* border: 1px solid #ccc; */
   }
 
   img {
-    width: 300px;
-    height: 300px;
+    width: 325px;
+    height: 130px;
     object-fit: cover;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
@@ -35,6 +36,7 @@
     /* margin: auto; */
     padding-top: 15px;
     padding-left: 60px;
-    gap: 20px;
+    column-gap: 20px;
+    row-gap: 20px;
     width: 90%;
   }
