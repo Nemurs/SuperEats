@@ -1,10 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from sqlalchemy.orm import relationship
 
-
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+class Business(db.Model):
+    __tablename__ = 'business'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -12,31 +10,31 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     phone_number = db.Column(db.String(10), nullable=False, unique=True)
-    first_name = db.Column(db.String(255), nullable=False, unique=False)
-    last_name = db.Column(db.String(255), nullable=False, unique=False)
+    name = db.Column(db.String(255), nullable=False, unique=False)
     address = db.Column(db.String(100), nullable=False, unique=False)
     city = db.Column(db.String(100), nullable=False, unique=False)
     state = db.Column(db.String(2), nullable=False, unique=False)
-    hashed_password = db.Column(db.String(255), nullable=False)
 
-    @property
-    def password(self):
-        return self.hashed_password
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
+    images = relationship('BusinessImage', back_populates='business')
 
     def to_dict(self):
         return {
             'id': self.id,
             'email': self.email,
             'phoneNumber': self.phone_number,
-            'firstName':self.first_name,
-            'lastName':self.last_name,
+            'name':self.name,
+            'address':self.address,
+            'city':self.city,
+            'state':self.state,
+            'images': [image.to_dict_no_items() for image in self.images]
+        }
+
+    def to_dict_no_items(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'phoneNumber': self.phone_number,
+            'name':self.name,
             'address':self.address,
             'city':self.city,
             'state':self.state,
