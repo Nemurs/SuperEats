@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { signUp } from "../../store/session";
+import { signUp, login } from "../../store/session";
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -20,15 +20,18 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, demo=false) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      const data = await dispatch(signUp(email, phoneNumber, firstName, lastName, address, city, state, password));
-      if (data) {
-        setErrors(data)
-      }
+    let data;
+    if (demo) {
+      data = await dispatch(login("demo@aa.io", "password"));
+    } else if (password === confirmPassword) {
+      data = await dispatch(signUp(email, phoneNumber, firstName, lastName, address, city, state, password));
     } else {
       setErrors(['Confirm Password field must be the same as the Password field']);
+    }
+    if (data) {
+      setErrors(data)
     }
   };
 
@@ -124,6 +127,7 @@ function SignupFormPage() {
           />
         </label>
         <button type="submit" className="black-button-square">Continue</button>
+        <button className="black-button-square" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>
       </form>
     </div>
   );

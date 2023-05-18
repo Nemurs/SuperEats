@@ -13,7 +13,7 @@ function LoginFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = async (e, demo) => {
+  const handleSubmit = async (e, demo=false) => {
     e.preventDefault();
 
     let data;
