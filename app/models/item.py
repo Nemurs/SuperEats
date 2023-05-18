@@ -27,7 +27,7 @@ class Item(db.Model):
             'business_id':self.business_id,
             'business': self.business.to_dict_no_items(),
             'images': [image.to_dict_no_items() for image in self.images],
-            'itemOrders': [item_order.to_dict_no_items() for item_order in self.item_orders]
+            'itemOrders': [item_order.to_dict_no_items() for item_order in self.item_orders],
         }
 
     def to_dict_no_items(self):

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cdf6349be9d7
+Revision ID: 6b6e7adca564
 Revises: 
-Create Date: 2023-05-18 03:50:53.808948
+Create Date: 2023-05-18 04:01:27.270940
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cdf6349be9d7'
+revision = '6b6e7adca564'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,10 +31,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('phone_number')
     )
-    op.create_table('cart',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
@@ -53,6 +49,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=255), nullable=False),
     sa.Column('preview', sa.Boolean(), nullable=False),
+    sa.Column('business_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['business_id'], ['business.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('cart',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('business_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['business_id'], ['business.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -103,8 +105,8 @@ def downgrade():
     op.drop_table('item_image')
     op.drop_table('review')
     op.drop_table('item')
+    op.drop_table('cart')
     op.drop_table('business_image')
     op.drop_table('user')
-    op.drop_table('cart')
     op.drop_table('business')
     # ### end Alembic commands ###

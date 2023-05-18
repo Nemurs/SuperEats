@@ -17,6 +17,7 @@ class Business(db.Model):
 
     images = db.relationship('BusinessImage', back_populates='business', cascade="all, delete-orphan")
     items = db.relationship('Item', back_populates='business', cascade="all, delete-orphan")
+    carts = db.relationship('Cart', back_populates='business', cascade="all, delete-orphan")
     business_reviews = db.relationship('Review', back_populates='business', cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -28,7 +29,10 @@ class Business(db.Model):
             'address':self.address,
             'city':self.city,
             'state':self.state,
-            'images': [image.to_dict_no_items() for image in self.images]
+            'images': [image.to_dict_no_items() for image in self.images],
+            'items': [item.to_dict_no_items() for item in self.items],
+            'carts': [cart.to_dict_no_items() for cart in self.carts],
+            'businessReviews': [business_review.to_dict_no_items() for business_review in self.business_reviews],
         }
 
     def to_dict_no_items(self):
