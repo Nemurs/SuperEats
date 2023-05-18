@@ -16,7 +16,7 @@ class Item(db.Model):
 
     business = db.relationship('Business', back_populates='items')
     images = relationship('ItemImage', back_populates='item', cascade="all, delete-orphan")
-    item_orders = relationship('Review', back_populates='item', cascade="all, delete-orphan")
+    item_orders = relationship('Order', back_populates='item', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

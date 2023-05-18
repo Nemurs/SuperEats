@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from sqlalchemy.orm import relationship
 
 class Business(db.Model):
     __tablename__ = 'business'
@@ -16,9 +15,9 @@ class Business(db.Model):
     state = db.Column(db.String(2), nullable=False, unique=False)
     category = db.Column(db.String(100), nullable=False, unique=False)
 
-    images = relationship('BusinessImage', back_populates='business', cascade="all, delete-orphan")
-    items = relationship('Item', back_populates='business', cascade="all, delete-orphan")
-    business_reviews = relationship('Review', back_populates='business', cascade="all, delete-orphan")
+    images = db.relationship('BusinessImage', back_populates='business', cascade="all, delete-orphan")
+    items = db.relationship('Item', back_populates='business', cascade="all, delete-orphan")
+    business_reviews = db.relationship('Review', back_populates='business', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
