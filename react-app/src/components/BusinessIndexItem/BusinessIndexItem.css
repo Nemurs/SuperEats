@@ -1,29 +1,14 @@
-
-
-/* .business-item:hover {
-    transform: scale(1.05);
-  } */
-
-  .business-item img {
-    /* width: 150px; */
-    /* height: 150px; */
-    /* object-fit: cover; */
-    /* border-radius: 10px;
-    margin-bottom: 15px; */
-  }
-
-  .business-item p {
+.business-item p {
     font-size: 18px;
     color: black;
-    /* margin-bottom: 5px; */
-  }
+}
 
-  .business-item a {
+.business-item a {
     font-size: 14px;
     color: #ffffff;
     text-decoration: none;
-  }
+}
 
-  .business-item a:hover {
+.business-item a:hover {
     text-decoration: underline;
-  }
+}
