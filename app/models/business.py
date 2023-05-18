@@ -15,7 +15,8 @@ class Business(db.Model):
     city = db.Column(db.String(100), nullable=False, unique=False)
     state = db.Column(db.String(2), nullable=False, unique=False)
 
-    images = relationship('BusinessImage', back_populates='business')
+    images = relationship('BusinessImage', back_populates='business', cascade="all, delete-orphan")
+    business_reviews = relationship('Review', back_populates='business', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
