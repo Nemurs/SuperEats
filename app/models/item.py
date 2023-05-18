@@ -16,7 +16,7 @@ class Item(db.Model):
 
     business = db.relationship('Business', back_populates='items')
     images = relationship('ItemImage', back_populates='item', cascade="all, delete-orphan")
-    # business_reviews = relationship('Review', back_populates='business', cascade="all, delete-orphan")
+    item_orders = relationship('Review', back_populates='item', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -26,7 +26,8 @@ class Item(db.Model):
             'category':self.category,
             'business_id':self.business_id,
             'business': self.business.to_dict_no_items(),
-            'images': [image.to_dict_no_items() for image in self.images]
+            'images': [image.to_dict_no_items() for image in self.images],
+            'itemOrders': [item_order.to_dict_no_items() for item_order in self.item_orders]
         }
 
     def to_dict_no_items(self):
