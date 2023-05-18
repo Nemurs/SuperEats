@@ -30,7 +30,7 @@ class Business(db.Model):
             'city':self.city,
             'state':self.state,
             'images': [image.to_dict_no_items() for image in self.images],
-            'items': [item.to_dict_no_items() for item in self.items],
+            'items': [item.to_dict() for item in self.items],
             'carts': [cart.to_dict_no_items() for cart in self.carts],
             'businessReviews': [business_review.to_dict_no_items() for business_review in self.business_reviews],
         }

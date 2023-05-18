@@ -19,18 +19,19 @@ function SingleBusinessPage() {
 
     if (!business || business.length > 1) return (<></>)
 
-    console.log(business)
+    const items = business.items;
+    console.log(items)
 
     return (
         <div className="SingleBusiness-wrapper">
-            <div className="SingleBusiness-text-wrapper">
-                <BusinessIndexItem
-                    business={business}
-                    interactive={false}
-                />
-                {/* <h1 className="SingleBusiness-greeting-text">Business #{businessId}</h1> */}
-                {/* <BusinessIndex businesses={businesses}/> */}
-            </div>
+            <BusinessIndexItem
+                business={business}
+                interactive={false}
+            />
+            <h2>
+                Items
+            </h2>
+
         </div>
     );
 }
