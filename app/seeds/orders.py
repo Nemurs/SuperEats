@@ -13,8 +13,7 @@ def seed_orders():
     orders_8 = [Order(user_id=8, cart_id=8, item_id=i) for i in range(29, 33)]
     orders_9 = [Order(user_id=9, cart_id=9, item_id=i) for i in range(33, 37)]
 
-    orders = [*orders_1, *orders_2, *orders_3, *orders_4, *
-              orders_5, *orders_6, *orders_7, *orders_8, *orders_9]
+    orders = [*orders_1, *orders_2, *orders_3, *orders_4, *orders_5, *orders_6, *orders_7, *orders_8, *orders_9]
     # orders = [ord.to_dict_no_items() for ord in orders]
     # print(orders)
     add_orders = [db.session.add(order) for order in orders]

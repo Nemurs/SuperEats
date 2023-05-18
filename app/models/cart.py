@@ -11,7 +11,7 @@ class Cart(db.Model):
         'business.id')), nullable=False, unique=False)
 
     business = db.relationship('Business', back_populates='carts')
-    orders = db.relationship('Order', back_populates='cart', cascade="all, delete-orphan")
+    orders = db.relationship('Order', back_populates='cart_info', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
