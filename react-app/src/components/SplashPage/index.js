@@ -1,6 +1,12 @@
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import "./SplashPage.css";
 
 function SplashPage() {
+  const sessionUser = useSelector((state) => state.session.user);
+
+  if (sessionUser) return <Redirect to="/home" />;
+
   return (
     <div className="splash-wrapper">
         <div className="splash-text-wrapper">
