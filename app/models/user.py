@@ -4,7 +4,7 @@ from flask_login import UserMixin
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -18,6 +18,9 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(100), nullable=False, unique=False)
     state = db.Column(db.String(2), nullable=False, unique=False)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    user_reviews = db.relationship('Review', back_populates='user', cascade="all, delete-orphan")
+    user_orders = db.relationship('Order', back_populates='user', cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -33,6 +36,25 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'email': self.email,
             'phoneNumber': self.phone_number,
-            'email': self.email
+            'firstName':self.first_name,
+            'lastName':self.last_name,
+            'address':self.address,
+            'city':self.city,
+            'state':self.state,
+            'userReviews': [user_review.to_dict_no_items() for user_review in self.user_reviews],
+            'userOrders': [user_order.to_dict_no_items() for user_order in self.user_orders]
+        }
+
+    def to_dict_no_items(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'phoneNumber': self.phone_number,
+            'firstName':self.first_name,
+            'lastName':self.last_name,
+            'address':self.address,
+            'city':self.city,
+            'state':self.state
         }

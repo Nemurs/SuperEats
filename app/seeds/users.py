@@ -1,7 +1,6 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
-
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
@@ -31,10 +30,72 @@ def seed_users():
         city='Los Angeles',
         state='CA',
         password='password')
+    mari = User(
+        email='mari@aa.io',
+        phone_number='7890123456',
+        first_name='Mari',
+        last_name='Steak',
+        address='123 Steak Blvd',
+        city='Los Angeles',
+        state='CA',
+        password='password')
+    alan = User(
+        email='alan@aa.io',
+        phone_number='0123456789',
+        first_name='Alan',
+        last_name='Soup',
+        address='123 Soup Dr',
+        city='Los Angeles',
+        state='CA',
+        password='password')
+    alan2 = User(
+        email='alan2@aa.io',
+        phone_number='2345678901',
+        first_name='Alan',
+        last_name='HotPot',
+        address='123 HotPot Dr',
+        city='Los Angeles',
+        state='CA',
+        password='password')
+    dorian = User(
+        email='dorian@aa.io',
+        phone_number='5678901234',
+        first_name='Dorian',
+        last_name='Ramen',
+        address='123 Ramen St',
+        city='Los Angeles',
+        state='CA',
+        password='password')
+    bianca = User(
+        email='bianca@aa.io',
+        phone_number='6789012345',
+        first_name='Bianca',
+        last_name='Pozole',
+        address='123 Pozole Ln',
+        city='Los Angeles',
+        state='CA',
+        password='password')
+    roslyn = User(
+        email='roslyn@aa.io',
+        phone_number='6578901234',
+        first_name='Roslyn',
+        last_name='Pizza',
+        address='123 Pizza Rd',
+        city='Los Angeles',
+        state='CA',
+        password='password')
+
+
 
     db.session.add(demo)
     db.session.add(kevin)
     db.session.add(joe)
+    db.session.add(mari)
+    db.session.add(alan)
+    db.session.add(alan2)
+    db.session.add(dorian)
+    db.session.add(bianca)
+    db.session.add(roslyn)
     db.session.commit()
 
 
@@ -46,8 +107,8 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.user RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM user"))
 
     db.session.commit()
