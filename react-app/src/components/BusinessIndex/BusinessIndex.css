@@ -6,7 +6,16 @@
     padding: 10px;
   }
 
-  .business-item:hover{
+  .business-item.wide {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .business-name.large{
+    margin-left: 5%;
+  }
+
+  .business-item.hoverable:hover{
     box-shadow: 0px 0px 10px rgb(200, 200, 200);
   }
 
@@ -14,9 +23,13 @@
     width: 325px;
     height: 130px;
     object-fit: cover;
-    border-radius: 5px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+  }
+
+  img.wide{
+    width: 100%;
+    cursor: default;
   }
 
   .businessIndex {

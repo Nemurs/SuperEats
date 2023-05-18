@@ -44,14 +44,14 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_ALL_BUSINESSES:
             newState = {};
-            console.log(action.businesses);
             action.businesses.Businesses.forEach((business) => {
                 newState[business.id] = business;
             });
             return newState;
         case LOAD_ONE_BUSINESS:
             newState = {};
-            newState = { ...action.business };
+            const id = action.business.Business.id
+            newState[id] = {...action.business.Business};
             return newState;
         default:
             return state;

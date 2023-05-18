@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadAllBusinessesThunk } from "../../store/business";
+import { useLocation } from "react-router-dom";
 import BusinessIndex from "../BusinessIndex";
 import "./HomePage.css";
 
 function HomePage() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const businesses = useSelector(state =>  Object.values(state.business))
 
   useEffect(() => {
-    dispatch(loadAllBusinessesThunk());
-  }, [dispatch]);
+    if(location.pathname === "/home"){
+      dispatch(loadAllBusinessesThunk());
+    }
+  }, [dispatch, location.pathname]);
 
   return (
     <div className="home-wrapper">
