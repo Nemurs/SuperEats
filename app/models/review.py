@@ -22,8 +22,8 @@ class Review(db.Model):
             'id': self.id,
             'reviewText': self.review_text,
             'rating': self.rating,
-            'business_id':self.business_id,
-            'user_id':self.user_id,
+            'businessId':self.business_id,
+            'userId':self.user_id,
             'business': self.business.to_dict_no_items(),
             'user': self.user.to_dict_no_items()
         }
@@ -33,6 +33,6 @@ class Review(db.Model):
             'id': self.id,
             'reviewText': self.review_text,
             'rating': self.rating,
-            'business_id':self.business_id,
-            'user_id':self.user_id,
+            'businessId':self.business_id,
+            'userId':self.user_id
         }

@@ -14,8 +14,10 @@ class Business(db.Model):
     address = db.Column(db.String(100), nullable=False, unique=False)
     city = db.Column(db.String(100), nullable=False, unique=False)
     state = db.Column(db.String(2), nullable=False, unique=False)
+    category = db.Column(db.String(100), nullable=False, unique=False)
 
     images = relationship('BusinessImage', back_populates='business', cascade="all, delete-orphan")
+    items = relationship('Item', back_populates='business', cascade="all, delete-orphan")
     business_reviews = relationship('Review', back_populates='business', cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -38,5 +40,5 @@ class Business(db.Model):
             'name':self.name,
             'address':self.address,
             'city':self.city,
-            'state':self.state,
+            'state':self.state
         }

@@ -18,10 +18,13 @@ def seed_businesses():
 
     business_names = ['SonoraTown', 'Erewhon', 'California Chicken Cafe', 'Din Tai Fung', 'Meizhou Dongpo', 'Main Chick Hot Chicken', "Noble Tea", 'Mizlala West Adams', 'Urth Caffe', 'Magnolia Bakery', 'Pizzana', '7-Eleven']
 
+    business_categories = ['Mexican', 'Grocery', 'Healthy', 'Chinese', 'Chinese', 'American', "Drinks", 'Middle Eastern', 'Urth Caffe', 'Dessert', 'Italian', 'Convenience']
+
     busisnesses = [Business(
         email=f'{business_names[i].replace(" ", "")}@business.io',
         phone_number=make_random_la_phone_number(),
         name=business_names[i],
+        category=business_categories[i],
         address=fake.street_address(),
         city='Los Angeles',
         state='CA') for i in range(len(business_names))]

@@ -41,5 +41,5 @@ class User(db.Model, UserMixin):
             'lastName':self.last_name,
             'address':self.address,
             'city':self.city,
-            'state':self.state,
+            'state':self.state
         }
