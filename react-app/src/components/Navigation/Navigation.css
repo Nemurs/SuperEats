@@ -11,8 +11,8 @@
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  /* padding-top: 20px; */
+  /* padding-bottom: 20px; */
   margin: 0px;
 }
 
@@ -47,6 +47,6 @@
   font-size: 24px;
 }
 
-.home-button.dark-background > a >span {
+.home-button.dark-background > a > span {
   color: #2dbe64;
 }

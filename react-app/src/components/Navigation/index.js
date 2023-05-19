@@ -1,16 +1,15 @@
 import React from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
 import { logout } from "../../store/session";
 import { clearItems } from '../../store/cart';
+import OpenModalButton from "../OpenModalButton";
+import CartModal from '../CartModal';
+import './Navigation.css';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
+	const carts = useSelector(state =>  Object.values(state.cart))
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -18,8 +17,10 @@ function Navigation({ isLoaded }) {
 
 	const clickToRedirect = async (e, newPath) => {
 		e.preventDefault();
-		await dispatch(logout());
-		await dispatch(clearItems());
+		if (sessionUser){
+			await dispatch(logout());
+			await dispatch(clearItems());
+		}
 		history.push(newPath);
 		console.log("Successfully logged out");
 		return;
@@ -69,7 +70,11 @@ function Navigation({ isLoaded }) {
 			) : (
 				<div className='cart-wrapper'>
 					<li className='nav-list-item'>
-						<button className="black-button-round">Cart</button>
+						<OpenModalButton
+							buttonText={"Cart"}
+							modalComponent={<CartModal carts={carts}/>}
+							buttonClass={"black-button-round"}
+						/>
 					</li>
 				</div>
 			)}
