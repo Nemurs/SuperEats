@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { logout } from "../../store/session";
+import { clearItems } from '../../store/cart';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
@@ -18,6 +19,7 @@ function Navigation({ isLoaded }) {
 	const clickToRedirect = async (e, newPath) => {
 		e.preventDefault();
 		await dispatch(logout());
+		await dispatch(clearItems());
 		history.push(newPath);
 		console.log("Successfully logged out");
 		return;
