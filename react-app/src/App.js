@@ -6,6 +6,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
+import HomePage from "./components/HomePage";
+import SingleBusinessPage from "./components/SingleBusinessPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,21 +19,31 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={location.pathname === "/" ?"site-wrapper splash-page": "site-wrapper"}>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <SplashPage/>
-          </Route>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
+    <div className={location.pathname === "/" ? "site-wrapper splash-page" : "site-wrapper"}>
+      <div className="nav-wrapper">
+        <Navigation isLoaded={isLoaded} />
+      </div>
+      <div className="main-content-wrapper">
+        {isLoaded && (
+          <Switch>
+            <Route exact path="/">
+              <SplashPage />
+            </Route>
+            <Route exact path="/home">
+              <HomePage />
+            </Route>
+            <Route exact path="/login" >
+              <LoginFormPage />
+            </Route>
+            <Route exact path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/business/:businessId">
+              <SingleBusinessPage />
+            </Route>
+          </Switch>
+        )}
+      </div>
     </div>
   );
 }

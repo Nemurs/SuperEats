@@ -1,0 +1,14 @@
+.business-item p {
+    font-size: 18px;
+    color: black;
+}
+
+.business-item a {
+    font-size: 14px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.business-item a:hover {
+    text-decoration: underline;
+}

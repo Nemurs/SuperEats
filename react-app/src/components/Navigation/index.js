@@ -41,7 +41,7 @@ function Navigation({ isLoaded }) {
 		<ul className='nav-list'>
 			<div className='home-sidebar-wrapper'>
 				{sessionUser && (<li className='nav-list-item'>
-					<button className='white-button-round' onClick={(e) => clickToRedirect(e, "/")}>
+					<button className='black-button-round' onClick={(e) => clickToRedirect(e, "/")}>
 						Logout
 					</button>
 				</li>)}
