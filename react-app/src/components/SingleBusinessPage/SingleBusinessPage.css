@@ -1,0 +1,19 @@
+.SingleBusiness-bottom-wrapper{
+    display: flex;
+}
+
+.SingleBusiness-bottom-left-wrapper{
+    width: 250px;
+    margin-top: 10px;
+}
+.SingleBusiness-bottom-left-wrapper > p {
+    margin-left: 15px;
+}
+
+.SingleBusiness-bottom-right-wrapper{
+    width: 100%;
+}
+
+.SingleBusiness-bottom-right-wrapper > h2 {
+    margin-left: -1%;
+}

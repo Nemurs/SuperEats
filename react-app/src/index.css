@@ -2,6 +2,9 @@ body{
     font-family: 'Uber Move Text', sans-serif;
     margin: 0px;
     border: none;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 
 .black-button-round{
@@ -36,6 +39,19 @@ span.bold{
     height: 100vh;
     width: 100%;
     margin: 0px;
+    display: flex;
+    flex-direction: column;
+    /* max-width: 1920px; */
+    /* align-items: center; */
+}
+
+.nav-wrapper{
+    width: 100%;
+}
+.main-content-wrapper{
+    width: 100%;
+    align-self: center;
+    justify-self: center;
     display: flex;
     flex-direction: column;
 }

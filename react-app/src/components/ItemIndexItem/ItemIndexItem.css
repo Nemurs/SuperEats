@@ -1,0 +1,35 @@
+.item-item p {
+    font-size: 18px;
+    color: black;
+}
+
+.item-item a {
+    font-size: 14px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.item-item a:hover {
+    text-decoration: underline;
+}
+
+.item-img-wrapper {
+    position: relative;
+}
+.item-img-wrapper > img {
+    cursor: default;
+}
+
+.item-img-wrapper > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-color: #ffffff;
+    border-radius: 100%;
+    width: 40px;
+}
+
+.item-img-wrapper > button:hover{
+    box-shadow: 0px 0px 10px #2dbe64;
+    /* scale: 1.5; */
+}

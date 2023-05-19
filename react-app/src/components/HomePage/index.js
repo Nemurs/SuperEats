@@ -19,7 +19,7 @@ function HomePage() {
   return (
     <div className="home-wrapper">
         <div className="home-text-wrapper">
-            <h1 className="home-greeting-text">All Business</h1>
+            <h1 className="home-greeting-text">All Businesses</h1>
             <BusinessIndex businesses={businesses}/>
         </div>
     </div>
