@@ -16,6 +16,8 @@ function HomePage() {
     }
   }, [dispatch, location.pathname]);
 
+  if (!businesses || businesses.length < 2) return (<></>)
+
   return (
     <div className="home-wrapper">
         <div className="home-text-wrapper">

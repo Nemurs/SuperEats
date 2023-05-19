@@ -5,9 +5,15 @@
 .SingleBusiness-bottom-left-wrapper{
     width: 250px;
     margin-top: 10px;
+    /* overflow-x: wrap;
+    overflow-wrap: break-word; */
+
 }
 .SingleBusiness-bottom-left-wrapper > p {
     margin-left: 15px;
+    overflow-x: wrap;
+    overflow-wrap: break-word;
+    font-size: 14px;
 }
 
 .SingleBusiness-bottom-right-wrapper{

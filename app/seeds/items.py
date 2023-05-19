@@ -259,22 +259,22 @@ def seed_items():
             name='7-Select Purified Water Gallon',
             price=3.29,
             category='Drinks',
-            business_id=11),
+            business_id=12),
         Item(
             name="Monster 16oz",
             price=3.69,
             category='Drinks',
-            business_id=11),
+            business_id=12),
         Item(
             name='Chesters Hot Fries 3.625 oz',
             price=2.49,
             category='Snacks',
-            business_id=11),
+            business_id=12),
         Item(
             name='Gushers Tropical 4.25oz',
             price=3.39,
             category='Candy',
-            business_id=11),
+            business_id=12),
     ]
     ]
 
