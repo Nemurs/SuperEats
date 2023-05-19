@@ -55,6 +55,7 @@ span.bold{
     justify-self: center;
     display: flex;
     flex-direction: column;
+    padding-bottom: 35px;
 }
 
 button{
