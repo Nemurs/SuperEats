@@ -1,9 +1,9 @@
 .cart-wrapper{
     position: relative;
     width: 100%;
-    max-width: 25vw;
+    max-width: 35vw;
     /* max-height: 100vh; */
-    /* overflow-y: auto; */
+    /* max-height: 100%; */
 }
 
 .cart-wrapper > button {
