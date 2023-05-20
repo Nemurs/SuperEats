@@ -1,5 +1,6 @@
 import React from "react";
 import CloseModalButton from "../CloseModalButton";
+import CartItemIndex from "../CartItemIndex";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import "./CartModal.css";
@@ -9,11 +10,11 @@ function CartModal({ carts }) {
   const { closeModal } = useModal();
 
   const clickToRedirect = async (e, newPath) => {
-		e.preventDefault();
+    e.preventDefault();
     closeModal();
-		history.push(newPath);
-		return;
-	}
+    history.push(newPath);
+    return;
+  }
 
   if (!carts.length) return (
     <div className="cart-wrapper">
@@ -27,13 +28,48 @@ function CartModal({ carts }) {
     </div>
   )
 
+  console.log("in cart modal ---->", carts)
+  let allCartItems = [];
+
+  for (let cart of Object.values(carts)) {
+    for (let item of Object.values(cart)) {
+      allCartItems.push(item)
+    }
+  }
+  let categorized_items = {};
+  for (let item of allCartItems) {
+    if (!(item.business.name in categorized_items)) {
+      categorized_items[item.business.name] = {"items": [item], "prices":[item.price]}
+    } else {
+      categorized_items[item.business.name].items.push(item)
+      categorized_items[item.business.name].prices.push(item.price)
+    }
+  }
+  const categories = Object.keys(categorized_items);
+
   return (
     <div className="cart-wrapper">
       <CloseModalButton />
-      <div className="cart-text-wrapper">
-        <p>test</p>
-        {/* <h1 className="cart-greeting-text">All Businesses</h1> */}
-        {/* <BusinessIndex businesses={businesses}/> */}
+      <div className="categories">
+        {categories.map((category, index) => (
+          <div key={category + String(carts[index])} className='category-wrapper'>
+            <div className="category-label-delete">
+              <h3>{category}</h3>
+              <button className="close-button-x background-red">✖</button>
+            </div>
+            <CartItemIndex
+              items={categorized_items[category].items}
+            />
+            <div className="category-price-submit">
+              <h4>Total: ${categorized_items[category].prices.reduce((acc, curr)=>acc+curr,0).toFixed(2)}</h4>
+              <button className="black-button-square background-green">Order</button>
+            </div>
+          </div>
+        ))}
+      <div className="cart-button-wrapper">
+        <button className="black-button-square background-green">Order all carts</button>
+        <button className="black-button-square background-red">Delete all carts</button>
+      </div>
       </div>
     </div>
   );

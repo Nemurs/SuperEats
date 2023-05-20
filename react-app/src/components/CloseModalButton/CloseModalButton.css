@@ -1,4 +1,5 @@
-.close-modal-button{
+.close-button-x{
     background-color: transparent;
     border: none;
+    border-radius: 20px;
 }

@@ -10,7 +10,7 @@ const CloseModalButton = () => {
     }
 
     return (
-        <button className="close-modal-button" onClick={handleClick}>
+        <button className="close-button-x" onClick={handleClick}>
             ✖
         </button>
     )

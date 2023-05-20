@@ -30,6 +30,24 @@ body{
     padding: 10px;
 }
 
+button.hover-green:hover{
+    box-shadow: 0px 0px 10px #2dbe64;
+}
+
+button.hover-red:hover{
+    box-shadow: 0px 0px 10px #f41b14;
+}
+
+button.background-green:hover{
+    background-color: #2dbe64;
+    color: white;
+}
+
+button.background-red:hover{
+    background-color: #f41b14;
+    color: white;
+}
+
 span.bold{
     font-weight: bold;
 }
