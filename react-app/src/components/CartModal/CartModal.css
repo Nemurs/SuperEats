@@ -1,7 +1,8 @@
 .cart-wrapper{
     position: relative;
-    width: 100%;
-    max-width: 35vw;
+    /* /* min-width: 25vw; */
+    width: 25vw;
+    /* max-width: 35vw; */
     /* max-height: 100vh; */
     /* max-height: 100%; */
 }
@@ -12,10 +13,15 @@
     left: -15px;
 }
 /*CartWithItems*/
+.categories{
+    width: 100%;
+}
+
 .category-wrapper{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /* width: 100%; */
     /* overflow-y: auto; */
 }
 

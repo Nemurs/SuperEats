@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/session";
@@ -68,7 +68,7 @@ function Navigation({ isLoaded }) {
 					</li>
 				</div>
 			) : (
-				<div className='cart-wrapper'>
+				<div className='cart-modal-button-wrapper'>
 					<li className='nav-list-item'>
 						<OpenModalButton
 							buttonText={"Cart"}

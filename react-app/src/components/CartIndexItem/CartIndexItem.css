@@ -11,4 +11,6 @@ img.smallest{
 .cart-item-item{
     display: flex;
     column-gap: 10px;
+    max-width: 150px;
+    align-items: center;
 }

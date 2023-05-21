@@ -3,11 +3,15 @@ import CloseModalButton from "../CloseModalButton";
 import CartItemIndex from "../CartItemIndex";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
+import { clearItems } from "../../store/cart";
 import "./CartModal.css";
+import { useDispatch, useSelector } from "react-redux";
 
-function CartModal({ carts }) {
+function CartModal({carts}) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { closeModal } = useModal();
+
 
   const clickToRedirect = async (e, newPath) => {
     e.preventDefault();
@@ -28,7 +32,7 @@ function CartModal({ carts }) {
     </div>
   )
 
-  console.log("in cart modal ---->", carts)
+  //Organize cart items by their respective businesses
   let allCartItems = [];
 
   for (let cart of Object.values(carts)) {
@@ -46,6 +50,14 @@ function CartModal({ carts }) {
     }
   }
   const categories = Object.keys(categorized_items);
+
+  //Handle button clicks
+  const clickClearAllCarts = async (e) => {
+    e.preventDefault();
+    await dispatch(clearItems());
+    closeModal();
+    return;
+  }
 
   return (
     <div className="cart-wrapper">
@@ -68,7 +80,7 @@ function CartModal({ carts }) {
         ))}
       <div className="cart-button-wrapper">
         <button className="black-button-square background-green">Order all carts</button>
-        <button className="black-button-square background-red">Delete all carts</button>
+        <button className="black-button-square background-red" onClick={clickClearAllCarts}>Delete all carts</button>
       </div>
       </div>
     </div>
