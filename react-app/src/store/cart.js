@@ -1,7 +1,8 @@
 // Actions
 // const INSERT_ALL_BUSINESSES = "cart/INSERT_ALL_BUSINESSES";
 const INSERT_ONE_ITEM = "cart/INSERT_ONE_ITEM";
-const CLEAR_ITEMS = "cart/CLEAR_ITEMS";
+const CLEAR_ALL_ITEMS = "cart/CLEAR_ALL_ITEMS";
+const CLEAR_ONE_CART = "cart/CLEAR_ONE_CART";
 
 // const loadAllBusinesses = (businesses) => ({
 //     type: INSERT_ALL_BUSINESSES,
@@ -14,7 +15,12 @@ export const insertOneItem = (item) => ({
 });
 
 export const clearItems = () => ({
-    type: CLEAR_ITEMS
+    type: CLEAR_ALL_ITEMS
+});
+
+export const clearCart = (businessId) => ({
+    type: CLEAR_ONE_CART,
+    businessId
 });
 
 // //Thunks
@@ -36,7 +42,7 @@ export default function reducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case INSERT_ONE_ITEM:
-            console.log(state)
+            // console.log(state)
             newState = {...state};
             const business_id = action.item.business_id;
             const item_id = action.item.id;
@@ -49,7 +55,11 @@ export default function reducer(state = initialState, action) {
             }
             console.log(newState);
             return newState;
-        case CLEAR_ITEMS:
+        case CLEAR_ONE_CART:
+            newState = {...state};
+            delete newState[action.businessId];
+            return newState;
+        case CLEAR_ALL_ITEMS:
             newState = {};
             return newState;
         default:

@@ -3,7 +3,7 @@ import CloseModalButton from "../CloseModalButton";
 import CartItemIndex from "../CartItemIndex";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-import { clearItems } from "../../store/cart";
+import { clearItems, clearCart } from "../../store/cart";
 import "./CartModal.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -59,6 +59,14 @@ function CartModal({carts}) {
     return;
   }
 
+  const clickClearOneCart = async (e, businessId) => {
+    e.preventDefault();
+    console.log(businessId)
+    await dispatch(clearCart(businessId));
+    closeModal();
+    return;
+  }
+
   return (
     <div className="cart-wrapper">
       <CloseModalButton />
@@ -67,7 +75,7 @@ function CartModal({carts}) {
           <div key={category + String(carts[index])} className='category-wrapper'>
             <div className="category-label-delete">
               <h3>{category}</h3>
-              <button className="close-button-x background-red">✖</button>
+              <button className="close-button-x background-red" onClick={(e)=>clickClearOneCart(e, categorized_items[category].items[0].business.id)}>✖</button>
             </div>
             <CartItemIndex
               items={categorized_items[category].items}
