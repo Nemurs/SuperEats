@@ -5,9 +5,10 @@ import { useModal } from "../../context/Modal.js";
 // import { loadOneThunk } from "../../store/singleSpot.js";
 import { authenticate } from "../../store/session";
 import StarRatingInput from "../StarRatingInput";
+import CloseModalButton from "../CloseModalButton";
 import "./ReviewModal.css";
 
-const ReviewModal = ({order, business, cartId , isEdit, review}) => {
+const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
     const dispatch = useDispatch();
     const [reviewText, setReviewText] = useState(isEdit ? review.reviewText : "");
     const [rating, setRating] = useState(isEdit ? review.rating : 0);
@@ -21,9 +22,9 @@ const ReviewModal = ({order, business, cartId , isEdit, review}) => {
         e.preventDefault();
         setSubmitState(true);
 
-        if (isEdit){
+        if (isEdit) {
 
-        } else{
+        } else {
             // let res = await dispatch(createNewReviewThunk());
 
             // if (!res.ok) {
@@ -65,35 +66,41 @@ const ReviewModal = ({order, business, cartId , isEdit, review}) => {
     }, [error])
 
     return (
-        <div className="submit-review-modal">
-            <h1>How did you like <span>{order.businessName}</span>?</h1>
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
-                    name='reviewText'
-                    placeholder='Leave your review here...'
-                    rows='10'
-                    onBlur={() => setTouched({ ...touched, 'review': true })}
-                ></textarea>
-                {((touched.review || submitState) && error.review) && <p className="form-error">{error.review}</p>}
-                <div className="star-rating">
-                    <div className="star-rating-input"
-                        onBlur={() => setTouched({ ...touched, 'rating': true })}
-                    >
-                        <StarRatingInput
-                            disabled={false}
-                            onChange={onChange}
-                            rating={rating}
-                            iconSize={"large"}
-                        />
+        <>
+            <CloseModalButton />
+            <div className="review-modal">
+                <h1>How did you like <span>{order.businessName}</span>?</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="star-rating">
+                        <div className="star-rating-input"
+                            onBlur={() => setTouched({ ...touched, 'rating': true })}
+                        >
+                            <StarRatingInput
+                                disabled={false}
+                                onChange={onChange}
+                                rating={rating}
+                                iconSize={"large"}
+                            />
+                        </div>
+                        {((touched.rating || submitState) && error.rating) && <p className="form-error">{error.rating}</p>}
                     </div>
-                    {((touched.rating || submitState) && error.rating) && <p className="form-error">{error.rating}</p>}
-                </div>
+                    <textarea
+                        value={reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
+                        name='reviewText'
+                        placeholder='Leave your review here...'
+                        rows='10'
+                        onBlur={() => setTouched({ ...touched, 'review': true })}
+                    ></textarea>
+                    {((touched.review || submitState) && error.review) && <p className="form-error">{error.review}</p>}
 
-                <button disabled={disabled} type="submit" className={disabled ? "submit-review-inactive": "submit-review-active" }>Submit</button>
-            </form>
-        </div>
+                    <div className="review-modal-buttons">
+                        <button disabled={disabled} type="submit" className={"black-button-square background-green"}>Submit</button>
+                        {isEdit ? <button className={"black-button-square background-red"}>Delete Review</button> : <></>}
+                    </div>
+                </form>
+            </div>
+        </>
     );
 }
 
