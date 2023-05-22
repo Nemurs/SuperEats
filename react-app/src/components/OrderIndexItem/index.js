@@ -5,6 +5,7 @@ import { authenticate } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import UpateOrderModal from "../UpdateOrderModal"
 import CartIndexItem from "../CartIndexItem";
+import StarRatingInput from "../StarRatingInput";
 import "./OrderIndexItem.css";
 
 const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
@@ -36,7 +37,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
                 <div className="order-wrapper-left-text">
                     <div className="order-wrapper-left-top-text">
                         <h3>{order.businessName}</h3>
-                        <p>{review && review.rating ? review.rating : <></>}</p>
+                        <StarRatingInput rating={review? review.rating : 0} disabled={true} />
                     </div>
                     <div className="cartIndex-vertical">
                         {order.items.map((item) => (
@@ -51,15 +52,17 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
             <div className="order-wrapper-right">
                 {isMostRecent ?
                     (<>
-                    <OpenModalButton
-                        buttonText={"Update Order"}
-                        buttonClass={"black-button-square background-orange"}
-                        modalComponent={<UpateOrderModal order={order} business={business} cartId={cartId}/>}
-                    />
-                    <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
-                    </>
-                    )
-                    : (<button className="black-button-square" onClick={redirectToStore}>Visit Store</button>)}
+                        <OpenModalButton
+                            buttonText={"Update Order"}
+                            buttonClass={"black-button-square background-orange"}
+                            modalComponent={<UpateOrderModal order={order} business={business} cartId={cartId} />}
+                        />
+                        <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
+                    </>) : (
+                        <>
+                            {review && review.rating ? <button className="black-button-square background-gold" onClick={redirectToStore}>Edit Review</button>: <button className="black-button-square background-gold" onClick={redirectToStore}>Add Review</button>}
+                            <button className="gray-button-square" onClick={redirectToStore}>Visit Store</button>
+                        </>)}
             </div>
         </div>
     )

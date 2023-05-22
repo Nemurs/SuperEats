@@ -29,6 +29,14 @@ body{
     padding: 10px;
 }
 
+.gray-button-square{
+    background-color: lightgray;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .white-button-round{
     background-color: white;
     color: black;
@@ -52,6 +60,11 @@ button.background-green:hover{
 
 button.background-orange:hover{
     background-color: #ff7b00;
+    color: white;
+}
+
+button.background-gold:hover{
+    background-color: #ffbf00;
     color: white;
 }
 
