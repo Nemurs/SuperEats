@@ -31,11 +31,11 @@ const OrderPage = () => {
     }
     let categories = Object.keys(categorized_items);
 
-    const mostRecentOrderId = Math.max(...Object.keys(categorized_items))
-    const mostRecentOrder = categorized_items[mostRecentOrderId] //largest cart id is most recent order
+    const mostRecentCartId = Math.max(...Object.keys(categorized_items))
+    const mostRecentOrder = categorized_items[mostRecentCartId] //largest cart id is most recent order
     let pastOrders = { ...categorized_items }
-    delete pastOrders[mostRecentOrderId]
-    delete categories[mostRecentOrderId]
+    delete pastOrders[mostRecentCartId]
+    delete categories[mostRecentCartId]
 
     pastOrders = Object.values(pastOrders);
     pastOrders.reverse()
@@ -43,7 +43,7 @@ const OrderPage = () => {
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
                 <h2>Current Order</h2>
-                <OrderIndexItem order={mostRecentOrder} business={businesses[mostRecentOrder.businessId]} isMostRecent={true}/>
+                <OrderIndexItem order={mostRecentOrder} cartId={mostRecentCartId} business={businesses[mostRecentOrder.businessId]} isMostRecent={true}/>
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>

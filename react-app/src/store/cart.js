@@ -51,6 +51,23 @@ export const orderItems = (userId, businessId, itemIds) => async (dispatch) => {
 	}
 };
 
+export const deleteOrder = (cartId) => async (dispatch) => {
+	const response = await fetch(`/api/order/cart/${cartId}`, {
+		method: "DELETE",
+	});
+
+	if (response.ok) {
+		return true;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 //Reducer
 const initialState = {};
 export default function reducer(state = initialState, action) {

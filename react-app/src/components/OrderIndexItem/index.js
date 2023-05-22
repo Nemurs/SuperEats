@@ -1,15 +1,27 @@
 import { useHistory } from "react-router-dom";
 import CartIndexItem from "../CartIndexItem";
 import "./OrderIndexItem.css";
+import { useDispatch } from "react-redux";
+import { deleteOrder } from "../../store/cart";
+import { authenticate } from "../../store/session";
 
-const OrderIndexItem = ({ order, business, isMostRecent }) => {
+const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     if (!order || !business) return (<></>)
 
     const redirectToStore = async (e) => {
         e.preventDefault();
         history.push(`/business/${order.businessId}`);
+        return;
+    }
+
+    const cancelOrder = async (e) => {
+        e.preventDefault();
+        await dispatch(deleteOrder(cartId));
+        await dispatch(authenticate());
+        // history.push(`/orders`);
         return;
     }
 
@@ -33,7 +45,7 @@ const OrderIndexItem = ({ order, business, isMostRecent }) => {
                 {isMostRecent ?
                     (<>
                     <button className="black-button-square background-orange" >Update Order</button>
-                    <button className="black-button-square background-red" >Cancel Order</button>
+                    <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
                     </>
                     )
                     : (<button className="black-button-square" onClick={redirectToStore}>Visit Store</button>)}
