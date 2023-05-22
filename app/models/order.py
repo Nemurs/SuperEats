@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Order(db.Model):
-    __tablename__ = 'order'
+    __tablename__ = 'all_orders'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -23,13 +23,16 @@ class Order(db.Model):
             'id': self.id,
             'itemId':self.item_id,
             'userId':self.user_id,
+            'cartId':self.cart_id,
             'item': self.item.to_dict_no_items(),
-            'user': self.user.to_dict_no_items()
+            'user': self.user.to_dict_no_items(),
+            'cartInfo': self.cart_info.to_dict_no_items()
         }
 
     def to_dict_no_items(self):
         return {
             'id': self.id,
             'itemId':self.item_id,
-            'userId':self.user_id
+            'userId':self.user_id,
+            'cartId':self.cart_id,
         }

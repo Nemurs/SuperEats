@@ -1,0 +1,24 @@
+.order-wrapper, .order-wrapper-left{
+    display: flex;
+    align-items: center;
+}
+
+.order-wrapper{
+    justify-content: space-between;
+}
+
+.order-wrapper-left{
+    column-gap: 15px;
+}
+
+.order-wrapper-left > img {
+    align-self: flex-start;
+    margin-top: 20px;
+}
+
+.order-wrapper-right{
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}

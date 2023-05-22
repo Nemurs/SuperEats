@@ -1,0 +1,12 @@
+.cartIndex, .cartIndex-vertical{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 10px;
+    row-gap: 10px;
+    /* flex-direction: column; */
+}
+
+.cartIndex-vertical{
+    flex-direction: column;
+}

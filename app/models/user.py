@@ -44,7 +44,7 @@ class User(db.Model, UserMixin):
             'city':self.city,
             'state':self.state,
             'userReviews': [user_review.to_dict_no_items() for user_review in self.user_reviews],
-            'userOrders': [user_order.to_dict_no_items() for user_order in self.user_orders]
+            'userOrders': [user_order.to_dict() for user_order in self.user_orders]
         }
 
     def to_dict_no_items(self):

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
 import { logout } from "../../store/session";
+import { clearItems } from '../../store/cart';
+import OpenModalButton from "../OpenModalButton";
+import CartModal from '../CartModal';
+import UserMenu from '../UserMenu';
+import './Navigation.css';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
+	const carts = useSelector(state =>  Object.values(state.cart))
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -17,7 +18,10 @@ function Navigation({ isLoaded }) {
 
 	const clickToRedirect = async (e, newPath) => {
 		e.preventDefault();
-		await dispatch(logout());
+		if (sessionUser){
+			await dispatch(logout());
+			await dispatch(clearItems());
+		}
 		history.push(newPath);
 		console.log("Successfully logged out");
 		return;
@@ -41,9 +45,11 @@ function Navigation({ isLoaded }) {
 		<ul className='nav-list'>
 			<div className='home-sidebar-wrapper'>
 				{sessionUser && (<li className='nav-list-item'>
-					<button className='black-button-round' onClick={(e) => clickToRedirect(e, "/")}>
-						Logout
-					</button>
+					<OpenModalButton
+						modalComponent={<UserMenu sessionUser={sessionUser}/>}
+						buttonText={<i className="fas fa-bars" style={{color: "#000000"}}/>}
+						buttonClass={"transparent-button-square"}
+					/>
 				</li>)}
 				<li className='nav-list-item'>
 					<button className='home-button'>
@@ -65,9 +71,13 @@ function Navigation({ isLoaded }) {
 					</li>
 				</div>
 			) : (
-				<div className='cart-wrapper'>
+				<div className='cart-modal-button-wrapper'>
 					<li className='nav-list-item'>
-						<button className="black-button-round">Cart</button>
+						<OpenModalButton
+							buttonText={"Cart"}
+							modalComponent={<CartModal carts={carts}/>}
+							buttonClass={"black-button-round"}
+						/>
 					</li>
 				</div>
 			)}
