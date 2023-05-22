@@ -37,10 +37,10 @@ def delete_cart(cart_id):
     Delete a cart.
     """
     server_id = current_user.to_dict()['id']
-    server_cart = Cart.query.filter(Cart.user_id == server_id).order_by(Cart.id.desc()).first()
+    server_cart = Cart.query.get(cart_id)
     # print("THIS IS THE REQUEST ------->", data)
-    if (cart_id != server_cart.id):
-        return {'errors': "can only delete the most recent cart"}, 400
+    if (not server_cart):
+        return {'errors': "cart not found"}, 400
 
     #delete cart
     db.session.delete(server_cart)

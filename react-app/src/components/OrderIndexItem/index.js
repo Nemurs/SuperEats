@@ -39,7 +39,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
                                 key={item.id} item={item} includeImg={false}
                             />
                         ))}
-                        <h4>Total: ${order.prices.reduce((acc, curr) => acc + curr, 0).toFixed(2)}</h4>
+                        <h4 >Total: ${order.prices.reduce((acc, curr) => acc + curr, 0).toFixed(2)}</h4>
                     </div>
                 </div>
             </div>

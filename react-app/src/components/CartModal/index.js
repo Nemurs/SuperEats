@@ -7,7 +7,7 @@ import { clearItems, clearCart, orderItems } from "../../store/cart";
 import "./CartModal.css";
 import { useDispatch } from "react-redux";
 
-function CartModal({carts, sessionUser}) {
+function CartModal({ carts, sessionUser }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
@@ -43,7 +43,7 @@ function CartModal({carts, sessionUser}) {
   let categorized_items = {};
   for (let item of allCartItems) {
     if (!(item.business.name in categorized_items)) {
-      categorized_items[item.business.name] = {"items": [item], "prices":[item.price]}
+      categorized_items[item.business.name] = {"businessId": item.business.id, "items": [item], "prices": [item.price] }
     } else {
       categorized_items[item.business.name].items.push(item)
       categorized_items[item.business.name].prices.push(item.price)
@@ -68,11 +68,20 @@ function CartModal({carts, sessionUser}) {
 
   const clickOrderOneCart = async (e, businessId, items) => {
     e.preventDefault();
-    console.log(items)
+    // console.log(items)
     await dispatch(orderItems(sessionUser.id, businessId, items.map(item => item.id)));
     closeModal();
-    history.push("/orders");
+    history.push("/orders", {currentOrderCount:1});
     return;
+  }
+
+  const clickOrderManyCarts = async (e, carts) => {
+    e.preventDefault();
+    for (let cart of Object.values(carts)) {
+      await dispatch(orderItems(sessionUser.id, cart["businessId"], cart["items"].map(item => item.id)))
+    }
+    closeModal();
+    history.push("/orders", {currentOrderCount:Object.keys(carts).length});
   }
 
   return (
@@ -83,21 +92,21 @@ function CartModal({carts, sessionUser}) {
           <div key={category + String(carts[index])} className='category-wrapper'>
             <div className="category-label-delete">
               <h3>{category}</h3>
-              <button className="close-button-x background-red" onClick={(e)=>clickClearOneCart(e, categorized_items[category].items[0].business.id)}>✖</button>
+              <button className="close-button-x background-red" onClick={(e) => clickClearOneCart(e, categorized_items[category].items[0].business.id)}>✖</button>
             </div>
             <CartItemIndex
               items={categorized_items[category].items}
             />
             <div className="category-price-submit">
-              <h4>Total: ${categorized_items[category].prices.reduce((acc, curr)=>acc+curr,0).toFixed(2)}</h4>
-              <button className="black-button-square background-green" onClick={(e)=>clickOrderOneCart(e, categorized_items[category].items[0].business.id, categorized_items[category].items)}>Order</button>
+              <h4>Total: ${categorized_items[category].prices.reduce((acc, curr) => acc + curr, 0).toFixed(2)}</h4>
+              <button className="black-button-square background-green" onClick={(e) => clickOrderOneCart(e, categorized_items[category].items[0].business.id, categorized_items[category].items)}>Order</button>
             </div>
           </div>
         ))}
-      <div className="cart-button-wrapper">
-        <button className="black-button-square background-green">Order all carts</button>
-        <button className="black-button-square background-red" onClick={clickClearAllCarts}>Delete all carts</button>
-      </div>
+        <div className="cart-button-wrapper">
+          <button className="black-button-square background-green" onClick={(e)=>clickOrderManyCarts(e, categorized_items)}>Order all carts</button>
+          <button className="black-button-square background-red" onClick={clickClearAllCarts}>Delete all carts</button>
+        </div>
       </div>
     </div>
   );
