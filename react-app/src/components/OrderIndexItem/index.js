@@ -7,7 +7,7 @@ import UpateOrderModal from "../UpdateOrderModal"
 import CartIndexItem from "../CartIndexItem";
 import "./OrderIndexItem.css";
 
-const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
+const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -27,12 +27,17 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
         return;
     }
 
+    console.log(review)
+
     return (
         <div className="order-wrapper">
             <div className="order-wrapper-left">
                 <img className="small" src={business.images[0].url} alt={order.businessName} />
                 <div className="order-wrapper-left-text">
-                    <h3>{order.businessName}</h3>
+                    <div className="order-wrapper-left-top-text">
+                        <h3>{order.businessName}</h3>
+                        <p>{review && review.rating ? review.rating : <></>}</p>
+                    </div>
                     <div className="cartIndex-vertical">
                         {order.items.map((item) => (
                             <CartIndexItem

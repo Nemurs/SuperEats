@@ -16,68 +16,69 @@ def seed_reviews():
         review_text=choice(positive_reviews),
         rating=randint(4, 5),
         business_id=i,
-        user_id=1
-    ) for i in range(1, 13)]
+        user_id=i,
+        cart_id=i
+    ) for i in range(1, 10)]
 
-    good_revs2 = [Review(
-        review_text=choice(positive_reviews),
-        rating=randint(4, 5),
-        business_id=i,
-        user_id=2
-    ) for i in range(1, 13)]
+    # good_revs2 = [Review(
+    #     review_text=choice(positive_reviews),
+    #     rating=randint(4, 5),
+    #     business_id=i,
+    #     user_id=2
+    # ) for i in range(1, 13)]
 
-    good_revs3 = [Review(
-        review_text=choice(positive_reviews),
-        rating=randint(4, 5),
-        business_id=i,
-        user_id=4
-    ) for i in range(1, 13)]
+    # good_revs3 = [Review(
+    #     review_text=choice(positive_reviews),
+    #     rating=randint(4, 5),
+    #     business_id=i,
+    #     user_id=4
+    # ) for i in range(1, 13)]
 
-    good_revs4 = [Review(
-        review_text=choice(positive_reviews),
-        rating=randint(4, 5),
-        business_id=i,
-        user_id=6
-    ) for i in range(1, 13)]
+    # good_revs4 = [Review(
+    #     review_text=choice(positive_reviews),
+    #     rating=randint(4, 5),
+    #     business_id=i,
+    #     user_id=6
+    # ) for i in range(1, 13)]
 
-    good_revs5 = [Review(
-        review_text=choice(positive_reviews),
-        rating=randint(4, 5),
-        business_id=i,
-        user_id=7
-    ) for i in range(1, 13)]
+    # good_revs5 = [Review(
+    #     review_text=choice(positive_reviews),
+    #     rating=randint(4, 5),
+    #     business_id=i,
+    #     user_id=7
+    # ) for i in range(1, 13)]
 
-    good_revs6 = [Review(
-        review_text=choice(positive_reviews),
-        rating=randint(4, 5),
-        business_id=i,
-        user_id=8
-    ) for i in range(1, 13)]
+    # good_revs6 = [Review(
+    #     review_text=choice(positive_reviews),
+    #     rating=randint(4, 5),
+    #     business_id=i,
+    #     user_id=8
+    # ) for i in range(1, 13)]
 
-    good_revs7 = [Review(
-        review_text=choice(positive_reviews),
-        rating=randint(4, 5),
-        business_id=i,
-        user_id=9
-    ) for i in range(1, 13)]
+    # good_revs7 = [Review(
+    #     review_text=choice(positive_reviews),
+    #     rating=randint(4, 5),
+    #     business_id=i,
+    #     user_id=9
+    # ) for i in range(1, 13)]
 
     avg_revs = [Review(
         review_text=choice(average_reviews),
         rating=3,
         business_id=i,
-        user_id=3
-    ) for i in range(1, 13)]
+        user_id=1,
+        cart_id=i+8
+    ) for i in range(2, 4)]
 
     bad_revs = [Review(
         review_text=choice(bad_reviews),
         rating=randint(1, 2),
-        business_id=i,
-        user_id=5
-    ) for i in range(1, 13)]
+        business_id=8,
+        user_id=2,
+        cart_id=12
+    )]
 
-    reviews = [*good_revs1, *good_revs2, *good_revs3,
-               *good_revs4, *good_revs5, *good_revs6,
-               *good_revs7, *avg_revs, *bad_revs]
+    reviews = [*good_revs1, *avg_revs, *bad_revs]
     # print([reviews[i].to_dict_no_items() for i in range(len(reviews))])
     # print (len(reviews))
     add_reviews = [db.session.add(rev) for rev in reviews]

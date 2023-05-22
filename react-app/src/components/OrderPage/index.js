@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 const OrderPage = () => {
     const dispatch = useDispatch();
     const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
+    const userReviews = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userReviews) : null));
     const businesses = useSelector(state => state.business);
 
     useEffect(() => {
@@ -52,7 +53,7 @@ const OrderPage = () => {
     mostRecentOrders = Object.entries(mostRecentOrders);
     mostRecentOrders.reverse()
 
-    pastOrders = Object.values(pastOrders);
+    pastOrders = Object.entries(pastOrders);
     pastOrders.reverse()
     return (
         <div className="order-page-wrapper">
@@ -71,7 +72,7 @@ const OrderPage = () => {
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>
-                <OrderIndex orders={pastOrders} businesses={businesses} />
+                <OrderIndex orders={pastOrders} businesses={businesses} reviews={userReviews}/>
             </div>
         </div>
     )

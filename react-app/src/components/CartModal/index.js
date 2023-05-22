@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { clearItems, clearCart, orderItems } from "../../store/cart";
 import "./CartModal.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/session";
 
 function CartModal({ carts, sessionUser }) {
@@ -13,6 +13,11 @@ function CartModal({ carts, sessionUser }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
+  // const cart = useSelector(state=>Object.values(state.cart))
+
+  // if (!Object.values(cart).length) {
+  //   return (<></>)
+  // }
 
   const clickToRedirect = async (e, newPath) => {
     e.preventDefault();
@@ -89,6 +94,7 @@ function CartModal({ carts, sessionUser }) {
 
   return (
     <div className="cart-wrapper">
+      {/* <p>{Object.values(cart[0])[0].name}</p> */}
       <CloseModalButton />
       <div className="categories">
         {categories.map((category, index) => (
