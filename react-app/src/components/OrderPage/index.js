@@ -6,11 +6,12 @@ import "./OrderPage.css";
 import OrderIndexItem from "../OrderIndexItem";
 import OrderIndex from "../OrderIndex";
 import { authenticate } from "../../store/session";
+import { isTimestampOld } from "../../utils";
 
 const OrderPage = () => {
     const dispatch = useDispatch();
     const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
-    const businesses = useSelector(state => state.business)
+    const businesses = useSelector(state => state.business);
 
     useEffect(() => {
         dispatch(authenticate())
@@ -23,7 +24,7 @@ const OrderPage = () => {
     let categorized_items = {};
     for (let order of userOrders) {
         if (!(order.cartId in categorized_items)) {
-            categorized_items[order.cartId] = { "items": [order.item], "prices": [order.item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId }
+            categorized_items[order.cartId] = { "items": [order.item], "prices": [order.item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId, "timeCreated": order.cartInfo.timeCreated, "timeUpdated": order.cartInfo.timeUpdated}
         } else {
             categorized_items[order.cartId].items.push(order.item)
             categorized_items[order.cartId].prices.push(order.item.price)
@@ -33,9 +34,15 @@ const OrderPage = () => {
 
     const mostRecentCartId = Math.max(...Object.keys(categorized_items))
     const mostRecentOrder = categorized_items[mostRecentCartId] //largest cart id is most recent order
+
     let pastOrders = { ...categorized_items }
-    delete pastOrders[mostRecentCartId]
-    delete categories[mostRecentCartId]
+
+    let timestampCheck = false;
+    if (!isTimestampOld(mostRecentOrder.timeCreated, 5) || (mostRecentOrder.timeUpdated && !isTimestampOld(mostRecentOrder.timeUpdated, 5))){
+        delete pastOrders[mostRecentCartId]
+        delete categories[mostRecentCartId]
+        timestampCheck = true;
+    }
 
     pastOrders = Object.values(pastOrders);
     pastOrders.reverse()
@@ -43,7 +50,7 @@ const OrderPage = () => {
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
                 <h2>Current Order</h2>
-                <OrderIndexItem order={mostRecentOrder} cartId={mostRecentCartId} business={businesses[mostRecentOrder.businessId]} isMostRecent={true}/>
+                {timestampCheck ? <OrderIndexItem order={mostRecentOrder} cartId={mostRecentCartId} business={businesses[mostRecentOrder.businessId]} isMostRecent={true}/> : <p> All orders complete after 5 minutes</p>}
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>
