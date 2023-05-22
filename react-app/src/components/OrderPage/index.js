@@ -5,6 +5,7 @@ import CartIndexItem from "../CartIndexItem";
 import "./OrderPage.css";
 import OrderIndexItem from "../OrderIndexItem";
 import OrderIndex from "../OrderIndex";
+import { authenticate } from "../../store/session";
 
 const OrderPage = () => {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const OrderPage = () => {
     const businesses = useSelector(state => state.business)
 
     useEffect(() => {
+        dispatch(authenticate())
         dispatch(loadAllBusinessesThunk());
     }, [dispatch])
 

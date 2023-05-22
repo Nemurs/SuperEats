@@ -24,17 +24,32 @@ export const clearCart = (businessId) => ({
 });
 
 // //Thunks
-// export const loadAllBusinessesThunk = () => async (dispatch) => {
-//     const response = await fetch("/api/item");
-//     if (response.ok) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return;
-//         }
+export const orderItems = (userId, businessId, itemIds) => async (dispatch) => {
+	const response = await fetch("/api/order", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            "user_id": userId,
+            "business_id": businessId,
+            "item_ids": itemIds
+        }),
+	});
 
-//         dispatch(loadAllBusinesses(data));
-//     }
-// };
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(clearCart(businessId));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 //Reducer
 const initialState = {};

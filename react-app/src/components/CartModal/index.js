@@ -3,11 +3,11 @@ import CloseModalButton from "../CloseModalButton";
 import CartItemIndex from "../CartItemIndex";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-import { clearItems, clearCart } from "../../store/cart";
+import { clearItems, clearCart, orderItems } from "../../store/cart";
 import "./CartModal.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function CartModal({carts}) {
+function CartModal({carts, sessionUser}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
@@ -61,9 +61,17 @@ function CartModal({carts}) {
 
   const clickClearOneCart = async (e, businessId) => {
     e.preventDefault();
-    console.log(businessId)
     await dispatch(clearCart(businessId));
     closeModal();
+    return;
+  }
+
+  const clickOrderOneCart = async (e, businessId, items) => {
+    e.preventDefault();
+    console.log(items)
+    await dispatch(orderItems(sessionUser.id, businessId, items.map(item => item.id)));
+    closeModal();
+    history.push("/orders");
     return;
   }
 
@@ -82,7 +90,7 @@ function CartModal({carts}) {
             />
             <div className="category-price-submit">
               <h4>Total: ${categorized_items[category].prices.reduce((acc, curr)=>acc+curr,0).toFixed(2)}</h4>
-              <button className="black-button-square background-green">Order</button>
+              <button className="black-button-square background-green" onClick={(e)=>clickOrderOneCart(e, categorized_items[category].items[0].business.id, categorized_items[category].items)}>Order</button>
             </div>
           </div>
         ))}
