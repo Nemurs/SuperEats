@@ -2,3 +2,11 @@
     margin-left: 50px;
     margin-right: 50px;
 }
+
+.past-orders-wrapper{
+    margin-top: 40px;
+}
+
+.past-orders-wrapper > h2, .current-order-wrapper > h2{
+    margin-bottom: 0;
+}

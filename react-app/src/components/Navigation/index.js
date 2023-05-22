@@ -75,7 +75,7 @@ function Navigation({ isLoaded }) {
 					<li className='nav-list-item'>
 						<OpenModalButton
 							buttonText={"Cart"}
-							modalComponent={<CartModal carts={carts}/>}
+							modalComponent={<CartModal carts={carts} sessionUser={sessionUser}/>}
 							buttonClass={"black-button-round"}
 						/>
 					</li>

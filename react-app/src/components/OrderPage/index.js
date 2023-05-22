@@ -5,13 +5,17 @@ import CartIndexItem from "../CartIndexItem";
 import "./OrderPage.css";
 import OrderIndexItem from "../OrderIndexItem";
 import OrderIndex from "../OrderIndex";
+import { authenticate } from "../../store/session";
+import { isTimestampOld } from "../../utils";
+import { useLocation } from "react-router-dom";
 
 const OrderPage = () => {
     const dispatch = useDispatch();
     const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
-    const businesses = useSelector(state => state.business)
+    const businesses = useSelector(state => state.business);
 
     useEffect(() => {
+        dispatch(authenticate())
         dispatch(loadAllBusinessesThunk());
     }, [dispatch])
 
@@ -20,30 +24,79 @@ const OrderPage = () => {
     //Format orders by cartId
     let categorized_items = {};
     for (let order of userOrders) {
+        // console.log("OG ORDER-->", order)
+        let new_item = { ...order.item, ...{ orderId: order.id } }
         if (!(order.cartId in categorized_items)) {
-            categorized_items[order.cartId] = { "items": [order.item], "prices": [order.item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId }
+            categorized_items[order.cartId] = { "items": [new_item], "prices": [new_item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId, "timeCreated": order.cartInfo.timeCreated, "timeUpdated": order.cartInfo.timeUpdated }
         } else {
-            categorized_items[order.cartId].items.push(order.item)
-            categorized_items[order.cartId].prices.push(order.item.price)
+            categorized_items[order.cartId].items.push(new_item)
+            categorized_items[order.cartId].prices.push(new_item.price)
         }
     }
     let categories = Object.keys(categorized_items);
 
-    const mostRecentOrderId = Math.max(...Object.keys(categorized_items))
-    const mostRecentOrder = categorized_items[mostRecentOrderId] //largest cart id is most recent order
-    let pastOrders = { ...categorized_items }
-    delete pastOrders[mostRecentOrderId]
-    delete categories[mostRecentOrderId]
+    // let mostRecentCartIds;
+    // let cartIds = Object.keys(categorized_items)
+    // cartIds.sort((a, b)=> b-a)
+    // if(location.state && location.state.currentOrderCount > 1){
+    //     mostRecentCartIds = cartIds.slice(location.state.currentOrderCount)
+    // } else{
+    //     mostRecentCartIds = [cartIds[0]]
+    // }
+    // const mostRecentCartId = Math.max(...Object.keys(categorized_items))
+    // const mostRecentOrder = categorized_items[mostRecentCartId] //largest cart id is most recent order
 
+
+    // let timestampCheck = false;
+    // let mostRecentOrders={};
+    // for(let recentId of mostRecentCartIds){
+    //     mostRecentOrders[recentId] = categorized_items[recentId]
+    // }
+    // for (let [recentId, mostRecentOrder] of Object.entries(mostRecentOrders)){
+    //     if (!isTimestampOld(mostRecentOrder.timeCreated, 5) || (mostRecentOrder.timeUpdated && !isTimestampOld(mostRecentOrder.timeUpdated, 5))){
+    //         delete pastOrders[recentId]
+    //         delete categories[recentId]
+    //         timestampCheck = true;
+    //     }
+    // }
+
+    let timestampCheck = false;
+    let pastOrders = { ...categorized_items }
+    let mostRecentOrders = {};
+    for (let [cartId, order] of Object.entries(categorized_items)) {
+        if (!isTimestampOld(order.timeCreated, 5) || (order.timeUpdated && !isTimestampOld(order.timeUpdated, 5))) {
+            console.log(order)
+            console.log(pastOrders)
+            delete pastOrders[cartId]
+            delete categories[cartId]
+            mostRecentOrders[cartId] = order
+            timestampCheck = true;
+        }
+    }
+
+    mostRecentOrders = Object.entries(mostRecentOrders);
+    mostRecentOrders.reverse()
+
+    pastOrders = Object.values(pastOrders);
+    pastOrders.reverse()
     return (
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
                 <h2>Current Order</h2>
-                <OrderIndexItem order={mostRecentOrder} business={businesses[mostRecentOrder.businessId]} isMostRecent={true}/>
+
+                {timestampCheck ?
+                    mostRecentOrders.map((kvp) => {
+                        let recentId = kvp[0];
+                        let mostRecentOrder = kvp[1];
+                        return (
+                            <OrderIndexItem key={recentId} order={mostRecentOrder} cartId={recentId} business={businesses[mostRecentOrder.businessId]} isMostRecent={true} />
+                        )
+                    })
+                    : <p> All orders complete after 5 minutes</p>}
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>
-                <OrderIndex orders={Object.values(pastOrders)} businesses={businesses}/>
+                <OrderIndex orders={pastOrders} businesses={businesses} />
             </div>
         </div>
     )
