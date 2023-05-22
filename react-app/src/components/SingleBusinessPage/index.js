@@ -41,8 +41,8 @@ function SingleBusinessPage() {
             />
             <div className="SingleBusiness-bottom-wrapper">
                 <div className="SingleBusiness-bottom-left-wrapper">
-                    {categories.map((category)=> (
-                        <p key={category + String(businessId)+'label'}>{category}</p>
+                    {categories.map((category) => (
+                        <p key={category + String(businessId) + 'label'}>{category}</p>
                     ))}
                 </div>
                 <div className="SingleBusiness-bottom-right-wrapper">
@@ -55,6 +55,17 @@ function SingleBusinessPage() {
                             <ItemIndex
                                 items={categorized_items[category]}
                             />
+                        </div>
+                    ))}
+                    <h2>
+                        Reviews
+                    </h2>
+                    {business.businessReviews.map(rev => (
+                        <div className="review" key={rev.id}>
+                            <h3>
+                                {rev.rating}.0 rating by {rev.userId}:
+                            </h3>
+                            <p>{rev.reviewText}</p>
                         </div>
                     ))}
                 </div>
