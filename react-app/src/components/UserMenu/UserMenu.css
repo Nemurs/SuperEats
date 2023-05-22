@@ -1,18 +1,18 @@
 .user-menu-wrapper{
-    width: 8vw;
+    width: 10vw;
     display: flex;
     flex-direction: column;
     row-gap: 50px;
 }
 
-.profile-links-wrapper, .profile-tile-wrapper{
+.profile-links-wrapper{
     align-self: center;
 }
 
 .profile-tile-wrapper, .profile-link > button{
     display: flex;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 15px;
 }
 
 .profile-link > button > h3{

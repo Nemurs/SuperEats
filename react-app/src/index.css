@@ -50,6 +50,11 @@ button.background-green:hover{
     color: white;
 }
 
+button.background-orange:hover{
+    background-color: #ff7b00;
+    color: white;
+}
+
 button.background-red:hover{
     background-color: #f41b14;
     color: white;

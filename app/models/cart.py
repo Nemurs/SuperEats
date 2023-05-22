@@ -16,11 +16,14 @@ class Cart(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'businessId': self.business_id,
             'business': self.business.to_dict_no_items(),
             'orders': [order.to_dict_no_items() for order in self.orders]
         }
 
     def to_dict_no_items(self):
         return {
-            'id': self.id
+            'id': self.id,
+            'businessId': self.business_id,
+            'businessName': self.business.to_dict_no_items()["name"]
         }

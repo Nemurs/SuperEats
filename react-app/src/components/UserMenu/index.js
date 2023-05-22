@@ -4,16 +4,15 @@ import { useModal } from "../../context/Modal";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import "./UserMenu.css";
-import { Link } from "react-router-dom";
 
 const UserMenu = ({ sessionUser }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
 
-    const clickToRedirect = async (e, newPath, logout = false) => {
+    const clickToRedirect = async (e, newPath, islogout = false) => {
         e.preventDefault();
-        if (sessionUser && logout) {
+        if (sessionUser && islogout) {
             await dispatch(logout());
             await dispatch(clearItems());
         }
@@ -38,15 +37,9 @@ const UserMenu = ({ sessionUser }) => {
             <div className="profile-links-wrapper">
                 <ul className="profile-links-list">
                     <li className="profile-link">
-                        <button className='transparent-button-square' onClick={(e) => clickToRedirect(e, "/current-order")}>
+                        <button className='transparent-button-square' onClick={(e) => clickToRedirect(e, "/orders")}>
                             <i className="fa fa-drumstick-bite" style={{ color: "#000000" }} />
-                            <h3>Current Order</h3>
-                        </button>
-                    </li>
-                    <li className="profile-link">
-                        <button className='transparent-button-square' onClick={(e) => clickToRedirect(e, "/past-orders")}>
-                            <i className="fas fa-archive" style={{ color: "#000000" }} />
-                            <h3>Past Orders</h3>
+                            <h3>Orders</h3>
                         </button>
                     </li>
                 </ul>
