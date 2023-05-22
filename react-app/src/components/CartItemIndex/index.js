@@ -8,7 +8,7 @@ const CartItemIndex = ({items}) =>  {
         <div className="cartIndex">
             {items.map((item) => (
                 <CartIndexItem
-                    key={item.id} item={item}
+                    key={item.id} item={item} includeImg={true}
                 />
             ))}
         </div>
