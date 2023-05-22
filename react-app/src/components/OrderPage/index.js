@@ -8,14 +8,14 @@ import OrderIndex from "../OrderIndex";
 
 const OrderPage = () => {
     const dispatch = useDispatch();
-    const userOrders = useSelector(state => Object.values(state.session.user.userOrders));
+    const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
     const businesses = useSelector(state => state.business)
 
     useEffect(() => {
         dispatch(loadAllBusinessesThunk());
     }, [dispatch])
 
-    if (!userOrders) return (<></>)
+    if (!userOrders || !businesses) return (<></>)
 
     //Format orders by cartId
     let categorized_items = {};

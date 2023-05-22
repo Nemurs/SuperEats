@@ -5,17 +5,17 @@ from sqlalchemy.sql import text
 def seed_orders():
     orders = [
         *[Order(user_id=1, cart_id=1, item_id=i) for i in range(1, 5)],
-        *[Order(user_id=1, cart_id=2, item_id=i) for i in range(5, 9)],
-        *[Order(user_id=1, cart_id=3, item_id=i) for i in range(9, 13)],
-        *[Order(user_id=2, cart_id=4, item_id=i) for i in range(5, 9)],
-        *[Order(user_id=2, cart_id=5, item_id=i) for i in range(29, 33)],
-        *[Order(user_id=3, cart_id=6, item_id=i) for i in range(9, 13)],
-        *[Order(user_id=4, cart_id=7, item_id=i) for i in range(13, 17)],
-        *[Order(user_id=5, cart_id=8, item_id=i) for i in range(17, 21)],
-        *[Order(user_id=6, cart_id=9, item_id=i) for i in range(21, 25)],
-        *[Order(user_id=7, cart_id=10, item_id=i) for i in range(25, 29)],
-        *[Order(user_id=8, cart_id=11, item_id=i) for i in range(29, 33)],
-        *[Order(user_id=9, cart_id=12, item_id=i) for i in range(33, 37)]
+        *[Order(user_id=2, cart_id=2, item_id=i) for i in range(5, 9)],
+        *[Order(user_id=3, cart_id=3, item_id=i) for i in range(9, 13)],
+        *[Order(user_id=4, cart_id=4, item_id=i) for i in range(13, 17)],
+        *[Order(user_id=5, cart_id=5, item_id=i) for i in range(17, 21)],
+        *[Order(user_id=6, cart_id=6, item_id=i) for i in range(21, 25)],
+        *[Order(user_id=7, cart_id=7, item_id=i) for i in range(25, 29)],
+        *[Order(user_id=8, cart_id=8, item_id=i) for i in range(29, 33)],
+        *[Order(user_id=9, cart_id=9, item_id=i) for i in range(33, 37)],
+        *[Order(user_id=1, cart_id=10, item_id=i) for i in range(5, 9)],
+        *[Order(user_id=1, cart_id=11, item_id=i) for i in range(9, 13)],
+        *[Order(user_id=2, cart_id=12, item_id=i) for i in range(29, 33)]
     ]
 
 
