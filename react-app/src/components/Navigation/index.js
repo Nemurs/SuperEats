@@ -5,6 +5,7 @@ import { logout } from "../../store/session";
 import { clearItems } from '../../store/cart';
 import OpenModalButton from "../OpenModalButton";
 import CartModal from '../CartModal';
+import UserMenu from '../UserMenu';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -44,9 +45,11 @@ function Navigation({ isLoaded }) {
 		<ul className='nav-list'>
 			<div className='home-sidebar-wrapper'>
 				{sessionUser && (<li className='nav-list-item'>
-					<button className='black-button-round' onClick={(e) => clickToRedirect(e, "/")}>
-						Logout
-					</button>
+					<OpenModalButton
+						modalComponent={<UserMenu sessionUser={sessionUser}/>}
+						buttonText={<i className="fas fa-bars" style={{color: "#000000"}}/>}
+						buttonClass={"transparent-button-square"}
+					/>
 				</li>)}
 				<li className='nav-list-item'>
 					<button className='home-button'>

@@ -1,0 +1,31 @@
+.user-menu-wrapper{
+    width: 8vw;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+}
+
+.profile-links-wrapper, .profile-tile-wrapper{
+    align-self: center;
+}
+
+.profile-tile-wrapper, .profile-link > button{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.profile-link > button > h3{
+    font-size: 20px;
+}
+
+.profile-tile-wrapper-left > h2 {
+    margin-left: 8px;
+    font-size: 28px;
+}
+
+
+.profile-links-list{
+    list-style: none;
+    padding-left: 0;
+}

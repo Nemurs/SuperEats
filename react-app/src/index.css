@@ -7,6 +7,13 @@ body{
     align-items: center; */
 }
 
+.transparent-button-square{
+    background-color: transparent;
+    color: black;
+    border: none;
+    padding: 10px;
+}
+
 .black-button-round{
     background-color: black;
     color: white;
