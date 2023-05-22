@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
 from app.models import Cart, Order, db
-from app.forms import OrderForm
 
 order_routes = Blueprint('order', __name__)
 
@@ -35,7 +34,7 @@ def make_cart_and_orders():
 @login_required
 def delete_cart(cart_id):
     """
-    Make a cart and attach orders to it.
+    Delete a cart.
     """
     server_id = current_user.to_dict()['id']
     server_cart = Cart.query.filter(Cart.user_id == server_id).order_by(Cart.id.desc()).first()
@@ -47,4 +46,24 @@ def delete_cart(cart_id):
     db.session.delete(server_cart)
     db.session.commit()
 
-    return {"message":f"Successfully delete cart {cart_id}"}
+    return {"message":f"Successfully deleted cart {cart_id}"}
+
+@order_routes.route('/<int:order_id>', methods=['DELETE'])
+@login_required
+def delete_order(order_id):
+    """
+    Delete an order.
+    """
+    server_id = current_user.to_dict()['id']
+    server_order = Order.query.get(order_id)
+    # print("THIS IS THE REQUEST ------->", data)
+    if not server_order:
+        return {'errors': "order not found"}, 400
+    if (server_id != server_order.cart_info.user_id):
+        return {'errors': "can only delete your own order"}, 400
+
+    #delete order
+    db.session.delete(server_order)
+    db.session.commit()
+
+    return {"message":f"Successfully deleted order {order_id}"}

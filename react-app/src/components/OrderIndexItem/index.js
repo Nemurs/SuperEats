@@ -1,9 +1,11 @@
 import { useHistory } from "react-router-dom";
-import CartIndexItem from "../CartIndexItem";
-import "./OrderIndexItem.css";
 import { useDispatch } from "react-redux";
 import { deleteOrder } from "../../store/cart";
 import { authenticate } from "../../store/session";
+import OpenModalButton from "../OpenModalButton";
+import UpateOrderModal from "../UpdateOrderModal"
+import CartIndexItem from "../CartIndexItem";
+import "./OrderIndexItem.css";
 
 const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
     const history = useHistory();
@@ -44,7 +46,11 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
             <div className="order-wrapper-right">
                 {isMostRecent ?
                     (<>
-                    <button className="black-button-square background-orange" >Update Order</button>
+                    <OpenModalButton
+                        buttonText={"Update Order"}
+                        buttonClass={"black-button-square background-orange"}
+                        modalComponent={<UpateOrderModal order={order} business={business} cartId={cartId}/>}
+                    />
                     <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
                     </>
                     )

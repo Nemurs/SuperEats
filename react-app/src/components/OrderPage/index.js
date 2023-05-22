@@ -23,11 +23,13 @@ const OrderPage = () => {
     //Format orders by cartId
     let categorized_items = {};
     for (let order of userOrders) {
+        // console.log("OG ORDER-->", order)
+        let new_item = {...order.item, ...{orderId:order.id}}
         if (!(order.cartId in categorized_items)) {
-            categorized_items[order.cartId] = { "items": [order.item], "prices": [order.item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId, "timeCreated": order.cartInfo.timeCreated, "timeUpdated": order.cartInfo.timeUpdated}
+            categorized_items[order.cartId] = {"items": [new_item], "prices": [new_item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId, "timeCreated": order.cartInfo.timeCreated, "timeUpdated": order.cartInfo.timeUpdated}
         } else {
-            categorized_items[order.cartId].items.push(order.item)
-            categorized_items[order.cartId].prices.push(order.item.price)
+            categorized_items[order.cartId].items.push(new_item)
+            categorized_items[order.cartId].prices.push(new_item.price)
         }
     }
     let categories = Object.keys(categorized_items);
