@@ -105,6 +105,6 @@ button{
     cursor: pointer;
 }
 
-.error-list-item{
+.error-list-item, .form-error{
     color:red;
 }

@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import UpateOrderModal from "../UpdateOrderModal"
 import CartIndexItem from "../CartIndexItem";
 import StarRatingInput from "../StarRatingInput";
+import ReviewModal from "../ReviewModal";
 import "./OrderIndexItem.css";
 
 const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
@@ -37,7 +38,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
                 <div className="order-wrapper-left-text">
                     <div className="order-wrapper-left-top-text">
                         <h3>{order.businessName}</h3>
-                        <StarRatingInput rating={review? review.rating : 0} disabled={true} />
+                        <StarRatingInput rating={review ? review.rating : 0} disabled={true} />
                     </div>
                     <div className="cartIndex-vertical">
                         {order.items.map((item) => (
@@ -60,7 +61,14 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
                         <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
                     </>) : (
                         <>
-                            {review && review.rating ? <button className="black-button-square background-gold" onClick={redirectToStore}>Edit Review</button>: <button className="black-button-square background-gold" onClick={redirectToStore}>Add Review</button>}
+                            {review && review.rating ? (<OpenModalButton
+                                buttonText={"Edit Review"}
+                                buttonClass={"black-button-square background-gold"}
+                                modalComponent={<ReviewModal order={order} business={business} cartId={cartId} isEdit={true} review={review} />}
+                            />) : (<OpenModalButton
+                                buttonText={"Add Review"}
+                                buttonClass={"black-button-square background-gold"}
+                                modalComponent={<ReviewModal order={order} business={business} cartId={cartId} isEdit={false}/>} />)}
                             <button className="gray-button-square" onClick={redirectToStore}>Visit Store</button>
                         </>)}
             </div>
