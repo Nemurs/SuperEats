@@ -23,7 +23,7 @@ def make_cart_and_orders():
     db.session.commit()
 
     #create orders for cart
-    new_cart_id = Cart.query.filter(Cart.user_id == data["user_id"], Cart.business_id == data["business_id"]).first().id
+    new_cart_id = Cart.query.filter(Cart.user_id == data["user_id"], Cart.business_id == data["business_id"]).order_by(Cart.id.desc()).first().id
     for id in data["item_ids"]:
         new_order = Order(user_id=data["user_id"], item_id=id, cart_id=new_cart_id)
         db.session.add(new_order)

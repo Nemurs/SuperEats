@@ -37,6 +37,8 @@ const OrderPage = () => {
     delete pastOrders[mostRecentOrderId]
     delete categories[mostRecentOrderId]
 
+    pastOrders = Object.values(pastOrders);
+    pastOrders.reverse()
     return (
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
@@ -45,7 +47,7 @@ const OrderPage = () => {
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>
-                <OrderIndex orders={Object.values(pastOrders)} businesses={businesses}/>
+                <OrderIndex orders={pastOrders} businesses={businesses}/>
             </div>
         </div>
     )
