@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { clearItems, clearCart, orderItems } from "../../store/cart";
 import "./CartModal.css";
 import { useDispatch } from "react-redux";
+import { authenticate } from "../../store/session";
 
 function CartModal({ carts, sessionUser }) {
   const history = useHistory();
@@ -70,8 +71,9 @@ function CartModal({ carts, sessionUser }) {
     e.preventDefault();
     // console.log(items)
     await dispatch(orderItems(sessionUser.id, businessId, items.map(item => item.id)));
+    await dispatch(authenticate());
     closeModal();
-    history.push("/orders", {currentOrderCount:1});
+    history.push("/orders");
     return;
   }
 
@@ -80,8 +82,9 @@ function CartModal({ carts, sessionUser }) {
     for (let cart of Object.values(carts)) {
       await dispatch(orderItems(sessionUser.id, cart["businessId"], cart["items"].map(item => item.id)))
     }
+    await dispatch(authenticate());
     closeModal();
-    history.push("/orders", {currentOrderCount:Object.keys(carts).length});
+    history.push("/orders");
   }
 
   return (

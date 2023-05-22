@@ -35,31 +35,6 @@ const OrderPage = () => {
     }
     let categories = Object.keys(categorized_items);
 
-    // let mostRecentCartIds;
-    // let cartIds = Object.keys(categorized_items)
-    // cartIds.sort((a, b)=> b-a)
-    // if(location.state && location.state.currentOrderCount > 1){
-    //     mostRecentCartIds = cartIds.slice(location.state.currentOrderCount)
-    // } else{
-    //     mostRecentCartIds = [cartIds[0]]
-    // }
-    // const mostRecentCartId = Math.max(...Object.keys(categorized_items))
-    // const mostRecentOrder = categorized_items[mostRecentCartId] //largest cart id is most recent order
-
-
-    // let timestampCheck = false;
-    // let mostRecentOrders={};
-    // for(let recentId of mostRecentCartIds){
-    //     mostRecentOrders[recentId] = categorized_items[recentId]
-    // }
-    // for (let [recentId, mostRecentOrder] of Object.entries(mostRecentOrders)){
-    //     if (!isTimestampOld(mostRecentOrder.timeCreated, 5) || (mostRecentOrder.timeUpdated && !isTimestampOld(mostRecentOrder.timeUpdated, 5))){
-    //         delete pastOrders[recentId]
-    //         delete categories[recentId]
-    //         timestampCheck = true;
-    //     }
-    // }
-
     let timestampCheck = false;
     let pastOrders = { ...categorized_items }
     let mostRecentOrders = {};
