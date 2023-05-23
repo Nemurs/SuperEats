@@ -99,19 +99,21 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
         e.preventDefault();
         setSubmitState(true);
 
-        if (isEdit) {
-            if (await dispatch(editReviewThunk(review.id, rating, reviewText))){
-                closeModal();
-                console.log("edit review went through!")
-            }
-        } else {
-            if (await dispatch(createReviewThunk(rating, reviewText, user.id, businessId, cartId))){
-                closeModal();
-                console.log("create review went through!")
+        if (!Object.values(error).length){
+            if (isEdit) {
+                if (await dispatch(editReviewThunk(review.id, rating, reviewText))){
+                    closeModal();
+                    console.log("edit review went through!")
+                }
+            } else {
+                if (await dispatch(createReviewThunk(rating, reviewText, user.id, businessId, cartId))){
+                    closeModal();
+                    console.log("create review went through!")
+                }
             }
         }
-        return;
 
+        return;
     };
 
     const onChange = (number) => {
@@ -142,8 +144,6 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
         if (reviewText.length > 10 && rating > 0 && !error.rating && !error.review) setDisabled(false);
     }, [error])
 
-
-
     const deleteReviewClick = async (e) => {
         e.preventDefault();
         if (await dispatch(deleteReviewThunk(review.id))){
@@ -151,11 +151,6 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
         }
         return;
     }
-
-    // const createReviewClick = async (e) => {
-    //     e.preventDefault();
-
-    // }
 
     return (
         <>
@@ -183,6 +178,7 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
                         placeholder='Leave your review here...'
                         rows='10'
                         onBlur={() => setTouched({ ...touched, 'review': true })}
+
                     ></textarea>
                     {((touched.review || submitState) && error.review) && <p className="form-error">{error.review}</p>}
 

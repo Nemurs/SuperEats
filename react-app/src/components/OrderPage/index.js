@@ -13,7 +13,7 @@ const OrderPage = () => {
     const dispatch = useDispatch();
     const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
     const userReviews = useSelector(state => (state?.session?.user ? (state.session.user.userReviews) : null), shallowEqual);
-    const businesses = useSelector(state => state.business);
+    const businesses = useSelector(state => state?.business?.allBusinesses ? (state.business.allBusinesses) : null)
 
     useEffect(() => {
         dispatch(authenticate())
@@ -53,8 +53,11 @@ const OrderPage = () => {
     mostRecentOrders = Object.entries(mostRecentOrders);
     mostRecentOrders.reverse()
 
+    console.log(mostRecentOrders)
+
     pastOrders = Object.entries(pastOrders);
     pastOrders.reverse()
+    console.log(pastOrders)
     return (
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
@@ -68,7 +71,7 @@ const OrderPage = () => {
                             <OrderIndexItem key={recentId} order={mostRecentOrder} cartId={recentId} business={businesses[mostRecentOrder.businessId]} isMostRecent={true} />
                         )
                     })
-                    : <p> All orders complete after 5 minutes</p>}
+                    : <p> All orders complete after 1 minute</p>}
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>
