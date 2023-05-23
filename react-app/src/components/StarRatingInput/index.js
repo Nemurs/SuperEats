@@ -5,9 +5,7 @@ const StarRatingInput = ({ rating, disabled, onChange, iconSize }) => {
   const [activeRating, setActiveRating] = useState(rating);
 
   useEffect(() => {
-    if (rating) {
       setActiveRating(rating)
-    }
   }, [rating])
 
   const starIconHover = (index) => {

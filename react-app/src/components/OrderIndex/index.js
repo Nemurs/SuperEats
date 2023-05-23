@@ -5,9 +5,7 @@ const OrderIndex = ({ orders, businesses, reviews }) => {
     const [activeReviews, setActiveReviews] = useState(reviews);
 
     useEffect(() => {
-        if (reviews) {
-            setActiveReviews(reviews)
-        }
+        setActiveReviews(reviews)
     }, [reviews])
 
     if (!orders.length || !businesses) return (<></>)
@@ -18,7 +16,7 @@ const OrderIndex = ({ orders, businesses, reviews }) => {
             {orders.map((kvp) => {
                 let cartId = kvp[0];
                 let order = kvp[1];
-                console.log(activeReviews.find(rev => rev.cartId == cartId))
+                // console.log(activeReviews.find(rev => rev.cartId == cartId))
                 return (
                     <OrderIndexItem key={order.id} order={order} business={businesses[order.businessId]} isMostRecent={false} cartId={cartId} reviewProp={activeReviews.find(rev => rev.cartId == cartId)} />
                 )

@@ -15,29 +15,8 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
     const dispatch = useDispatch();
     const [review, setReview] = useState(reviewProp ? reviewProp : null);
 
-    // useEffect(() => {
-    //     console.log("initial useEffect,",reviews)
-    //     if (reviews.length){
-    //         for (let rev of reviews){
-    //             if (rev.cartId === Number(cartId)){
-    //                 setReview(rev)
-    //             }
-    //         }
-    //     }
-    // }, [])
     useEffect(() => {
-        if (reviewProp){
-            setReview(reviewProp)
-        }
-        // if (reviews && reviews.length){
-        //     for (let rev of reviews){
-        //         // console.log(rev.cartId, cartId)
-        //         if (rev.cartId === Number(cartId)){
-        //             console.log("useEffect dependency,", rev)
-        //             setReview(rev)
-        //         }
-        //     }
-        // }
+        setReview(reviewProp)
     }, [reviewProp])
 
     if (!order || !business) return (<></>)
