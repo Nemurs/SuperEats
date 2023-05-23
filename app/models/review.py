@@ -13,9 +13,12 @@ class Review(db.Model):
         'business.id')), nullable=False, unique=False)
     user_id = db.Column(db.ForeignKey(add_prefix_for_prod(
         'user.id')), nullable=False, unique=False)
+    cart_id = db.Column(db.ForeignKey(add_prefix_for_prod(
+        'cart.id')), nullable=False, unique=True)
 
     business = db.relationship('Business', back_populates='business_reviews')
     user = db.relationship('User', back_populates='user_reviews')
+    cart_info = db.relationship('Cart', back_populates='cart_review')
 
     def to_dict(self):
         return {
@@ -24,6 +27,7 @@ class Review(db.Model):
             'rating': self.rating,
             'businessId':self.business_id,
             'userId':self.user_id,
+            'cartId':self.cart_id,
             'business': self.business.to_dict_no_items(),
             'user': self.user.to_dict_no_items()
         }
@@ -34,5 +38,7 @@ class Review(db.Model):
             'reviewText': self.review_text,
             'rating': self.rating,
             'businessId':self.business_id,
-            'userId':self.user_id
+            'userId':self.user_id,
+            'cartId':self.cart_id,
+            'userFirstName':self.user.first_name
         }

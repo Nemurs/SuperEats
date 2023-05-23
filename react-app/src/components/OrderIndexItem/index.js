@@ -5,11 +5,19 @@ import { authenticate } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import UpateOrderModal from "../UpdateOrderModal"
 import CartIndexItem from "../CartIndexItem";
+import StarRatingInput from "../StarRatingInput";
+import ReviewModal from "../ReviewModal";
 import "./OrderIndexItem.css";
+import { useEffect, useState } from "react";
 
-const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
+const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [review, setReview] = useState(reviewProp ? reviewProp : null);
+
+    useEffect(() => {
+        setReview(reviewProp)
+    }, [reviewProp])
 
     if (!order || !business) return (<></>)
 
@@ -27,12 +35,19 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
         return;
     }
 
+    // console.log(review)
+
     return (
         <div className="order-wrapper">
             <div className="order-wrapper-left">
                 <img className="small" src={business.images[0].url} alt={order.businessName} />
                 <div className="order-wrapper-left-text">
-                    <h3>{order.businessName}</h3>
+                    <div className="order-wrapper-left-top-text">
+                        <h3>{order.businessName}</h3>
+                        {/* {console.log(review)} */}
+                        {review ? (<StarRatingInput rating={review.rating} disabled={true} />) : (<StarRatingInput rating={0} disabled={true} />)}
+
+                    </div>
                     <div className="cartIndex-vertical">
                         {order.items.map((item) => (
                             <CartIndexItem
@@ -46,15 +61,24 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId }) => {
             <div className="order-wrapper-right">
                 {isMostRecent ?
                     (<>
-                    <OpenModalButton
-                        buttonText={"Update Order"}
-                        buttonClass={"black-button-square background-orange"}
-                        modalComponent={<UpateOrderModal order={order} business={business} cartId={cartId}/>}
-                    />
-                    <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
-                    </>
-                    )
-                    : (<button className="black-button-square" onClick={redirectToStore}>Visit Store</button>)}
+                        <OpenModalButton
+                            buttonText={"Update Order"}
+                            buttonClass={"black-button-square background-orange"}
+                            modalComponent={<UpateOrderModal order={order} business={business} cartId={cartId} />}
+                        />
+                        <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
+                    </>) : (
+                        <>
+                            {review && review.rating ? (<OpenModalButton
+                                buttonText={"Edit Review"}
+                                buttonClass={"black-button-square background-gold"}
+                                modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={true} review={review} />}
+                            />) : (<OpenModalButton
+                                buttonText={"Add Review"}
+                                buttonClass={"black-button-square background-gold"}
+                                modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={false}/>} />)}
+                            <button className="gray-button-square" onClick={redirectToStore}>Visit Store</button>
+                        </>)}
             </div>
         </div>
     )

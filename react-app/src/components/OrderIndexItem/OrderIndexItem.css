@@ -1,4 +1,4 @@
-.order-wrapper, .order-wrapper-left{
+.order-wrapper, .order-wrapper-left, .order-wrapper-left-top-text{
     display: flex;
     align-items: center;
 }
@@ -7,7 +7,7 @@
     justify-content: space-between;
 }
 
-.order-wrapper-left{
+.order-wrapper-left, .order-wrapper-left-top-text{
     column-gap: 15px;
 }
 
@@ -21,4 +21,5 @@
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+    margin-top: 15px;
 }
