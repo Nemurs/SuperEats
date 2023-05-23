@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { loadAllBusinessesThunk } from "../../store/business";
 import CartIndexItem from "../CartIndexItem";
 import "./OrderPage.css";
@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 const OrderPage = () => {
     const dispatch = useDispatch();
     const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
-    const userReviews = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userReviews) : null));
+    const userReviews = useSelector(state => (state?.session?.user ? (state.session.user.userReviews) : null), shallowEqual);
     const businesses = useSelector(state => state.business);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const OrderPage = () => {
     let pastOrders = { ...categorized_items }
     let mostRecentOrders = {};
     for (let [cartId, order] of Object.entries(categorized_items)) {
-        if (!isTimestampOld(order.timeCreated, 5) || (order.timeUpdated && !isTimestampOld(order.timeUpdated, 5))) {
+        if (!isTimestampOld(order.timeCreated, 1) || (order.timeUpdated && !isTimestampOld(order.timeUpdated, 1))) {
             console.log(order)
             console.log(pastOrders)
             delete pastOrders[cartId]

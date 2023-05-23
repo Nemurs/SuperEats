@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal.js";
+import { useHistory } from "react-router-dom";
 // import { createNewReviewThunk, loadAllReviewsThunk } from "../../store/singleSpotReviews.js";
 // import { loadOneThunk } from "../../store/singleSpot.js";
 import { authenticate } from "../../store/session";
@@ -8,8 +9,28 @@ import StarRatingInput from "../StarRatingInput";
 import CloseModalButton from "../CloseModalButton";
 import "./ReviewModal.css";
 
+const deleteReviewThunk = (reviewId) => async (dispatch) => {
+    const response = await fetch(`/api/review/${reviewId}`, {
+        method: "DELETE",
+    });
+
+    if (response.ok) {
+        await dispatch(authenticate());
+        return true;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
 const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [reviewText, setReviewText] = useState(isEdit ? review.reviewText : "");
     const [rating, setRating] = useState(isEdit ? review.rating : 0);
     const [error, setError] = useState({});
@@ -65,6 +86,19 @@ const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
         if (reviewText.length > 10 && rating > 0 && !error.rating && !error.review) setDisabled(false);
     }, [error])
 
+
+
+    const deleteReviewClick = async (e) => {
+        e.preventDefault();
+        if (await dispatch(deleteReviewThunk(review.id))){
+            closeModal();
+        }
+
+        // history.push(`/orders`);
+
+        return;
+    }
+
     return (
         <>
             <CloseModalButton />
@@ -96,7 +130,7 @@ const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
 
                     <div className="review-modal-buttons">
                         <button disabled={disabled} type="submit" className={"black-button-square background-green"}>Submit</button>
-                        {isEdit ? <button className={"black-button-square background-red"}>Delete Review</button> : <></>}
+                        {isEdit ? <button className={"black-button-square background-red"} onClick={deleteReviewClick}>Delete Review</button> : <></>}
                     </div>
                 </form>
             </div>

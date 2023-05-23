@@ -8,10 +8,37 @@ import CartIndexItem from "../CartIndexItem";
 import StarRatingInput from "../StarRatingInput";
 import ReviewModal from "../ReviewModal";
 import "./OrderIndexItem.css";
+import { useEffect, useState } from "react";
 
-const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
+const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [review, setReview] = useState(reviewProp ? reviewProp : null);
+
+    // useEffect(() => {
+    //     console.log("initial useEffect,",reviews)
+    //     if (reviews.length){
+    //         for (let rev of reviews){
+    //             if (rev.cartId === Number(cartId)){
+    //                 setReview(rev)
+    //             }
+    //         }
+    //     }
+    // }, [])
+    useEffect(() => {
+        if (reviewProp){
+            setReview(reviewProp)
+        }
+        // if (reviews && reviews.length){
+        //     for (let rev of reviews){
+        //         // console.log(rev.cartId, cartId)
+        //         if (rev.cartId === Number(cartId)){
+        //             console.log("useEffect dependency,", rev)
+        //             setReview(rev)
+        //         }
+        //     }
+        // }
+    }, [reviewProp])
 
     if (!order || !business) return (<></>)
 
@@ -29,7 +56,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
         return;
     }
 
-    console.log(review)
+    // console.log(review)
 
     return (
         <div className="order-wrapper">
@@ -38,7 +65,9 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, review }) => {
                 <div className="order-wrapper-left-text">
                     <div className="order-wrapper-left-top-text">
                         <h3>{order.businessName}</h3>
-                        <StarRatingInput rating={review ? review.rating : 0} disabled={true} />
+                        {console.log(review)}
+                        {review ? (<StarRatingInput rating={review.rating} disabled={true} />) : (<StarRatingInput rating={0} disabled={true} />)}
+
                     </div>
                     <div className="cartIndex-vertical">
                         {order.items.map((item) => (
