@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal.js";
 import { useHistory } from "react-router-dom";
 // import { createNewReviewThunk, loadAllReviewsThunk } from "../../store/singleSpotReviews.js";
@@ -28,7 +28,62 @@ const deleteReviewThunk = (reviewId) => async (dispatch) => {
     }
 };
 
-const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
+const createReviewThunk = (rating, reviewText, userId, businessId, cartId) => async (dispatch) => {
+    const response = await fetch(`/api/review`, {
+        method: "POST",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            rating,
+            "review_text": reviewText,
+            "user_id": userId,
+            "business_id": businessId,
+            "cart_id": cartId
+        }),
+    });
+
+    if (response.ok) {
+        await dispatch(authenticate());
+        return true;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+const editReviewThunk = (reviewId, rating, reviewText) => async (dispatch) => {
+    const response = await fetch(`/api/review/${reviewId}`, {
+        method: "PUT",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            rating,
+            "review_text": reviewText
+        }),
+    });
+
+    if (response.ok) {
+        await dispatch(authenticate());
+        return true;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [reviewText, setReviewText] = useState(isEdit ? review.reviewText : "");
@@ -38,23 +93,24 @@ const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
     const [touched, setTouched] = useState({});
     const [submitState, setSubmitState] = useState(false);
     const { closeModal } = useModal();
+    const user = useSelector(state => state.session.user);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitState(true);
 
         if (isEdit) {
-
+            if (await dispatch(editReviewThunk(review.id, rating, reviewText))){
+                closeModal();
+                console.log("edit review went through!")
+            }
         } else {
-            // let res = await dispatch(createNewReviewThunk());
-
-            // if (!res.ok) {
-            //     console.log(await res.json());
-            // } else {
-            //     await dispatch(authenticate());
-            //     closeModal();
-            // }
+            if (await dispatch(createReviewThunk(rating, reviewText, user.id, businessId, cartId))){
+                closeModal();
+                console.log("create review went through!")
+            }
         }
+        return;
 
     };
 
@@ -93,11 +149,13 @@ const ReviewModal = ({ order, business, cartId, isEdit, review }) => {
         if (await dispatch(deleteReviewThunk(review.id))){
             closeModal();
         }
-
-        // history.push(`/orders`);
-
         return;
     }
+
+    // const createReviewClick = async (e) => {
+    //     e.preventDefault();
+
+    // }
 
     return (
         <>

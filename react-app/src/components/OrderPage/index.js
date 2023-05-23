@@ -41,8 +41,8 @@ const OrderPage = () => {
     let mostRecentOrders = {};
     for (let [cartId, order] of Object.entries(categorized_items)) {
         if (!isTimestampOld(order.timeCreated, 1) || (order.timeUpdated && !isTimestampOld(order.timeUpdated, 1))) {
-            console.log(order)
-            console.log(pastOrders)
+            // console.log(order)
+            // console.log(pastOrders)
             delete pastOrders[cartId]
             delete categories[cartId]
             mostRecentOrders[cartId] = order

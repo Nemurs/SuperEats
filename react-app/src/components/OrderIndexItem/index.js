@@ -44,7 +44,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
                 <div className="order-wrapper-left-text">
                     <div className="order-wrapper-left-top-text">
                         <h3>{order.businessName}</h3>
-                        {console.log(review)}
+                        {/* {console.log(review)} */}
                         {review ? (<StarRatingInput rating={review.rating} disabled={true} />) : (<StarRatingInput rating={0} disabled={true} />)}
 
                     </div>
@@ -72,11 +72,11 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
                             {review && review.rating ? (<OpenModalButton
                                 buttonText={"Edit Review"}
                                 buttonClass={"black-button-square background-gold"}
-                                modalComponent={<ReviewModal order={order} business={business} cartId={cartId} isEdit={true} review={review} />}
+                                modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={true} review={review} />}
                             />) : (<OpenModalButton
                                 buttonText={"Add Review"}
                                 buttonClass={"black-button-square background-gold"}
-                                modalComponent={<ReviewModal order={order} business={business} cartId={cartId} isEdit={false}/>} />)}
+                                modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={false}/>} />)}
                             <button className="gray-button-square" onClick={redirectToStore}>Visit Store</button>
                         </>)}
             </div>
