@@ -10,7 +10,7 @@ function SingleBusinessPage() {
     const dispatch = useDispatch();
     const { businessId } = useParams();
     const location = useLocation();
-    const business = useSelector(state => Object.values(state.business)[0])
+    const business = useSelector(state => state?.business?.singleBusiness ? (state.business.singleBusiness) : null)
 
     useEffect(() => {
         if (location.pathname.startsWith("/business/") && businessId) {
@@ -18,8 +18,8 @@ function SingleBusinessPage() {
         }
     }, [dispatch, location.pathname, businessId]);
 
-    if (!business || business.length > 1) return (<></>)
-
+    console.log(business);
+    if (!business || !business?.items) return (<></>)
     const items = business.items;
     let categorized_items = {};
     for (let item of items) {

@@ -43,15 +43,17 @@ export default function reducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case LOAD_ALL_BUSINESSES:
-            newState = {};
+            newState = {...state};
+            newState["allBusinesses"] = {};
             action.businesses.Businesses.forEach((business) => {
-                newState[business.id] = business;
+                newState["allBusinesses"] = {...newState["allBusinesses"], ...{[business.id] : business}};
             });
             return newState;
         case LOAD_ONE_BUSINESS:
-            newState = {};
+            newState = {...state};
+            newState["singleBusiness"] = {};
             const id = action.business.Business.id
-            newState[id] = {...action.business.Business};
+            newState["singleBusiness"] =  {...action.business.Business}
             return newState;
         default:
             return state;
