@@ -53,11 +53,11 @@ const OrderPage = () => {
     mostRecentOrders = Object.entries(mostRecentOrders);
     mostRecentOrders.reverse()
 
-    console.log(mostRecentOrders)
+    // console.log(mostRecentOrders)
 
     pastOrders = Object.entries(pastOrders);
     pastOrders.reverse()
-    console.log(pastOrders)
+    // console.log(pastOrders)
     return (
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
@@ -71,11 +71,14 @@ const OrderPage = () => {
                             <OrderIndexItem key={recentId} order={mostRecentOrder} cartId={recentId} business={businesses[mostRecentOrder.businessId]} isMostRecent={true} />
                         )
                     })
-                    : <p> All orders complete after 1 minute</p>}
+                    : <p> All orders complete after 1 minute.</p>}
             </div>
             <div className="past-orders-wrapper">
                 <h2>Past Orders</h2>
-                <OrderIndex orders={pastOrders} businesses={businesses} reviews={userReviews}/>
+                {pastOrders.length ? (
+                    <OrderIndex orders={pastOrders} businesses={businesses} reviews={userReviews}/>
+                ) : (<p>Place an order to see it here!</p>)}
+
             </div>
         </div>
     )
