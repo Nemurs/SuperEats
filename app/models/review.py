@@ -39,5 +39,6 @@ class Review(db.Model):
             'rating': self.rating,
             'businessId':self.business_id,
             'userId':self.user_id,
-            'cartId':self.cart_id
+            'cartId':self.cart_id,
+            'userFirstName':self.user.first_name
         }

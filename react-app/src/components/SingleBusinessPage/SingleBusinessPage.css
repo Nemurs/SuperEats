@@ -23,3 +23,9 @@
 .SingleBusiness-bottom-right-wrapper > h2 {
     margin-left: -1%;
 }
+
+.businesspage-review-header{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}

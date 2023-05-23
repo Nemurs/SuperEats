@@ -60,14 +60,19 @@ function SingleBusinessPage() {
                     <h2>
                         Reviews
                     </h2>
-                    {business.businessReviews.map(rev => (
-                        <div className="review" key={rev.id}>
-                            <h3>
-                                {rev.rating}.0 rating by {rev.userId}:
-                            </h3>
+                    {business.businessReviews.length ? business.businessReviews.map(rev => (
+                        <div className="businesspage-review" key={rev.id}>
+                            <div className="businesspage-review-header">
+                                <i className="fas fa-star"/>
+                                <h3>
+                                    {rev.rating}.0 from {rev.userFirstName}:
+                                </h3>
+                            </div>
                             <p>{rev.reviewText}</p>
                         </div>
-                    ))}
+                    )) :
+                    (<h4>Place an order and be the first to review!</h4>)
+                    }
                 </div>
             </div>
 
