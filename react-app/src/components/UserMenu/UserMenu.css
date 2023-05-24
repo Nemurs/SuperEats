@@ -1,5 +1,5 @@
 .user-menu-wrapper{
-    width: 10vw;
+    width: 15vw;
     display: flex;
     flex-direction: column;
     row-gap: 50px;
@@ -15,17 +15,34 @@
     column-gap: 15px;
 }
 
+.profile-tile-wrapper > img{
+    width: 50px;
+    height: 50px;
+    object-fit: scale-down;
+}
+
+.profile-tile-wrapper-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-tile-wrapper-right > button {
+    margin-right: 0px;
+}
+
 .profile-link > button > h3{
     font-size: 20px;
 }
 
-.profile-tile-wrapper-left > h2 {
-    margin-left: 8px;
+.profile-tile-wrapper-right > h2 {
+    /* margin-right: 8px; */
     font-size: 28px;
 }
-
 
 .profile-links-list{
     list-style: none;
     padding-left: 0;
+    margin-left: 0px;
 }

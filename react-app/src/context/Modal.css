@@ -34,3 +34,7 @@
 #modal-content.right{
   right:0;
 }
+
+#modal-content.left{
+  left:0;
+}
