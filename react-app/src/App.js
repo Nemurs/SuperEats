@@ -9,6 +9,7 @@ import SplashPage from "./components/SplashPage";
 import HomePage from "./components/HomePage";
 import SingleBusinessPage from "./components/SingleBusinessPage";
 import OrderPage from "./components/OrderPage";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ function App() {
               <SplashPage />
             </Route>
             <Route exact path="/home">
-              <HomePage />
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
             </Route>
             <Route exact path="/login" >
               <LoginFormPage />
@@ -40,10 +43,14 @@ function App() {
               <SignupFormPage />
             </Route>
             <Route exact path="/orders">
-              <OrderPage />
+              <ProtectedRoute>
+                <OrderPage />
+              </ProtectedRoute>
             </Route>
             <Route path="/business/:businessId">
-              <SingleBusinessPage />
+              <ProtectedRoute>
+                <SingleBusinessPage />
+              </ProtectedRoute>
             </Route>
           </Switch>
         )}

@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 101;
 }
 
 #modal-background {
@@ -26,4 +27,10 @@
   max-height: 95vh;
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#modal-content.right{
+  right:0;
 }

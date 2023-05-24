@@ -49,6 +49,7 @@ function Navigation({ isLoaded }) {
 						modalComponent={<UserMenu sessionUser={sessionUser}/>}
 						buttonText={<i className="fas fa-bars" style={{color: "#000000"}}/>}
 						buttonClass={"transparent-button-square"}
+						modalPosition={"left"}
 					/>
 				</li>)}
 				<li className='nav-list-item'>
@@ -77,6 +78,7 @@ function Navigation({ isLoaded }) {
 							buttonText={"Cart"}
 							modalComponent={<CartModal carts={carts} sessionUser={sessionUser}/>}
 							buttonClass={"black-button-round"}
+							modalPosition={"right"}
 						/>
 					</li>
 				</div>

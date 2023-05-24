@@ -1,10 +1,19 @@
 .cart-wrapper{
     position: relative;
+    /* top: 20vh; */
+    /* bottom: 40vh; */
+    /* margin-top: 0; */
+    /* margin-bottom: 0; */
     /* /* min-width: 25vw; */
     width: 25vw;
     /* max-width: 35vw; */
     /* max-height: 100vh; */
     /* max-height: 100%; */
+    height: 100%;
+    /* align-self: flex-end; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .cart-wrapper > button {
@@ -52,10 +61,15 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    /* position: relative; */
+    width: 25vw;
+    height: fit-content;
 }
 
 .empty-cart-wrapper > img {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    object-fit: contain;
     cursor: default;
+    align-self: center;
 }
