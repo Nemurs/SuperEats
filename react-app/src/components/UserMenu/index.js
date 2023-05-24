@@ -48,7 +48,7 @@ const UserMenu = ({ sessionUser }) => {
                 </ul>
             </div>
 
-            <button className='black-button-round' onClick={(e) => clickToRedirect(e, "/", true)}>
+            <button className='black-button-square' onClick={(e) => clickToRedirect(e, "/", true)}>
                 Logout
             </button>
         </div>
