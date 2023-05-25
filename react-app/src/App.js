@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import HomePage from "./components/HomePage";
+import ProfilePage from "./components/ProfilePage";
 import SingleBusinessPage from "./components/SingleBusinessPage";
 import OrderPage from "./components/OrderPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -34,6 +35,11 @@ function App() {
             <Route exact path="/home">
               <ProtectedRoute>
                 <HomePage />
+              </ProtectedRoute>
+            </Route>
+            <Route exact path="/profile">
+              <ProtectedRoute>
+                <ProfilePage />
               </ProtectedRoute>
             </Route>
             <Route exact path="/login" >

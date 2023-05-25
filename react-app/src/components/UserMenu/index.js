@@ -29,12 +29,12 @@ const UserMenu = ({ sessionUser }) => {
                 <img src={process.env.PUBLIC_URL + "/default-profile-picture.png"} alt="default profile picture"/>
                 <div className="profile-tile-wrapper-right">
                     <h2>{sessionUser.firstName}</h2>
-                    <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e)=>e.preventDefault()}>
-                        Manage Account
-                    </button>
-                    {/* <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e) => clickToRedirect(e, "/profile")}>
+                    {/* <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e)=>e.preventDefault()}>
                         Manage Account
                     </button> */}
+                    <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e) => clickToRedirect(e, "/profile")}>
+                        View Account
+                    </button>
                 </div>
             </div>
             <div className="profile-links-wrapper">
