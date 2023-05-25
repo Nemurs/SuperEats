@@ -3,6 +3,8 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import './LoginForm.css';
+import isEmail from "validator/lib/isEmail";
+import isLength from "validator/lib/isLength";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -13,14 +15,22 @@ function LoginFormPage() {
 
   if (sessionUser) return <Redirect to="/home" />;
 
-  const handleSubmit = async (e, demo=false) => {
+  const handleSubmit = async (e, demo = false) => {
     e.preventDefault();
-
     let data;
-
     if (demo) {
       data = await dispatch(login("demo@aa.io", "password"));
     } else {
+      if (!isEmail(email)) return setErrors(prev => prev.includes("Please enter a valid email") ? prev : ["Please enter a valid email", ...prev])
+      else {
+        setErrors(prev => prev.splice(prev.indexOf("Please enter a valid email"), 1))
+      }
+
+      if (!isLength(password, { min: 4, max: 255 })) return setErrors(prev => prev.includes("Please enter a valid password (min: 4 characters)") ? prev : ["Please enter a valid password (min: 4 characters)", ...prev])
+      else {
+        setErrors(prev => prev.splice(prev.indexOf("Please enter a valid password (min: 4 characters)"), 1))
+      }
+      //only submit if frontend validation passes
       data = await dispatch(login(email, password));
     }
     if (data) {
@@ -32,7 +42,7 @@ function LoginFormPage() {
     <div className="login-form-wrapper">
       <form onSubmit={handleSubmit} className="login-form">
         <h1 className="login-form-text">Login</h1>
-        {errors.length ? (<ul>
+        {errors.length ? (<ul className="errors-list">
           {errors.map((error, idx) => (
             <li key={idx} className="error-list-item">{error}</li>
           ))}
@@ -55,8 +65,8 @@ function LoginFormPage() {
             required
           />
         </label>
-        <button type="submit" className="black-button-square">Continue</button>
-        <button className="black-button-square" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>
+        <button type="submit" className="black-button-square background-green">Continue</button>
+        <button className="black-button-square background-gold" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>
       </form>
     </div>
   );

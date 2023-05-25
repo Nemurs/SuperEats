@@ -7,8 +7,11 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import HomePage from "./components/HomePage";
+import ProfilePage from "./components/ProfilePage";
 import SingleBusinessPage from "./components/SingleBusinessPage";
 import OrderPage from "./components/OrderPage";
+import OrderPageTimer from "./components/OrderPageTimer";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ function App() {
 
   return (
     <div className={location.pathname === "/" ? "site-wrapper splash-page" : "site-wrapper"}>
-      <div className="nav-wrapper">
+      <div className={location.pathname === "/" ? "nav-wrapper splash-page" : "nav-wrapper"}>
         <Navigation isLoaded={isLoaded} />
       </div>
       <div className="main-content-wrapper">
@@ -31,7 +34,14 @@ function App() {
               <SplashPage />
             </Route>
             <Route exact path="/home">
-              <HomePage />
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            </Route>
+            <Route exact path="/profile">
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
             </Route>
             <Route exact path="/login" >
               <LoginFormPage />
@@ -40,10 +50,14 @@ function App() {
               <SignupFormPage />
             </Route>
             <Route exact path="/orders">
-              <OrderPage />
+              <ProtectedRoute>
+                <OrderPageTimer />
+              </ProtectedRoute>
             </Route>
             <Route path="/business/:businessId">
-              <SingleBusinessPage />
+              <ProtectedRoute>
+                <SingleBusinessPage />
+              </ProtectedRoute>
             </Route>
           </Switch>
         )}

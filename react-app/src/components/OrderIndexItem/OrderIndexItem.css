@@ -14,6 +14,7 @@
 .order-wrapper-left > img {
     align-self: flex-start;
     margin-top: 20px;
+    cursor: default;
 }
 
 .order-wrapper-right{

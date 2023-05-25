@@ -29,6 +29,10 @@ body{
     padding: 10px;
 }
 
+.disabled-button{
+    cursor: default;
+}
+
 .gray-button-square{
     background-color: lightgray;
     color: black;
@@ -90,8 +94,16 @@ span.bold{
 
 .nav-wrapper{
     width: 100%;
-    height: 100px;
+    height: 80px;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
 }
+
+.nav-wrapper.splash-page{
+    background-color: transparent;
+}
+
 .main-content-wrapper{
     width: 100%;
     align-self: center;
@@ -99,10 +111,18 @@ span.bold{
     display: flex;
     flex-direction: column;
     padding-bottom: 35px;
+    margin-top: 79px;
 }
 
 button{
     cursor: pointer;
+}
+
+/* Errors*/
+.errors-list{
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
 }
 
 .error-list-item, .form-error{

@@ -1,0 +1,14 @@
+.profile-page-wrapper > img{
+    width: 100px;
+    height: 100px;
+    object-fit: scale-down;
+    align-self: center;
+}
+
+.basic-info-wrapper, .profile-page-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: -10px;
+}

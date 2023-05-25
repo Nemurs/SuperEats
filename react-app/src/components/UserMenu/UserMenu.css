@@ -1,8 +1,17 @@
 .user-menu-wrapper{
-    width: 10vw;
+    min-width: 150px;
+    width: 15vw;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     row-gap: 50px;
+}
+
+.user-menu-wrapper > button.black-button-square {
+    width: 90%;
+    position: absolute;
+    bottom: 50px;
 }
 
 .profile-links-wrapper{
@@ -15,17 +24,31 @@
     column-gap: 15px;
 }
 
+.profile-tile-wrapper > img{
+    width: 50px;
+    height: 100%;
+    object-fit: scale-down;
+    align-self: center;
+}
+
+.profile-tile-wrapper-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .profile-link > button > h3{
     font-size: 20px;
 }
 
-.profile-tile-wrapper-left > h2 {
-    margin-left: 8px;
+.profile-tile-wrapper-right > h2 {
+    /* margin-right: 8px; */
     font-size: 28px;
 }
-
 
 .profile-links-list{
     list-style: none;
     padding-left: 0;
+    margin-left: 0px;
 }

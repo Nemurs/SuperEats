@@ -8,17 +8,15 @@ import "./CartModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/session";
 
-function CartModal({ carts, sessionUser }) {
+function CartModal() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  // const cart = useSelector(state=>Object.values(state.cart))
+  const carts = useSelector(state => Object.values(state.cart))
+  const sessionUser = useSelector(state => state.session.user)
 
-  // if (!Object.values(cart).length) {
-  //   return (<></>)
-  // }
-
+  //Empty Cart
   const clickToRedirect = async (e, newPath) => {
     e.preventDefault();
     closeModal();
@@ -26,9 +24,9 @@ function CartModal({ carts, sessionUser }) {
     return;
   }
 
-  if (!carts.length) return (
-    <div className="cart-wrapper">
-      <CloseModalButton />
+  if (!Object.values(carts).length) return (
+    <div className="cart-wrapper no-items">
+        <CloseModalButton />
       <div className="empty-cart-wrapper">
         <img src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/a023a017672c2488.svg" alt="empty shopping cart icon" />
         <h4>Add items to start a cart</h4>
@@ -67,14 +65,13 @@ function CartModal({ carts, sessionUser }) {
 
   const clickClearOneCart = async (e, businessId) => {
     e.preventDefault();
+    if(Object.values(carts).length === 1) closeModal();
     await dispatch(clearCart(businessId));
-    closeModal();
     return;
   }
 
   const clickOrderOneCart = async (e, businessId, items) => {
     e.preventDefault();
-    // console.log(items)
     await dispatch(orderItems(sessionUser.id, businessId, items.map(item => item.id)));
     await dispatch(authenticate());
     closeModal();
@@ -84,17 +81,16 @@ function CartModal({ carts, sessionUser }) {
 
   const clickOrderManyCarts = async (e, carts) => {
     e.preventDefault();
+    closeModal();
     for (let cart of Object.values(carts)) {
       await dispatch(orderItems(sessionUser.id, cart["businessId"], cart["items"].map(item => item.id)))
     }
     await dispatch(authenticate());
-    closeModal();
     history.push("/orders");
   }
 
   return (
     <div className="cart-wrapper">
-      {/* <p>{Object.values(cart[0])[0].name}</p> */}
       <CloseModalButton />
       <div className="categories">
         {categories.map((category, index) => (

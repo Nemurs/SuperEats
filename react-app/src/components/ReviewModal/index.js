@@ -98,7 +98,6 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitState(true);
-
         if (!Object.values(error).length){
             if (isEdit) {
                 if (await dispatch(editReviewThunk(review.id, rating, reviewText))){
@@ -141,7 +140,7 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
     }, [reviewText, rating])
 
     useEffect(() => {
-        if (reviewText.length > 10 && rating > 0 && !error.rating && !error.review) setDisabled(false);
+        if (reviewText.length >= 10 && rating > 0 && !error.rating && !error.review) setDisabled(false);
     }, [error])
 
     const deleteReviewClick = async (e) => {
@@ -153,7 +152,7 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
     }
 
     return (
-        <>
+        <div className="review-modal-wrapper">
             <CloseModalButton />
             <div className="review-modal">
                 <h1>How did you like <span>{order.businessName}</span>?</h1>
@@ -182,13 +181,13 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
                     ></textarea>
                     {((touched.review || submitState) && error.review) && <p className="form-error">{error.review}</p>}
 
-                    <div className="review-modal-buttons">
-                        <button disabled={disabled} type="submit" className={"black-button-square background-green"}>Submit</button>
+                    <div className={"review-modal-buttons"}>
+                        <button disabled={disabled} type="submit" className={disabled ? "gray-button-square disabled-button" : "black-button-square background-green"} onClick={handleSubmit}>Submit</button>
                         {isEdit ? <button className={"black-button-square background-red"} onClick={deleteReviewClick}>Delete Review</button> : <></>}
                     </div>
                 </form>
             </div>
-        </>
+        </div>
     );
 }
 

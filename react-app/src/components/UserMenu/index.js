@@ -26,15 +26,15 @@ const UserMenu = ({ sessionUser }) => {
     return (
         <div className="user-menu-wrapper">
             <div className="profile-tile-wrapper">
-                <i className="fa fa-portrait" style={{ color: "#000000" }}></i>
-                <div className="profile-tile-wrapper-left">
+                <img src={process.env.PUBLIC_URL + "/default-profile-picture.png"} alt="default profile picture"/>
+                <div className="profile-tile-wrapper-right">
                     <h2>{sessionUser.firstName}</h2>
-                    <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e)=>e.preventDefault()}>
-                        Manage Account
-                    </button>
-                    {/* <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e) => clickToRedirect(e, "/profile")}>
+                    {/* <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e)=>e.preventDefault()}>
                         Manage Account
                     </button> */}
+                    <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e) => clickToRedirect(e, "/profile")}>
+                        View Account
+                    </button>
                 </div>
             </div>
             <div className="profile-links-wrapper">
@@ -48,7 +48,7 @@ const UserMenu = ({ sessionUser }) => {
                 </ul>
             </div>
 
-            <button className='black-button-round' onClick={(e) => clickToRedirect(e, "/", true)}>
+            <button className='black-button-square background-green' onClick={(e) => clickToRedirect(e, "/", true)}>
                 Logout
             </button>
         </div>

@@ -1,5 +1,5 @@
 .signup-form-wrapper{
-    height: 600px;
+    height: 100%;
     width: 350px;
     padding: 20px;
     align-self: center;
@@ -40,10 +40,10 @@
 }
 
 .state-input{
-    width: 25%;
+    width: 20%;
 }
 .city-input{
-    width: 65%;
+    width: 70%;
 }
 
 .firstName-input, .lastName-input{
