@@ -3,18 +3,19 @@ import OrderPage from '../OrderPage';
 
 const OrderPageTimer = () => {
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  const [timer, setTimer] = useState(60); // Initial timer value in seconds
+  const [timer, setTimer] = useState(60);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShouldRefresh(true);
-    }, timer * 1000); // Convert timer value to milliseconds
+    }, timer * 1000);
 
     return () => clearTimeout(timeout);
   }, [timer]);
 
   useEffect(() => {
     const interval = setInterval(() => {
+    // Refresh timer every second
       setTimer((prevTimer) => {
         if (prevTimer === 0) {
           setShouldRefresh(true);
@@ -22,7 +23,7 @@ const OrderPageTimer = () => {
         }
         return prevTimer - 1;
       });
-    }, 1000); // Refresh timer every second
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);

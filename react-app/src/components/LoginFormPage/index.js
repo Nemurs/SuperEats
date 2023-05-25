@@ -65,8 +65,8 @@ function LoginFormPage() {
             required
           />
         </label>
-        <button type="submit" className="black-button-square">Continue</button>
-        <button className="black-button-square" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>
+        <button type="submit" className="black-button-square background-green">Continue</button>
+        <button className="black-button-square background-gold" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>
       </form>
     </div>
   );
