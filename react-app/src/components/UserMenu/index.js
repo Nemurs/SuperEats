@@ -26,7 +26,7 @@ const UserMenu = ({ sessionUser }) => {
     return (
         <div className="user-menu-wrapper">
             <div className="profile-tile-wrapper">
-                <img src={process.env.PUBLIC_URL + "/default-profile-picture.png"}/>
+                <img src={process.env.PUBLIC_URL + "/default-profile-picture.png"} alt="default profile picture"/>
                 <div className="profile-tile-wrapper-right">
                     <h2>{sessionUser.firstName}</h2>
                     <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e)=>e.preventDefault()}>

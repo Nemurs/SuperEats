@@ -95,6 +95,11 @@ span.bold{
     z-index: 100;
     background-color: white;
 }
+
+.nav-wrapper.splash-page{
+    background-color: transparent;
+}
+
 .main-content-wrapper{
     width: 100%;
     align-self: center;

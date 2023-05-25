@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className={location.pathname === "/" ? "site-wrapper splash-page" : "site-wrapper"}>
-      <div className="nav-wrapper">
+      <div className={location.pathname === "/" ? "nav-wrapper splash-page" : "nav-wrapper"}>
         <Navigation isLoaded={isLoaded} />
       </div>
       <div className="main-content-wrapper">
