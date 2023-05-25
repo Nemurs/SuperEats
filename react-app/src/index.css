@@ -118,6 +118,13 @@ button{
     cursor: pointer;
 }
 
+/* Errors*/
+.errors-list{
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+
 .error-list-item, .form-error{
     color:red;
 }

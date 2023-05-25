@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp, login } from "../../store/session";
 import './SignupForm.css';
+import isEmail from "validator/lib/isEmail";
+import isMobilePhone from "validator/lib/isMobilePhone";
+import isLength from "validator/lib/isLength";
+import isNumeric from "validator/lib/isNumeric";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -20,16 +24,46 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/home" />;
 
-  const handleSubmit = async (e, demo=false) => {
+  const checkErrors = (email, phoneNumber, state, password) => {
+    const stateAbbreviations = [
+      'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+    ];
+    let error_list = [];
+
+    if (!isEmail(email)) {
+      error_list.push("Please enter a valid email")
+    }
+
+    if (!isNumeric(phoneNumber, { no_symbols: true }) ||!isLength(phoneNumber, { min: 10, max: 10 }) || !isMobilePhone(phoneNumber, "en-US", { strictMode: false })) {
+      error_list.push("Please enter a valid 10-digit US phone number (only numbers)")
+    }
+
+    if (!isLength(state, { min: 2, max: 2 }) || !stateAbbreviations.includes(state.toUpperCase())) {
+      error_list.push("Please enter a valid 2 letter state abbreviation")
+    }
+
+    if (!isLength(password, { min: 4, max: 255 })) {
+      error_list.push("Please enter a password with 4 or more characters")
+    }
+
+    return error_list;
+  }
+
+  const handleSubmit = async (e, demo = false) => {
     e.preventDefault();
     let data;
     if (demo) {
       data = await dispatch(login("demo@aa.io", "password"));
+    }
+    let err = checkErrors(email, phoneNumber, state, password);
+    if (err.length){
+      return setErrors(err)
     } else if (password === confirmPassword) {
       data = await dispatch(signUp(email, phoneNumber, firstName, lastName, address, city, state, password));
     } else {
-      setErrors(['Confirm Password field must be the same as the Password field']);
+      return setErrors(["Password and Confirm Password must match"])
     }
+
     if (data) {
       setErrors(data)
     }
@@ -39,7 +73,7 @@ function SignupFormPage() {
     <div className="signup-form-wrapper">
       <form onSubmit={handleSubmit} className="signup-form">
         <h1 className="signup-form-text">Sign Up</h1>
-        {errors.length ? (<ul>
+        {errors.length ? (<ul className="errors-list">
           {errors.map((error, idx) => (
             <li key={idx} className="error-list-item">{error}</li>
           ))}
