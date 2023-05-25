@@ -140,7 +140,7 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
     }, [reviewText, rating])
 
     useEffect(() => {
-        if (reviewText.length > 10 && rating > 0 && !error.rating && !error.review) setDisabled(false);
+        if (reviewText.length >= 10 && rating > 0 && !error.rating && !error.review) setDisabled(false);
     }, [error])
 
     const deleteReviewClick = async (e) => {

@@ -15,24 +15,22 @@ function LoginFormPage() {
 
   if (sessionUser) return <Redirect to="/home" />;
 
-  const handleSubmit = async (e, demo=false) => {
+  const handleSubmit = async (e, demo = false) => {
     e.preventDefault();
-
-    if (!isEmail(email)) return setErrors(prev => prev.includes("Please enter a valid email") ? prev : ["Please enter a valid email", ...prev ])
-    else {
-      setErrors(prev => prev.splice(prev.indexOf("Please enter a valid email"), 1))
-    }
-
-    if (!isLength(password, { min: 4, max: 255 })) return setErrors(prev => prev.includes("Please enter a valid password (min: 4 characters)") ? prev : ["Please enter a valid password (min: 4 characters)", ...prev ])
-    else {
-      setErrors(prev => prev.splice(prev.indexOf("Please enter a valid password (min: 4 characters)"), 1))
-    }
-
-
     let data;
     if (demo) {
       data = await dispatch(login("demo@aa.io", "password"));
     } else {
+      if (!isEmail(email)) return setErrors(prev => prev.includes("Please enter a valid email") ? prev : ["Please enter a valid email", ...prev])
+      else {
+        setErrors(prev => prev.splice(prev.indexOf("Please enter a valid email"), 1))
+      }
+
+      if (!isLength(password, { min: 4, max: 255 })) return setErrors(prev => prev.includes("Please enter a valid password (min: 4 characters)") ? prev : ["Please enter a valid password (min: 4 characters)", ...prev])
+      else {
+        setErrors(prev => prev.splice(prev.indexOf("Please enter a valid password (min: 4 characters)"), 1))
+      }
+      //only submit if frontend validation passes
       data = await dispatch(login(email, password));
     }
     if (data) {

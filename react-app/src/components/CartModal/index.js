@@ -16,6 +16,14 @@ function CartModal() {
   const carts = useSelector(state => Object.values(state.cart))
   const sessionUser = useSelector(state => state.session.user)
 
+  //Empty Cart
+  const clickToRedirect = async (e, newPath) => {
+    e.preventDefault();
+    closeModal();
+    history.push(newPath);
+    return;
+  }
+
   if (!Object.values(carts).length) return (
     <div className="cart-wrapper no-items">
         <CloseModalButton />
@@ -48,13 +56,6 @@ function CartModal() {
   const categories = Object.keys(categorized_items);
 
   //Handle button clicks
-  const clickToRedirect = async (e, newPath) => {
-    e.preventDefault();
-    closeModal();
-    history.push(newPath);
-    return;
-  }
-
   const clickClearAllCarts = async (e) => {
     e.preventDefault();
     await dispatch(clearItems());
@@ -80,11 +81,11 @@ function CartModal() {
 
   const clickOrderManyCarts = async (e, carts) => {
     e.preventDefault();
+    closeModal();
     for (let cart of Object.values(carts)) {
       await dispatch(orderItems(sessionUser.id, cart["businessId"], cart["items"].map(item => item.id)))
     }
     await dispatch(authenticate());
-    closeModal();
     history.push("/orders");
   }
 

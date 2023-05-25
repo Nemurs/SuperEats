@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import ProfilePage from "./components/ProfilePage";
 import SingleBusinessPage from "./components/SingleBusinessPage";
 import OrderPage from "./components/OrderPage";
+import OrderPageTimer from "./components/OrderPageTimer";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
             </Route>
             <Route exact path="/orders">
               <ProtectedRoute>
-                <OrderPage />
+                <OrderPageTimer />
               </ProtectedRoute>
             </Route>
             <Route path="/business/:businessId">
