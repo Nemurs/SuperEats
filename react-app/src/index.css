@@ -29,6 +29,10 @@ body{
     padding: 10px;
 }
 
+.disabled-button{
+    cursor: default;
+}
+
 .gray-button-square{
     background-color: lightgray;
     color: black;
