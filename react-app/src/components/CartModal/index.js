@@ -8,25 +8,15 @@ import "./CartModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/session";
 
-function CartModal({ carts, sessionUser }) {
+function CartModal() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  // const cart = useSelector(state=>Object.values(state.cart))
+  const carts = useSelector(state => Object.values(state.cart))
+  const sessionUser = useSelector(state => state.session.user)
 
-  // if (!Object.values(cart).length) {
-  //   return (<></>)
-  // }
-
-  const clickToRedirect = async (e, newPath) => {
-    e.preventDefault();
-    closeModal();
-    history.push(newPath);
-    return;
-  }
-
-  if (!carts.length) return (
+  if (!Object.values(carts).length) return (
     <div className="cart-wrapper no-items">
         <CloseModalButton />
       <div className="empty-cart-wrapper">
@@ -58,6 +48,13 @@ function CartModal({ carts, sessionUser }) {
   const categories = Object.keys(categorized_items);
 
   //Handle button clicks
+  const clickToRedirect = async (e, newPath) => {
+    e.preventDefault();
+    closeModal();
+    history.push(newPath);
+    return;
+  }
+
   const clickClearAllCarts = async (e) => {
     e.preventDefault();
     await dispatch(clearItems());
@@ -67,14 +64,13 @@ function CartModal({ carts, sessionUser }) {
 
   const clickClearOneCart = async (e, businessId) => {
     e.preventDefault();
+    if(Object.values(carts).length === 1) closeModal();
     await dispatch(clearCart(businessId));
-    closeModal();
     return;
   }
 
   const clickOrderOneCart = async (e, businessId, items) => {
     e.preventDefault();
-    // console.log(items)
     await dispatch(orderItems(sessionUser.id, businessId, items.map(item => item.id)));
     await dispatch(authenticate());
     closeModal();
@@ -94,7 +90,6 @@ function CartModal({ carts, sessionUser }) {
 
   return (
     <div className="cart-wrapper">
-      {/* <p>{Object.values(cart[0])[0].name}</p> */}
       <CloseModalButton />
       <div className="categories">
         {categories.map((category, index) => (
