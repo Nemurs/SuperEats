@@ -61,7 +61,7 @@ const OrderPage = () => {
     return (
         <div className="order-page-wrapper">
             <div className="current-order-wrapper">
-                <h2>Current Order</h2>
+                <h2>Current Order{mostRecentOrders.length == 1 ? "":"s"}</h2>
 
                 {timestampCheck ?
                     mostRecentOrders.map((kvp) => {

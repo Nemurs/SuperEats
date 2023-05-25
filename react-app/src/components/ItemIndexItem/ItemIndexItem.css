@@ -20,7 +20,7 @@
     cursor: default;
 }
 
-.item-img-wrapper > button {
+.add-to-cart-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -29,7 +29,24 @@
     width: 40px;
 }
 
-.item-img-wrapper > button:hover{
-    box-shadow: 0px 0px 10px #2dbe64;
-    /* scale: 1.5; */
+.add-to-cart-button:hover{
+    /* box-shadow: 0px 0px 10px #2dbe64; */
+    background-color: #2dbe64;
 }
+
+
+.item-img-wrapper[addItemAnimation='1'] {
+    animation: enlarge 1s 1;
+  }
+
+  @keyframes enlarge {
+    33% {
+      transform: scale(1.2);
+    }
+    66% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(1.0);
+    }
+  }

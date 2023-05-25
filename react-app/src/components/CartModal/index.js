@@ -27,7 +27,7 @@ function CartModal({ carts, sessionUser }) {
   }
 
   if (!carts.length) return (
-    <div className="cart-wrapper">
+    <div className="cart-wrapper no-items">
         <CloseModalButton />
       <div className="empty-cart-wrapper">
         <img src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/a023a017672c2488.svg" alt="empty shopping cart icon" />

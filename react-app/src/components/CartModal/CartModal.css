@@ -13,6 +13,8 @@
     /* align-self: flex-end; */
     display: flex;
     flex-direction: column;
+}
+.cart-wrapper.no-items{
     justify-content: center;
 }
 
