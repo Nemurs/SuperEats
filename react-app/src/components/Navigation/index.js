@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/session";
@@ -11,6 +11,15 @@ import './Navigation.css';
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const carts = useSelector(state =>  Object.values(state.cart))
+	const [itemCount, setItemCount] = useState(0);
+
+	useEffect(()=> {
+		let items = 0
+		for (let cart of Object.values(carts)){
+			items += Object.values(cart).length
+		}
+		setItemCount(items)
+	}, [carts])
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -74,12 +83,15 @@ function Navigation({ isLoaded }) {
 			) : (
 				<div className='cart-modal-button-wrapper'>
 					<li className='nav-list-item'>
-						<OpenModalButton
-							buttonText={"Cart"}
-							modalComponent={<CartModal carts={carts} sessionUser={sessionUser}/>}
-							buttonClass={"black-button-round"}
-							modalPosition={"right"}
-						/>
+						<div className='cart-icon-wrapper'>
+							{itemCount > 0 && <p className='cart-icon-count'>{String(itemCount)}</p>}
+							<OpenModalButton
+								buttonText={<><i className="fas fa-shopping-cart" style={{color:"white"}}/>   Cart</>}
+								modalComponent={<CartModal carts={carts} sessionUser={sessionUser}/>}
+								buttonClass={"black-button-round"}
+								modalPosition={"right"}
+							/>
+						</div>
 					</li>
 				</div>
 			)}

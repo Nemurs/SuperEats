@@ -22,6 +22,9 @@ const OrderPage = ({ shouldRefresh, timer }) => {
     useEffect(() => {
         dispatch(authenticate())
         dispatch(loadAllBusinessesThunk());
+    }, [dispatch])
+
+    useEffect(() => {
         //Format orders by cartId
         let categorized_items = {};
         for (let order of userOrders) {
@@ -62,8 +65,7 @@ const OrderPage = ({ shouldRefresh, timer }) => {
         setMostRecentOrdersActive(mostRecentOrders)
         setPastOrdersActive(pastOrders)
         setTimestampCheckActive(timestampCheck)
-
-    }, [dispatch])
+    }, [userOrders, userReviews, businesses])
 
     useEffect(() => {
         if (shouldRefresh) {
