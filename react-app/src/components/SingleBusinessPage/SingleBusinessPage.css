@@ -1,5 +1,7 @@
 .SingleBusiness-bottom-wrapper{
     display: flex;
+    column-gap: 20px;
+    margin-left: 2.35%;
 }
 
 .SingleBusiness-bottom-left-wrapper{

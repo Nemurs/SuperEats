@@ -18,8 +18,8 @@ function SingleBusinessPage() {
         }
     }, [dispatch, location.pathname, businessId]);
 
-    console.log(business);
     if (!business || !business?.items) return (<></>)
+
     const items = business.items;
     let categorized_items = {};
     for (let item of items) {
@@ -31,7 +31,11 @@ function SingleBusinessPage() {
     }
     const categories = Object.keys(categorized_items);
 
-    console.log(categorized_items)
+    const scrollTo = (id) => {
+        console.log(id)
+        const section = document.getElementById(`${id}`);
+        section.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+      };
 
     return (
         <div className="SingleBusiness-wrapper">
@@ -41,23 +45,29 @@ function SingleBusinessPage() {
             />
             <div className="SingleBusiness-bottom-wrapper">
                 <div className="SingleBusiness-bottom-left-wrapper">
+                    <h3 onClick={()=>scrollTo("items-label")} style={{cursor:"pointer"}}>
+                        Items
+                    </h3>
                     {categories.map((category) => (
-                        <p key={category + String(businessId) + 'label'}>{category}</p>
+                        <p key={category + String(businessId) + 'label'} style={{cursor:"pointer"}} onClick={()=>scrollTo(String(category + String(businessId)))}>{category}</p>
                     ))}
+                    <h3 onClick={()=>scrollTo("reviews-label")} style={{cursor:"pointer"}}>
+                        Reviews
+                    </h3>
                 </div>
                 <div className="SingleBusiness-bottom-right-wrapper">
-                    <h2>
+                    <h2 id="items-label" style={{cursor:"pointer"}}>
                         Items
                     </h2>
                     {categories.map((category) => (
-                        <div key={category + String(businessId)} className='category-wrapper'>
-                            <h3 className="">{category}</h3>
+                        <div key={category + String(businessId)} className='category-wrapper' id={String(category + String(businessId))}>
+                            <h3 >{category}</h3>
                             <ItemIndex
                                 items={categorized_items[category]}
                             />
                         </div>
                     ))}
-                    <h2>
+                    <h2 id="reviews-label">
                         Reviews
                     </h2>
                     {business.businessReviews.length ? business.businessReviews.map(rev => (
