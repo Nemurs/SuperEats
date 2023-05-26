@@ -11,8 +11,8 @@ import { useLocation } from "react-router-dom";
 
 const OrderPage = ({ shouldRefresh, timer }) => {
     const dispatch = useDispatch();
-    const userOrders = useSelector(state => (state?.session?.user ? Object.values(state.session.user.userOrders) : null));
-    const userReviews = useSelector(state => (state?.session?.user ? (state.session.user.userReviews) : null), shallowEqual);
+    const userOrders = useSelector(state => (state?.session?.user ? (state.session.user.userOrders) : null));
+    const userReviews = useSelector(state => (state?.session?.user ? (state.session.user.userReviews) : null));
     const businesses = useSelector(state => state?.business?.allBusinesses ? (state.business.allBusinesses) : null)
 
     const [mostRecentOrdersActive, setMostRecentOrdersActive] = useState({})
@@ -22,9 +22,14 @@ const OrderPage = ({ shouldRefresh, timer }) => {
     useEffect(() => {
         dispatch(authenticate())
         dispatch(loadAllBusinessesThunk());
+    }, [dispatch])
+
+    useEffect(() => {
+        if (!userOrders || !businesses) return (<></>)
+        console.log("something is going on with this useEffect")
         //Format orders by cartId
         let categorized_items = {};
-        for (let order of userOrders) {
+        for (let order of Object.values(userOrders)) {
             // console.log("OG ORDER-->", order)
             let new_item = { ...order.item, ...{ orderId: order.id } }
             if (!(order.cartId in categorized_items)) {
@@ -62,8 +67,7 @@ const OrderPage = ({ shouldRefresh, timer }) => {
         setMostRecentOrdersActive(mostRecentOrders)
         setPastOrdersActive(pastOrders)
         setTimestampCheckActive(timestampCheck)
-
-    }, [dispatch])
+    }, [userOrders, userReviews, businesses])
 
     useEffect(() => {
         if (shouldRefresh) {
@@ -76,7 +80,7 @@ const OrderPage = ({ shouldRefresh, timer }) => {
         }
     }, [shouldRefresh]);
 
-    if (!userOrders || !businesses) return (<></>)
+
 
 
 
