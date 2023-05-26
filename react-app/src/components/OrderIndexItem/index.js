@@ -73,10 +73,13 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
                                 buttonText={"Edit Review"}
                                 buttonClass={"black-button-square background-gold"}
                                 modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={true} review={review} />}
+                                modalClass={"center-small"}
                             />) : (<OpenModalButton
                                 buttonText={"Add Review"}
                                 buttonClass={"black-button-square background-gold"}
-                                modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={false}/>} />)}
+                                modalComponent={<ReviewModal order={order} businessId={business.id} cartId={cartId} isEdit={false}/>}
+                                modalClass={"center-small"}
+                                />)}
                             <button className="gray-button-square" onClick={redirectToStore}>Visit Store</button>
                         </>)}
             </div>
