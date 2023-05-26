@@ -103,7 +103,6 @@ export default function reducer(state = initialState, action) {
                 normalized_item[item_id] = {...action.item};
                 newState[business_id] = normalized_item;
             }
-            console.log(newState);
             return newState;
         case CLEAR_ONE_CART:
             newState = {...state};
