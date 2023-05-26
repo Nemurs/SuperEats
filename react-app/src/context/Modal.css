@@ -19,6 +19,9 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
+#modal-content.center-small{
+  height: fit-content;
+}
 
 #modal-content {
   position: absolute;

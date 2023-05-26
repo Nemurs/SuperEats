@@ -1,3 +1,8 @@
+.review-modal-wrapper{
+    max-height: 500px;
+    height: 100%;
+}
+
 .review-modal{
     display: flex;
     flex-direction: column;
@@ -9,7 +14,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 20px;
 }
 
 .review-modal-buttons{
