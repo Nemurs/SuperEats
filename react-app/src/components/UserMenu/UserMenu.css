@@ -5,13 +5,19 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
     row-gap: 50px;
 }
 
+.user-menu-top-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .user-menu-wrapper > button.black-button-square {
-    width: 90%;
-    position: absolute;
-    bottom: 50px;
+    width: 100%;
 }
 
 .profile-links-wrapper{
@@ -22,6 +28,7 @@
     display: flex;
     align-items: center;
     column-gap: 15px;
+    justify-content: space-around;
 }
 
 .profile-tile-wrapper > img{
