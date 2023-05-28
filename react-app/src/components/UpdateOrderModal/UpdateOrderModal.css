@@ -1,0 +1,11 @@
+.update-order-wrapper{
+    position: relative;
+    padding: 20px;
+}
+
+
+.update-order-wrapper > .close-button-x {
+    position: absolute;
+	top: -10px;
+	left: -15px;
+}
