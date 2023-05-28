@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadAllBusinessesThunk } from "../../store/business";
 import CartIndexItem from "../CartIndexItem";
 import "./OrderPage.css";

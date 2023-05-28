@@ -1,6 +1,14 @@
 .review-modal-wrapper{
     max-height: 500px;
     height: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+.review-modal-wrapper > .close-button-x {
+    position: absolute;
+	top: -10px;
+	left: -15px;
 }
 
 .review-modal{

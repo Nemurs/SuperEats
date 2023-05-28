@@ -65,6 +65,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
                             buttonText={"Update Order"}
                             buttonClass={"black-button-square background-orange"}
                             modalComponent={<UpateOrderModal order={order} business={business} cartId={cartId} />}
+                            modalClass={"center-small"}
                         />
                         <button className="black-button-square background-red" onClick={cancelOrder}>Cancel Order</button>
                     </>) : (

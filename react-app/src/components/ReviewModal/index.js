@@ -177,7 +177,6 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
                         placeholder='Leave your review here...'
                         rows='10'
                         onBlur={() => setTouched({ ...touched, 'review': true })}
-                        onFocus={() => setTouched({ ...touched, 'review': true })}
                     ></textarea>
                     {((touched.review || submitState) && error.review) && <p className="form-error">{error.review}</p>}
 
