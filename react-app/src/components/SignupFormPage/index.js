@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { signUp, login } from "../../store/session";
 import './SignupForm.css';
 import isEmail from "validator/lib/isEmail";
@@ -22,7 +22,9 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/home" />;
+  const history = useHistory();
+  const isEdit = history.location.state?.isEdit;
+  if (sessionUser && !isEdit) return <Redirect to="/home" />;
 
   const checkErrors = (email, phoneNumber, state, password) => {
     const stateAbbreviations = [

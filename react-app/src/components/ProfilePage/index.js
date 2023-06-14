@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteAccountModal from "./ConfirmDeleteAccountModal";
 import "./ProfilePage.css";
@@ -9,28 +9,10 @@ const ProfilePage = () => {
     const user = useSelector(state => state.session.user);
     const history = useHistory();
 
-    const editProfile = (e) => {
+    const editAccount = (e) => {
         e.preventDefault();
-        return (
-            <Redirect
-                to={{
-                    pathname: "/sigunp",
-                    state: { isEdit: true }
-                }}
-            />
-        )
-    }
-
-    const deletePRofile = (e) => {
-        e.preventDefault();
-        return (
-            <Redirect
-                to={{
-                    pathname: "/sigunp",
-                    state: { isEdit: true }
-                }}
-            />
-        )
+        history.push("/signup", {isEdit: true})
+        return;
     }
 
     return (
@@ -45,15 +27,16 @@ const ProfilePage = () => {
                 <h3>Email</h3>
                 <p>{`${user.email}`}</p>
             </div>
-            <div className="profile-page-button-wrapper">
-                <button className="black-button-square background-orange">Edit Account Details</button>
+            {user.id > 9 ? (<div className="profile-page-button-wrapper">
+                <button className="black-button-square background-orange" onClick={editAccount}>Edit Account Details</button>
                 <OpenModalButton
                     buttonText={"Delete Account"}
                     buttonClass={"black-button-square background-red"}
-                    modalComponent={<ConfirmDeleteAccountModal/>}
+                    modalComponent={<ConfirmDeleteAccountModal userId={user.id} />}
                     modalClass={"center-small"}
                 />
-            </div>
+            </div>) : (<></>)}
+
         </div>
     )
 }

@@ -99,6 +99,17 @@ export const signUp = (email, phoneNumber ,firstName, lastName, address, city, s
 	}
 };
 
+export const deleteAccountThunk = (id) => async (dispatch) => {
+	const response = await fetch(`/api/users/${id}`, {
+		method: "DELETE",
+	});
+
+	if (response.ok) {
+		dispatch(removeUser());
+	}
+	return response;
+};
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
