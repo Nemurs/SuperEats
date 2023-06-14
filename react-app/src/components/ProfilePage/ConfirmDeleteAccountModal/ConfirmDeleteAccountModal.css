@@ -1,0 +1,19 @@
+.ConfirmDeleteAccountModal-wrapper{
+    position: relative;
+    text-align: center;
+    width: 250px;
+    /* font-size: 22px; */
+}
+
+.ConfirmDeleteAccountModal-wrapper > .close-button-x {
+    position: absolute;
+	top: -10px;
+	left: -15px;
+}
+
+.ConfirmDeleteAccountModal-button-wrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+}
