@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { signUp, login } from "../../store/session";
+import { signUp, login, editAccountThunk } from "../../store/session";
 import './SignupForm.css';
 import isEmail from "validator/lib/isEmail";
 import isMobilePhone from "validator/lib/isMobilePhone";
@@ -10,20 +10,23 @@ import isNumeric from "validator/lib/isNumeric";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const isEdit = history.location.state?.isEdit;
+
+  const [email, setEmail] = useState(isEdit && sessionUser ? sessionUser.email : "");
+  const [phoneNumber, setPhoneNumber] = useState(isEdit && sessionUser ? sessionUser.phoneNumber : "");
+  const [firstName, setFirstName] = useState(isEdit && sessionUser ? sessionUser.firstName : "");
+  const [lastName, setLastName] = useState(isEdit && sessionUser ? sessionUser.lastName : "");
+  const [address, setAddress] = useState(isEdit && sessionUser ? sessionUser.address : "");
+  const [city, setCity] = useState(isEdit && sessionUser ? sessionUser.city : "");
+  const [state, setState] = useState(isEdit && sessionUser ? sessionUser.state : "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const history = useHistory();
-  const isEdit = history.location.state?.isEdit;
+
   if (sessionUser && !isEdit) return <Redirect to="/home" />;
 
   const checkErrors = (email, phoneNumber, state, password) => {
@@ -36,7 +39,7 @@ function SignupFormPage() {
       error_list.push("Please enter a valid email")
     }
 
-    if (!isNumeric(phoneNumber, { no_symbols: true }) ||!isLength(phoneNumber, { min: 10, max: 10 }) || !isMobilePhone(phoneNumber, "en-US", { strictMode: false })) {
+    if (!isNumeric(phoneNumber, { no_symbols: true }) || !isLength(phoneNumber, { min: 10, max: 10 }) || !isMobilePhone(phoneNumber, "en-US", { strictMode: false })) {
       error_list.push("Please enter a valid 10-digit US phone number (only numbers)")
     }
 
@@ -54,12 +57,15 @@ function SignupFormPage() {
   const handleSubmit = async (e, demo = false) => {
     e.preventDefault();
     let data;
-    if (demo) {
+    if (demo && !isEdit) {
       data = await dispatch(login("demo@aa.io", "password"));
     }
     let err = checkErrors(email, phoneNumber, state, password);
-    if (err.length){
-      return setErrors(err)
+    if (err.length) {
+      return setErrors(err);
+    } else if (isEdit) {
+      let userId = sessionUser.id;
+      data = await dispatch(editAccountThunk(userId, email, phoneNumber, firstName, lastName, address, city, state, password));
     } else if (password === confirmPassword) {
       data = await dispatch(signUp(email, phoneNumber, firstName, lastName, address, city, state, password));
     } else {
@@ -68,13 +74,15 @@ function SignupFormPage() {
 
     if (data) {
       setErrors(data)
+    } else {
+      history.push("/home")
     }
   };
 
   return (
     <div className="signup-form-wrapper">
       <form onSubmit={handleSubmit} className="signup-form">
-        <h1 className="signup-form-text">Sign Up</h1>
+        <h1 className="signup-form-text">{isEdit ? "Edit Account Details" : "Sign Up"}</h1>
         {errors.length ? (<ul className="errors-list">
           {errors.map((error, idx) => (
             <li key={idx} className="error-list-item">{error}</li>
@@ -153,7 +161,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        <label>
+        {!isEdit ? (<label>
           <input
             type="password"
             value={confirmPassword}
@@ -161,9 +169,11 @@ function SignupFormPage() {
             placeholder="Enter password again"
             required
           />
-        </label>
+        </label>) : (<></>)}
+
         <button type="submit" className="black-button-square background-green">Continue</button>
-        <button className="black-button-square background-gold" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>
+
+        {!isEdit ? (<button className="black-button-square background-gold" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>) : (<></>)}
       </form>
     </div>
   );
