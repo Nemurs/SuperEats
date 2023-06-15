@@ -2,15 +2,15 @@ import OpenModalButton from "../OpenModalButton";
 import UpdateProfilePictureModal from "../UpdateProfilePictureModal";
 import "./ProfilePicture.css";
 
-const ProfilePicture = ({imgUrl, user}) => {
+const ProfilePicture = ({imgUrl,imgId, userId}) => {
 
     return (
         <div className="profile-pic-wrapper">
             <img src={imgUrl} alt="profile picture" className="profile-pic-img"/>
-            {user.id > 9 ? (<OpenModalButton
+            {userId > 9 ? (<OpenModalButton
                 buttonIconClass={"fas fa-camera"}
                 buttonClass={"black-button-round small-padding"}
-                modalComponent={<UpdateProfilePictureModal {...{imgUrl, user}}/>}
+                modalComponent={<UpdateProfilePictureModal {...{imgUrl, imgId,userId}}/>}
                 modalClass={"center-small"}
             />) : (<></>)}
         </div>
