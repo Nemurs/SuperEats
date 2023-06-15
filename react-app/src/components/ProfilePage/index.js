@@ -21,7 +21,7 @@ const ProfilePage = () => {
     return (
         <div className="profile-page-wrapper" >
             <h1 >Account Info</h1>
-            <ProfilePicture imgUrl={pfp}/>
+            <ProfilePicture imgUrl={pfp} user={user}/>
             <div className="basic-info-wrapper">
                 <h3>Name</h3>
                 <p>{`${user.firstName} ${user.lastName}`}</p>

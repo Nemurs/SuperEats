@@ -1,0 +1,36 @@
+.profile-pic-update-wrapper{
+    position: relative;
+    text-align: center;
+    width: 350px;
+}
+
+.profile-pic-update-wrapper > .close-button-x {
+    position: absolute;
+	top: -10px;
+	left: -15px;
+}
+
+.profile-pic-preview{
+    width: 250px;
+    height: 250px;
+    object-fit: scale-down;
+}
+
+.profile-pic-update-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.profile-pic-update-form > input {
+    width: 80%;
+    height: 30px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.profile-pic-update-form > button {
+    width: 84%;
+}
