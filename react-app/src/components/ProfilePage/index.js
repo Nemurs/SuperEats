@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
+import ProfilePicture from "../ProfilePicture";
 import ConfirmDeleteAccountModal from "./ConfirmDeleteAccountModal";
 import "./ProfilePage.css";
 
@@ -20,7 +21,7 @@ const ProfilePage = () => {
     return (
         <div className="profile-page-wrapper" >
             <h1 >Account Info</h1>
-            <img src={pfp} alt="default profile picture" />
+            <ProfilePicture imgUrl={pfp}/>
             <div className="basic-info-wrapper">
                 <h3>Name</h3>
                 <p>{`${user.firstName} ${user.lastName}`}</p>
@@ -30,7 +31,7 @@ const ProfilePage = () => {
                 <p>{`${user.email}`}</p>
             </div>
             {user.id > 9 ? (<div className="profile-page-button-wrapper">
-                <button className="black-button-square background-orange" onClick={editAccount}>Edit Account Details</button>
+                <button className="black-button-square background-orange" onClick={editAccount}>Edit Account Info</button>
                 <OpenModalButton
                     buttonText={"Delete Account"}
                     buttonClass={"black-button-square background-red"}

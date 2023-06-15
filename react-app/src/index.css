@@ -28,6 +28,9 @@ body{
     border-radius: 10px;
     padding: 10px;
 }
+.small-padding {
+    padding: 5px;
+}
 
 .disabled-button{
     cursor: default;

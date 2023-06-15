@@ -29,7 +29,7 @@ const UserMenu = ({ sessionUser }) => {
         <div className="user-menu-wrapper">
             <div className="user-menu-top-wrapper">
                 <div className="profile-tile-wrapper">
-                    <img src={pfp} alt="default profile picture" />
+                    <img src={pfp} alt="profile picture" />
                     <div className="profile-tile-wrapper-right">
                         <h2>{sessionUser.firstName}</h2>
                         <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e) => clickToRedirect(e, "/profile")}>
