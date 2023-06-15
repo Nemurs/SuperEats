@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, logout_user, current_user
 from app.models import User, UserImage, db
-from app.forms import AddImageForm
+from app.forms import AddImageForm, EditAccountForm
 
 user_routes = Blueprint('users', __name__)
 
