@@ -15,10 +15,12 @@ const ProfilePage = () => {
         return;
     }
 
+    const pfp = user.images[0]?.preview ? user.images[0].url : process.env.PUBLIC_URL + "/default-profile-picture.png";
+
     return (
         <div className="profile-page-wrapper" >
             <h1 >Account Info</h1>
-            <img src={process.env.PUBLIC_URL + "/default-profile-picture.png"} alt="default profile picture" />
+            <img src={pfp} alt="default profile picture" />
             <div className="basic-info-wrapper">
                 <h3>Name</h3>
                 <p>{`${user.firstName} ${user.lastName}`}</p>
