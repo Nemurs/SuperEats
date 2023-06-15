@@ -21,9 +21,12 @@ const UpdateProfilePictureModal = ({ imgUrl, imgId, userId }) => {
 
     const handleSubmit = async (e, rmPic = false) => {
         e.preventDefault();
-        if(rmPic && !isDefPic){
-            await dispatch(deleteProfilePicThunk(userId, imgId))
+        if(rmPic){
+            if (!isDefPic){
+                await dispatch(deleteProfilePicThunk(userId, imgId))
+            } else return;
         } else {
+            if (imgUrl === picUrl) return;
             await dispatch(createProfilePicThunk(userId, picUrl))
         }
         closeModal();
