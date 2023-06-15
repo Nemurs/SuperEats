@@ -1,5 +1,6 @@
 from .db import db
 from .user import User
+from .user_image import UserImage
 from .business import Business
 from .business_image import BusinessImage
 from .review import Review

@@ -1,5 +1,6 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
+from .user_images import seed_user_images, undo_user_images
 from .businesses import seed_businesses, undo_businesses
 from .business_images import seed_business_images, undo_business_images
 from .reviews import seed_reviews, undo_reviews
@@ -30,9 +31,11 @@ def seed():
         undo_items()
         undo_business_images()
         undo_businesses()
+        undo_user_images()
         undo_users()
     seed_users()
     # Add other seed functions here
+    seed_user_images()
     seed_businesses()
     seed_business_images()
     seed_items()
@@ -52,4 +55,5 @@ def undo():
     undo_items()
     undo_business_images()
     undo_businesses()
+    undo_user_images()
     undo_users()

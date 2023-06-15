@@ -1,0 +1,18 @@
+.profile-pic-img{
+    width: 100px;
+    height: 100px;
+    object-fit: scale-down;
+    align-self: center;
+    cursor: default;
+}
+
+.profile-pic-wrapper{
+    position: relative;
+}
+
+.profile-pic-wrapper button {
+    position: absolute;
+    cursor: pointer;
+    right: -1px;
+    top: 6px;
+}

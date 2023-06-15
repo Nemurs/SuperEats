@@ -99,6 +99,50 @@ export const signUp = (email, phoneNumber ,firstName, lastName, address, city, s
 	}
 };
 
+export const editAccountThunk = (userId, email, phoneNumber ,firstName, lastName, address, city, state, password) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			email,
+			"id":userId,
+			"phone_number":phoneNumber,
+			"first_name":firstName,
+			"last_name":lastName,
+			address,
+			city,
+			state,
+			password
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
+export const deleteAccountThunk = (id) => async (dispatch) => {
+	const response = await fetch(`/api/users/${id}`, {
+		method: "DELETE",
+	});
+
+	if (response.ok) {
+		dispatch(removeUser());
+	}
+	return response;
+};
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
