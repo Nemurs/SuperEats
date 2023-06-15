@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(2), nullable=False, unique=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    images = db.relationship('UserImage', back_populates='user', cascade="all, delete-orphan")
     user_reviews = db.relationship('Review', back_populates='user', cascade="all, delete-orphan")
     user_orders = db.relationship('Order', back_populates='user', cascade="all, delete-orphan")
     user_carts = db.relationship('Cart', back_populates='user', cascade="all, delete-orphan")
@@ -44,6 +45,7 @@ class User(db.Model, UserMixin):
             'address':self.address,
             'city':self.city,
             'state':self.state,
+            'images': [image.to_dict_no_items() for image in self.images],
             'userReviews': [user_review.to_dict_no_items() for user_review in self.user_reviews],
             'userOrders': [user_order.to_dict() for user_order in self.user_orders]
         }
