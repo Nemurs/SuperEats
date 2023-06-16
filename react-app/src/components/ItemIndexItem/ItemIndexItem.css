@@ -16,9 +16,6 @@
 .item-img-wrapper {
     position: relative;
 }
-.item-img-wrapper > img {
-    cursor: default;
-}
 
 .add-to-cart-button {
     position: absolute;

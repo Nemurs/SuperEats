@@ -4,7 +4,7 @@ import './BusinessIndexItem.css'
 const BusinessIndexItem = ({ business, interactive = true , imgUrl}) => {
     if (!business) return (<></>)
     const previewImage = imgUrl ? imgUrl : business?.images?.filter(img => img.preview === true)[0].url
-    console.log(business)
+
     if (interactive) {
         return (
             <div className="business-item hoverable">
