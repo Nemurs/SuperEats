@@ -71,16 +71,21 @@ const ProfilePage = () => {
             </div>
             <div className="account-stats-wrapper" >
                 <h1>Your Stats</h1>
-                <h3>Reviews</h3>
-                <p>{user.userReviews.length}</p>
-                <h3>Orders</h3>
-                <p>{user.userCarts.length}</p>
-                <h3>Total Items Ordered</h3>
-                <p>{user.userOrders.length}</p>
-                <h3>Your Most Popular Business</h3>
                 {favBus ?
-                (<BusinessIndexItem business={favBus} imgUrl={favBus.imgUrl} />)
-                : (<></>)}
+                (<>
+                    <h3>Your Most Popular Business</h3>
+                    <BusinessIndexItem business={favBus} imgUrl={favBus.imgUrl} />
+                </>): (<></>)}
+                <div className="basic-account-stats-wrapper">
+                    <div className="basic-account-stats-orders">
+                        <h3>Orders</h3>
+                        <p>{user.userCarts.length}</p>
+                    </div>
+                    <div className="basic-account-stats-reviews">
+                        <h3>Reviews</h3>
+                        <p>{user.userReviews.length}</p>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -7,7 +7,15 @@
 
 .account-stats-wrapper{
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
+.basic-account-stats-wrapper{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+
 .basic-info-wrapper, .account-info-wrapper{
     display: flex;
     flex-direction: column;
