@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, logout_user, current_user
-from app.models import User, UserImage, db
+from app.models import User, UserImage, Cart, Business, BusinessImage, db
 from app.forms import AddImageForm, EditAccountForm
+from sqlalchemy import func
 
 user_routes = Blueprint('users', __name__)
 
@@ -24,6 +25,25 @@ def users():
     """
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route('/current/favorite_business')
+@login_required
+def get_fav_business():
+    """
+    Gets the current user's favorite business
+    """
+    if current_user.is_authenticated:
+        id = current_user.to_dict()["id"]
+        # carts = Cart.query.filter(Cart.user_id == id).group_by(Cart.business_id).all()
+        cart  = db.session.query(func.count(Cart.business_id), Cart.business_id).filter(Cart.user_id == id).group_by(Cart.business_id).first()
+        fav_business = Business.query.get(cart[1])
+        fav_business_img = BusinessImage.query.filter(BusinessImage.business_id == fav_business.id).first()
+        print(cart, fav_business)
+
+        out = fav_business.to_dict_no_items()
+        out["imgUrl"] = fav_business_img.to_dict_no_items()["url"]
+        return {"favoriteBusiness":out}
+    # return {'carts': [cart.to_dict() for cart in carts]}
 
 
 @user_routes.route('/<int:id>/images', methods=['POST'])
