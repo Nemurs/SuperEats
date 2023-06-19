@@ -27,7 +27,7 @@ const SearchIndex = () => {
             (
                 <>
                     <h1>Search Results</h1>
-                    { businesses.length ? (<BusinessIndex businesses={businesses}/>): (<p>Sorry that search had no results. Try again using a different word or phrase.</p>)}
+                    {businesses && businesses.length ? (<BusinessIndex businesses={businesses}/>): (<p>Sorry that search had no results. Try again using a different word or phrase.</p>)}
                 </>
             )}
 
