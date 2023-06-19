@@ -11,6 +11,10 @@ body{
     font-weight: bold;
 }
 
+.hidden{
+    display: hidden;
+}
+
 .transparent-button-square{
     background-color: transparent;
     color: black;
@@ -134,4 +138,11 @@ button{
 
 .error-list-item, .form-error{
     color:red;
+}
+
+/*Media Queries*/
+@media (max-width:713px) {
+    .home-text-wrapper{
+        text-align: center;
+    }
 }

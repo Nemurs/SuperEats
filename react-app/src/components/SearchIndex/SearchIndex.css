@@ -1,0 +1,16 @@
+.search-index > h1 {
+    margin-left: 2.5%;
+}
+
+/*Media Queries*/
+@media (max-width:713px) {
+    .search-index > h1{
+        text-align: center;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+
+    .search-index{
+        width: 100%;
+    }
+}

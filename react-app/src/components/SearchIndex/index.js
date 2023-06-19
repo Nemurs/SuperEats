@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { loadSomeBusinessesThunk } from "../../store/business";
 import BusinessIndex from "../BusinessIndex";
+import "./SearchIndex.css"
 
 const SearchIndex = () => {
     const location = useLocation();
@@ -21,8 +22,7 @@ const SearchIndex = () => {
     }, [searchTerms])
 
     return (
-        <div style={{"margin-left": "15px", "margin-top": "15px"}} className="search-index">
-
+        <div className="search-index">
             {searchTerms &&
             (
                 <>
