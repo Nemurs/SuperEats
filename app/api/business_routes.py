@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Business, Item, db
+from sqlalchemy import or_, and_
 
 business_routes = Blueprint('business', __name__)
 
@@ -18,9 +19,10 @@ def get_some_businesses():
     """
 
     search = list(request.args.keys())[0]
+    search = search.split(" ")
     print("search----->", search)
 
-    businesses = Business.query.join(Item).filter(((Business.name.like(f"%{search}%")) | (Business.category.like(f"%{search}%")) | (Item.name.like(f"%{search}%")) | (Item.category.like(f"%{search}%")))).all()
+    businesses = Business.query.join(Item).filter(and_((Business.name.like(f"%{term}%"))  | (Business.category.like(f"%{term}%")) | (Item.name.like(f"%{term}%")) | (Item.category.like(f"%{term}%")) for term in search)).all()
     return {'Businesses': [bus.to_dict() for bus in businesses]}
 
 @business_routes.route('/<int:id>')

@@ -7,6 +7,10 @@ body{
     align-items: center; */
 }
 
+.bold-text{
+    font-weight: bold;
+}
+
 .transparent-button-square{
     background-color: transparent;
     color: black;
