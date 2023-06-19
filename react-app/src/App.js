@@ -9,8 +9,8 @@ import SplashPage from "./components/SplashPage";
 import HomePage from "./components/HomePage";
 import ProfilePage from "./components/ProfilePage";
 import SingleBusinessPage from "./components/SingleBusinessPage";
-import OrderPage from "./components/OrderPage";
 import OrderPageTimer from "./components/OrderPageTimer";
+import SearchIndex from "./components/SearchIndex";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
@@ -52,6 +52,11 @@ function App() {
             <Route exact path="/orders">
               <ProtectedRoute>
                 <OrderPageTimer />
+              </ProtectedRoute>
+            </Route>
+            <Route exact path="/search">
+              <ProtectedRoute>
+                <SearchIndex />
               </ProtectedRoute>
             </Route>
             <Route path="/business/:businessId">

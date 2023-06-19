@@ -82,7 +82,7 @@ function SignupFormPage() {
   return (
     <div className="signup-form-wrapper">
       <form onSubmit={handleSubmit} className="signup-form">
-        <h1 className="signup-form-text">{isEdit ? "Edit Account Details" : "Sign Up"}</h1>
+        <h1 className="signup-form-text">{isEdit ? "Edit Account Info" : "Sign Up"}</h1>
         {errors.length ? (<ul className="errors-list">
           {errors.map((error, idx) => (
             <li key={idx} className="error-list-item">{error}</li>
@@ -157,7 +157,7 @@ function SignupFormPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
+            placeholder={!isEdit ? "Enter password" : "Enter password to authorize"}
             required
           />
         </label>
@@ -171,7 +171,7 @@ function SignupFormPage() {
           />
         </label>) : (<></>)}
 
-        <button type="submit" className="black-button-square background-green">Continue</button>
+        <button type="submit" className="black-button-square background-green">{!isEdit ? "Continue" : "Submit Changes"}</button>
 
         {!isEdit ? (<button className="black-button-square background-gold" onClick={(e) => handleSubmit(e, true)}>Log in as Demo User</button>) : (<></>)}
       </form>
