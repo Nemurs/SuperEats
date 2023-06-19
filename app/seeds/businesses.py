@@ -18,7 +18,7 @@ def seed_businesses():
 
     business_names = ['SonoraTown', 'Erewhon', 'California Chicken Cafe', 'Din Tai Fung', 'Meizhou Dongpo', 'Main Chick Hot Chicken', "Noble Tea", 'Mizlala West Adams', 'Urth Caffe', 'Magnolia Bakery', 'Pizzana', '7-Eleven']
 
-    business_categories = ['Mexican', 'Grocery', 'Healthy', 'Chinese', 'Chinese', 'American', "Drinks", 'Middle Eastern', 'Urth Caffe', 'Dessert', 'Italian', 'Convenience']
+    business_categories = ['Mexican', 'Grocery', 'Healthy', 'Chinese', 'Chinese', 'American', "Drinks", 'Middle Eastern', 'American', 'Dessert', 'Italian', 'Convenience']
 
     busisnesses = [Business(
         email=f'{business_names[i].replace(" ", "")}@business.io',

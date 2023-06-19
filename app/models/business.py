@@ -29,6 +29,7 @@ class Business(db.Model):
             'address':self.address,
             'city':self.city,
             'state':self.state,
+            'category':self.category,
             'images': [image.to_dict_no_items() for image in self.images],
             'items': [item.to_dict() for item in self.items],
             'carts': [cart.to_dict_no_items() for cart in self.carts],
@@ -43,5 +44,6 @@ class Business(db.Model):
             'name':self.name,
             'address':self.address,
             'city':self.city,
-            'state':self.state
+            'state':self.state,
+            'category':self.category
         }

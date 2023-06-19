@@ -11,10 +11,8 @@ function HomePage() {
   const businesses = useSelector(state => state?.business?.allBusinesses ? Object.values(state.business.allBusinesses) : null)
 
   useEffect(() => {
-    if(!businesses || !businesses.length){
-      dispatch(loadAllBusinessesThunk());
-    }
-  }, [dispatch, businesses]);
+    dispatch(loadAllBusinessesThunk());
+  }, [dispatch]);
 
 
 
