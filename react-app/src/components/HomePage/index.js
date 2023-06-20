@@ -18,34 +18,30 @@ function HomePage() {
 
   if (!businesses || businesses.length !== 12) return (<Loader />)
 
+  let likedBusinesses = businesses.slice()
+  likedBusinesses.sort((a,b)=> b.businessRating - a.businessRating)
+
+  let popularBusinesses = businesses.slice()
+  popularBusinesses.sort((a,b)=> Object.values(b.carts).length - Object.values(a.carts).length)
+
   return (
     <>
       <BusinessCarousel
-        businesses={businesses}
-        title={"All Businesses"}
-        tileCount={3}
+        businesses={likedBusinesses.slice(0,8)}
+        title={"Highly Rated"}
+        tileCount={4}
       />
       <BusinessCarousel
-      businesses={businesses.filter(bus => bus.category === 'Chinese')}
-      title={"Chinese"}
-      tileCount={3}
-    />
+        businesses={popularBusinesses.slice(0,8)}
+        title={"Most Popular"}
+        tileCount={4}
+      />
+      <BusinessCarousel
+        businesses={businesses}
+        title={"All Businesses"}
+        tileCount={4}
+      />
     </>
-
-    // <div className="home-wrapper">
-    //   <div className="home-text-wrapper">
-    //     <h1 className="home-greeting-text">All Businesses</h1>
-    //   </div>
-    //   <div className="carousel">
-    //     <button className="black-button-square" onClick={prevBusiness}>
-    //       <i className="fas fa-angle-left"></i>
-    //     </button>
-    //     <BusinessIndex businesses={businesses.slice(businessIndex, businessIndex + 4)} />
-    //     <button className="black-button-square" onClick={nextBusiness}>
-    //       <i className="fas fa-angle-right"></i>
-    //     </button>
-    //   </div>
-    // </div>
   );
 }
 

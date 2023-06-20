@@ -1,4 +1,4 @@
-.business-item p {
+.business-name {
     font-size: 18px;
     color: black;
 }
@@ -11,4 +11,14 @@
 
 .business-item a:hover {
     text-decoration: underline;
+}
+
+.business-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.business-rating{
+    color: gray;
 }
