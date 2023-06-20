@@ -21,6 +21,13 @@ class Business(db.Model):
     business_reviews = db.relationship('Review', back_populates='business', cascade="all, delete-orphan")
 
     def to_dict(self):
+        avg_business_rating = 0
+        business_reviews = [review.to_dict_no_items() for review in self.business_reviews]
+        if len(business_reviews) >= 1:
+            for review in business_reviews:
+                avg_business_rating += review['rating']
+            avg_business_rating /= len(business_reviews)
+
         return {
             'id': self.id,
             'email': self.email,
@@ -33,7 +40,8 @@ class Business(db.Model):
             'images': [image.to_dict_no_items() for image in self.images],
             'items': [item.to_dict() for item in self.items],
             'carts': [cart.to_dict_no_items() for cart in self.carts],
-            'businessReviews': [business_review.to_dict_no_items() for business_review in self.business_reviews],
+            'businessReviews': business_reviews,
+            'businessRating': avg_business_rating
         }
 
     def to_dict_no_items(self):

@@ -1,0 +1,28 @@
+.category-button-index-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.category-button-wrapper{
+    text-align: center;
+}
+
+.category-button-wrapper img{
+    width: 50px;
+    height: 50px;
+    object-fit: scale-down;
+    transition-duration: 0.5s;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    padding: 5px;
+}
+
+.category-button-wrapper img:hover{
+    background-color: lightgray;
+}
+
+.category-button-wrapper p{
+    text-overflow: auto;
+}

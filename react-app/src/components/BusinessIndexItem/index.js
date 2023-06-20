@@ -10,7 +10,10 @@ const BusinessIndexItem = ({ business, interactive = true , imgUrl}) => {
             <div className="business-item hoverable">
                 <Link to={`/business/${business.id}`}>
                     <img src={previewImage} alt={business.name} />
-                    <p className="business-name">{business.name}</p>
+                    <div className="business-text">
+                        <p className="business-name">{business.name}</p>
+                        <p className="business-rating">{business.businessRating.toFixed(2)}</p>
+                    </div>
                 </Link>
             </div>
         )

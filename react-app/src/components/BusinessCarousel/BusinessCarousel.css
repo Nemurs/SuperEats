@@ -1,0 +1,26 @@
+
+.carousel-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-top-wrapper, .carousel-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 5px;
+}
+
+.carousel-top-wrapper div {
+    margin: 0px 2.5%;
+}
+
+.carousel-button-wrapper button {
+    padding: 5px 10px;
+}
+
+.carousel{
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
