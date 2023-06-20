@@ -4,3 +4,15 @@
     align-items: center;
     margin-top: 20px;
 }
+
+.home-page-wrapper-bottom{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    column-gap: 25px;
+    width: 85%;
+}
+
+.home-page-wrapper-bottom-left{
+    width: 10%;
+}

@@ -32,23 +32,27 @@ function HomePage() {
         <CategoryButtonIndex/>
         <div className="home-page-wrapper-bottom">
           <div className="home-page-wrapper-bottom-left">
-
+            <h3>Sort</h3>
+            <h3>Price Range</h3>
           </div>
           <div className="home-page-wrapper-bottom-right">
             <BusinessCarousel
               businesses={likedBusinesses.slice(0,8)}
               title={"Highly Rated"}
               tileCount={TILECOUNT}
+              small={true}
             />
             <BusinessCarousel
               businesses={popularBusinesses.slice(0,8)}
               title={"Most Popular"}
               tileCount={TILECOUNT}
+              small={true}
             />
             <BusinessCarousel
               businesses={businesses}
               title={"All Businesses"}
               tileCount={TILECOUNT}
+              small={true}
             />
           </div>
         </div>
