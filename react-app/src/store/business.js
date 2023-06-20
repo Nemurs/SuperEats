@@ -25,6 +25,18 @@ export const loadAllBusinessesThunk = () => async (dispatch) => {
     }
 };
 
+export const loadSomeBusinessesThunk = (searchTerms) => async (dispatch) => {
+    const response = await fetch(`/api/business/search?${searchTerms}`);
+    if (response.ok) {
+        const data = await response.json();
+        if (data.errors) {
+            return;
+        }
+
+        dispatch(loadAllBusinesses(data));
+    }
+};
+
 export const loadOneBusinessThunk = (businessId) => async (dispatch) => {
     const response = await fetch(`/api/business/${businessId}`);
     if (response.ok) {

@@ -6,19 +6,20 @@ import { clearItems } from '../../store/cart';
 import OpenModalButton from "../OpenModalButton";
 import CartModal from '../CartModal';
 import UserMenu from '../UserMenu';
+import Search from '../Search';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
-	const carts = useSelector(state =>  Object.values(state.cart))
+	const carts = useSelector(state => Object.values(state.cart))
 	const [itemCount, setItemCount] = useState(0);
 
-	useEffect(()=> {
-		let items = 0
+	useEffect(() => {
+		let cartItems = 0;
 		for (let cart of Object.values(carts)){
-			items += Object.values(cart).length
+			cartItems += Object.values(cart).length
 		}
-		setItemCount(items)
+		setItemCount(cartItems)
 	}, [carts])
 
 	const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function Navigation({ isLoaded }) {
 
 	const clickToRedirect = async (e, newPath) => {
 		e.preventDefault();
-		if (sessionUser){
+		if (sessionUser) {
 			await dispatch(logout());
 			await dispatch(clearItems());
 		}
@@ -36,7 +37,7 @@ function Navigation({ isLoaded }) {
 		return;
 	}
 
-	if (location.pathname === "/login" || location.pathname === "/signup" ){
+	if (location.pathname === "/login" || location.pathname === "/signup") {
 		return (
 			<ul className={'nav-list dark-background'}>
 				<div className='home-sidebar-wrapper'>
@@ -55,8 +56,8 @@ function Navigation({ isLoaded }) {
 			<div className='home-sidebar-wrapper'>
 				{sessionUser && (<li className='nav-list-item'>
 					<OpenModalButton
-						modalComponent={<UserMenu sessionUser={sessionUser}/>}
-						buttonText={<i className="fas fa-bars" style={{color: "#000000"}}/>}
+						modalComponent={<UserMenu sessionUser={sessionUser} />}
+						buttonText={<i className="fas fa-bars" style={{ color: "#000000" }} />}
 						buttonClass={"transparent-button-square"}
 						modalClass={"left"}
 					/>
@@ -67,6 +68,8 @@ function Navigation({ isLoaded }) {
 					</button>
 				</li>
 			</div>
+
+
 			{isLoaded && !sessionUser ? (
 				<div className='login-signup-wrapper'>
 					<li className='nav-list-item'>
@@ -81,19 +84,24 @@ function Navigation({ isLoaded }) {
 					</li>
 				</div>
 			) : (
-				<div className='cart-modal-button-wrapper'>
-					<li className='nav-list-item'>
-						<div className='cart-icon-wrapper'>
-							{itemCount > 0 && <p className='cart-icon-count'>{String(itemCount)}</p>}
-							<OpenModalButton
-								buttonText={<><i className="fas fa-shopping-cart" style={{color:"white"}}/>   Cart</>}
-								modalComponent={<CartModal carts={carts} sessionUser={sessionUser}/>}
-								buttonClass={"black-button-round"}
-								modalClass={"right"}
-							/>
-						</div>
-					</li>
-				</div>
+				<>
+					<div className="search-bar-wrapper">
+						<Search />
+					</div>
+					<div className='cart-modal-button-wrapper'>
+						<li className='nav-list-item'>
+							<div className='cart-icon-wrapper'>
+								{itemCount > 0 && <p className='cart-icon-count'>{String(itemCount)}</p>}
+								<OpenModalButton
+									buttonText={<><i className="fas fa-shopping-cart" style={{ color: "white" }} />   Cart</>}
+									modalComponent={<CartModal carts={carts} sessionUser={sessionUser} />}
+									buttonClass={"black-button-round"}
+									modalClass={"right"}
+								/>
+							</div>
+						</li>
+					</div>
+				</>
 			)}
 		</ul>
 	);

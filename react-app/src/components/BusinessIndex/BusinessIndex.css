@@ -40,9 +40,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding-top: 15px;
-    padding-left: 60px;
+    /* padding-top: 15px;
+    padding-left: 60px; */
     column-gap: 20px;
     row-gap: 20px;
-    width: 90%;
+    /* width: 90%; */
   }

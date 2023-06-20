@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadAllBusinessesThunk } from "../../store/business";
 import { useLocation } from "react-router-dom";
 import BusinessIndex from "../BusinessIndex";
+import Loader from "../Loader";
 import "./HomePage.css";
 
 function HomePage() {
@@ -11,21 +12,19 @@ function HomePage() {
   const businesses = useSelector(state => state?.business?.allBusinesses ? Object.values(state.business.allBusinesses) : null)
 
   useEffect(() => {
-    if(!businesses || !businesses.length){
-      dispatch(loadAllBusinessesThunk());
-    }
-  }, [dispatch, businesses]);
+    dispatch(loadAllBusinessesThunk());
+  }, [dispatch]);
 
 
 
-  if (!businesses || !businesses.length) return (<></>)
+  if (!businesses || businesses.length !== 12) return (<Loader/>)
 
   return (
     <div className="home-wrapper">
-        <div className="home-text-wrapper">
-            <h1 className="home-greeting-text">All Businesses</h1>
-            { businesses ? (<BusinessIndex businesses={businesses}/>): (<h1>Loading...</h1>)}
-        </div>
+      <div className="home-text-wrapper">
+        <h1 className="home-greeting-text">All Businesses</h1>
+        {businesses ? (<BusinessIndex businesses={businesses} />) : (<h1>Loading...</h1>)}
+      </div>
     </div>
   );
 }
