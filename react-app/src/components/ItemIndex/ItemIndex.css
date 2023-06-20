@@ -19,7 +19,7 @@
     box-shadow: 0px 0px 10px rgb(200, 200, 200);
   }
 
-  img {
+  .item-img-wrapper img {
     width: 325px;
     height: 130px;
     object-fit: cover;
@@ -27,15 +27,12 @@
     cursor: pointer;
   }
 
-  img.wide{
+  .item-img-wrapper img.wide{
     width: 100%;
     cursor: default;
   }
 
-  img.small{
-    height: 180px;
-    /* object-fit: contain; */
-  }
+
 
   .itemIndex {
     display: flex;

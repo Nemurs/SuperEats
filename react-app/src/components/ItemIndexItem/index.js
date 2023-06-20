@@ -21,7 +21,7 @@ const ItemIndexItem = ({ item, hoverable = false, orderable = true , imgUrl }) =
         <div className="item-item hoverable">
             <Link  to={`/business/${item.business_id}`}>
                 <div className="item-img-wrapper" onAnimationEnd={()=>setAddItemAnimation(0)} addItemAnimation={addItemAnimation}>
-                    <img className="small" src={previewImage} alt={item.name} />
+                    <img className="" src={previewImage} alt={item.name} />
                     {orderable ? (<button className="black-button-round add-to-cart-button" onClick={addItemToCart} >+</button>):(<></>)}
                 </div>
                 <div className="item-text">
@@ -34,7 +34,7 @@ const ItemIndexItem = ({ item, hoverable = false, orderable = true , imgUrl }) =
     else return (
         <div className="item-item">
                 <div className="item-img-wrapper" onAnimationEnd={()=>setAddItemAnimation(0)} addItemAnimation={addItemAnimation}>
-                    <img className="small" src={previewImage} alt={item.name} />
+                    <img className="tall" src={previewImage} alt={item.name} />
                     {orderable ? (<button className="black-button-round add-to-cart-button" onClick={addItemToCart} >+</button>):(<></>)}
                 </div>
                 <div className="item-text">

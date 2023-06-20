@@ -45,6 +45,12 @@ class Business(db.Model):
         }
 
     def to_dict_no_items(self):
+        avg_business_rating = 0
+        business_reviews = [review.to_dict_no_items() for review in self.business_reviews]
+        if len(business_reviews) >= 1:
+            for review in business_reviews:
+                avg_business_rating += review['rating']
+            avg_business_rating /= len(business_reviews)
         return {
             'id': self.id,
             'email': self.email,
@@ -53,5 +59,6 @@ class Business(db.Model):
             'address':self.address,
             'city':self.city,
             'state':self.state,
-            'category':self.category
+            'category':self.category,
+            'businessRating': avg_business_rating
         }

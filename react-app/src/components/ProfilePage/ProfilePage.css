@@ -5,18 +5,7 @@
     column-gap: 10%;
 }
 
-.account-stats-wrapper{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-.basic-account-stats-wrapper{
-    display: flex;
-    justify-content: center;
-    column-gap: 20px;
-}
-
-.basic-info-wrapper, .account-info-wrapper{
+.basic-info-wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,6 +19,14 @@
     row-gap: 10px;
 }
 
-.paccount-info-button-wrapper button {
+.account-info-button-wrapper button {
     width: 100%;
+}
+
+.account-info-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: -10px;
 }
