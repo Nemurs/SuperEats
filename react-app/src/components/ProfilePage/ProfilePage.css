@@ -1,4 +1,11 @@
-.basic-info-wrapper, .profile-page-wrapper{
+.profile-page-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10%;
+}
+
+.basic-info-wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,12 +13,20 @@
     row-gap: -10px;
 }
 
-.profile-page-button-wrapper {
+.account-info-button-wrapper {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
 }
 
-.profile-page-button-wrapper button {
+.account-info-button-wrapper button {
     width: 100%;
+}
+
+.account-info-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: -10px;
 }

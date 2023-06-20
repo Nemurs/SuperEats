@@ -3,6 +3,17 @@
     padding: 20px;
 }
 
+.update-order-order-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-order-business{
+    width: 100%;
+    text-align: center;
+}
 
 .update-order-wrapper > .close-button-x {
     position: absolute;

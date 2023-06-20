@@ -12,6 +12,7 @@ import SingleBusinessPage from "./components/SingleBusinessPage";
 import OrderPageTimer from "./components/OrderPageTimer";
 import SearchIndex from "./components/SearchIndex";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AccountStats from "./components/AccountStats";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,11 @@ function App() {
             <Route exact path="/profile">
               <ProtectedRoute>
                 <ProfilePage />
+              </ProtectedRoute>
+            </Route>
+            <Route exact path="/account_stats">
+              <ProtectedRoute>
+                <AccountStats />
               </ProtectedRoute>
             </Route>
             <Route exact path="/login" >

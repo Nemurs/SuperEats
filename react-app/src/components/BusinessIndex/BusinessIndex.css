@@ -23,7 +23,7 @@
     cursor: pointer;
   }
 
-  img {
+  .business-item img {
     width: 325px;
     height: 130px;
     object-fit: cover;
@@ -31,7 +31,7 @@
     cursor: default;
   }
 
-  img.wide{
+  .business-item img.wide{
     width: 100%;
     cursor: default;
   }

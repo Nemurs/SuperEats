@@ -33,7 +33,7 @@ const UserMenu = ({ sessionUser }) => {
                     <div className="profile-tile-wrapper-right">
                         <h2>{sessionUser.firstName}</h2>
                         <button className='transparent-button-square' style={{ color: "#2dbe64" }} onClick={(e) => clickToRedirect(e, "/profile")}>
-                            View Account
+                            Account Security
                         </button>
                     </div>
                 </div>
@@ -43,6 +43,10 @@ const UserMenu = ({ sessionUser }) => {
                             <button className='transparent-button-square' onClick={(e) => clickToRedirect(e, "/orders")}>
                                 <i className="fa fa-drumstick-bite" style={{ color: "#000000" }} />
                                 <h3>Orders</h3>
+                            </button>
+                            <button className='transparent-button-square' onClick={(e) => clickToRedirect(e, "/account_stats")}>
+                                <i className="fas fa-address-card" style={{ color: "#000000" }} />
+                                <h3>Account Stats</h3>
                             </button>
                         </li>
                     </ul>

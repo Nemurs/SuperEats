@@ -40,7 +40,7 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
     return (
         <div className="order-wrapper">
             <div className="order-wrapper-left">
-                <img className="small" src={business.images[0].url} alt={order.businessName} />
+                <img className="tall" src={business.images[0].url} alt={order.businessName} />
                 <div className="order-wrapper-left-text">
                     <div className="order-wrapper-left-top-text">
                         <h3>{order.businessName}</h3>

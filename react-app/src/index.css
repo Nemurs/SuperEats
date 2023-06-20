@@ -78,6 +78,7 @@ button.background-red:hover{
     color: white;
 }
 
+/*Main Document Body*/
 body{
     font-family: 'Uber Move Text', sans-serif;
     margin: 0px;
@@ -85,19 +86,6 @@ body{
     /* display: flex;
     flex-direction: column;
     align-items: center; */
-}
-
-/*Main Document Body*/
-.bold-text{
-    font-weight: bold;
-}
-
-span.bold{
-    font-weight: bold;
-}
-
-.hidden{
-    display: hidden;
 }
 
 .site-wrapper{
@@ -131,6 +119,24 @@ span.bold{
     flex-direction: column;
     padding-bottom: 35px;
     margin-top: 79px;
+}
+
+/*Site-wide styles*/
+.bold-text{
+    font-weight: bold;
+}
+
+span.bold{
+    font-weight: bold;
+}
+
+.hidden{
+    display: hidden;
+}
+
+img.tall{
+    height: 180px;
+    /* object-fit: contain; */
 }
 
 button{
