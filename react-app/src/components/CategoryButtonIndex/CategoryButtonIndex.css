@@ -1,0 +1,20 @@
+.category-button-index-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.category-button-wrapper{
+    text-align: center;
+}
+
+.category-button-wrapper img{
+    width: 50px;
+    height: 50px;
+    object-fit: scale-down;
+}
+
+.category-button-wrapper p{
+    text-overflow: auto;
+}

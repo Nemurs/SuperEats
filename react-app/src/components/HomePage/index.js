@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadAllBusinessesThunk } from "../../store/business";
 import { useLocation } from "react-router-dom";
-import BusinessIndex from "../BusinessIndex";
+import BusinessCarousel from "../BusinessCarousel";
+import CategoryButtonIndex from "../CategoryButtonIndex";
 import Loader from "../Loader";
 import "./HomePage.css";
-import BusinessCarousel from "../BusinessCarousel";
 
 const TILECOUNT = 4;
 
@@ -28,21 +28,31 @@ function HomePage() {
 
   return (
     <>
-      <BusinessCarousel
-        businesses={likedBusinesses.slice(0,8)}
-        title={"Highly Rated"}
-        tileCount={TILECOUNT}
-      />
-      <BusinessCarousel
-        businesses={popularBusinesses.slice(0,8)}
-        title={"Most Popular"}
-        tileCount={TILECOUNT}
-      />
-      <BusinessCarousel
-        businesses={businesses}
-        title={"All Businesses"}
-        tileCount={TILECOUNT}
-      />
+      <div className="home-page-wrapper">
+        <CategoryButtonIndex/>
+        <div className="home-page-wrapper-bottom">
+          <div className="home-page-wrapper-bottom-left">
+
+          </div>
+          <div className="home-page-wrapper-bottom-right">
+            <BusinessCarousel
+              businesses={likedBusinesses.slice(0,8)}
+              title={"Highly Rated"}
+              tileCount={TILECOUNT}
+            />
+            <BusinessCarousel
+              businesses={popularBusinesses.slice(0,8)}
+              title={"Most Popular"}
+              tileCount={TILECOUNT}
+            />
+            <BusinessCarousel
+              businesses={businesses}
+              title={"All Businesses"}
+              tileCount={TILECOUNT}
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
