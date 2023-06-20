@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, logout_user, current_user
-from app.models import User, UserImage, db
+from app.models import User, UserImage, Cart, Business, BusinessImage, Order, Item, ItemImage, db
 from app.forms import AddImageForm, EditAccountForm
+from sqlalchemy import func, desc
 
 user_routes = Blueprint('users', __name__)
 
@@ -24,6 +25,42 @@ def users():
     """
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route('/current/favorite_business')
+@login_required
+def get_fav_business():
+    """
+    Get the current user's favorite business
+    """
+    if current_user.is_authenticated:
+        id = current_user.to_dict()["id"]
+        carts  = db.session.query(func.count(Cart.business_id).label('count'), Cart.business_id).filter(Cart.user_id == id).group_by(Cart.business_id).order_by(desc('count')).all()
+
+        fav_business = Business.query.get(carts[0][1])
+        fav_business_img = BusinessImage.query.filter(BusinessImage.business_id == fav_business.id).first()
+
+        out = fav_business.to_dict_no_items()
+        out["imgUrl"] = fav_business_img.to_dict_no_items()["url"]
+        return {"favoriteBusiness": out}
+    return {'errors': ['Unauthorized']}, 403
+
+@user_routes.route('/current/favorite_item')
+@login_required
+def get_fav_item():
+    """
+    Get the current user's favorite item
+    """
+    if current_user.is_authenticated:
+        id = current_user.to_dict()["id"]
+        orders  = db.session.query(func.count(Order.item_id).label('count'), Order.item_id).filter(Order.user_id == id).group_by(Order.item_id).order_by(desc('count')).all()
+        fav_item = Item.query.get(orders[0][1])
+        fav_item_img = ItemImage.query.filter(ItemImage.item_id == fav_item.id).first()
+        print(orders)
+
+        out = fav_item.to_dict_no_items()
+        out["imgUrl"] = fav_item_img.to_dict_no_items()["url"]
+        return {"favoriteItem": out}
+    return {'errors': ['Unauthorized']}, 403
 
 
 @user_routes.route('/<int:id>/images', methods=['POST'])

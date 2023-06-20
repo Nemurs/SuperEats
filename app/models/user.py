@@ -47,7 +47,8 @@ class User(db.Model, UserMixin):
             'state':self.state,
             'images': [image.to_dict_no_items() for image in self.images],
             'userReviews': [user_review.to_dict_no_items() for user_review in self.user_reviews],
-            'userOrders': [user_order.to_dict() for user_order in self.user_orders]
+            'userOrders': [user_order.to_dict() for user_order in self.user_orders],
+            'userCarts': [user_cart.to_dict_no_items() for user_cart in self.user_carts]
         }
 
     def to_dict_no_items(self):

@@ -24,6 +24,7 @@ class Cart(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'userId':self.user_id,
             'businessId': self.business_id,
             'timeCreated': self.time_created,
             'timeUpdated': self.time_updated,
@@ -34,6 +35,7 @@ class Cart(db.Model):
     def to_dict_no_items(self):
         return {
             'id': self.id,
+            'userId':self.user_id,
             'businessId': self.business_id,
             'timeCreated': self.time_created,
             'timeUpdated': self.time_updated,

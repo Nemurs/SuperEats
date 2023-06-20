@@ -9,10 +9,6 @@
     text-decoration: none;
 }
 
-.business-item a:hover {
-    text-decoration: underline;
-}
-
 .business-text{
     display: flex;
     align-items: center;

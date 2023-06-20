@@ -1,0 +1,22 @@
+.account-stats-wrapper, .account-stats{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.basic-account-stats, .adv-account-stats{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    width: fit-content;
+}
+
+.basic-account-stats-wrapper, .adv-account-stats-popular-business, .adv-account-stats-popular-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 20px;
+    width: fit-content;
+}
