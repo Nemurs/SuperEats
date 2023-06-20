@@ -23,10 +23,10 @@ const BusinessCarousel = ({ businesses, title, tileCount }) => {
                     <h2 className="carousel-text">{title}</h2>
                 </div>
                 <div className="carousel-button-wrapper">
-                    <button className="gray-button-round background-green" onClick={prevBusiness}>
+                    <button className="black-button-round background-gold" onClick={prevBusiness}>
                         <i className="fas fa-angle-left"></i>
                     </button>
-                    <button className="gray-button-round background-green" onClick={nextBusiness}>
+                    <button className="black-button-round background-green" onClick={nextBusiness}>
                         <i className="fas fa-angle-right"></i>
                     </button>
                 </div>

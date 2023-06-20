@@ -20,5 +20,10 @@
 }
 
 .business-rating{
-    color: gray;
+    font-size: 11px;
+    color: black;
+    background-color: lightgray;
+    padding: 4px;
+    border: 1px solid transparent;
+    border-radius: 20px;
 }

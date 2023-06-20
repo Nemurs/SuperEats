@@ -7,6 +7,8 @@ import Loader from "../Loader";
 import "./HomePage.css";
 import BusinessCarousel from "../BusinessCarousel";
 
+const TILECOUNT = 4;
+
 function HomePage() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -29,17 +31,17 @@ function HomePage() {
       <BusinessCarousel
         businesses={likedBusinesses.slice(0,8)}
         title={"Highly Rated"}
-        tileCount={4}
+        tileCount={TILECOUNT}
       />
       <BusinessCarousel
         businesses={popularBusinesses.slice(0,8)}
         title={"Most Popular"}
-        tileCount={4}
+        tileCount={TILECOUNT}
       />
       <BusinessCarousel
         businesses={businesses}
         title={"All Businesses"}
-        tileCount={4}
+        tileCount={TILECOUNT}
       />
     </>
   );
