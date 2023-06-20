@@ -1,19 +1,4 @@
-body{
-    font-family: 'Uber Move Text', sans-serif;
-    margin: 0px;
-    border: none;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-}
-
-.bold-text{
-    font-weight: bold;
-}
-
-.hidden{
-    display: hidden;
-}
+/*Buttons*/
 
 .transparent-button-square{
     background-color: transparent;
@@ -36,9 +21,6 @@ body{
     border-radius: 10px;
     padding: 10px;
 }
-.small-padding {
-    padding: 5px;
-}
 
 .disabled-button{
     cursor: default;
@@ -49,6 +31,14 @@ body{
     color: black;
     border: 1px solid transparent;
     border-radius: 10px;
+    padding: 10px;
+}
+
+.gray-button-round{
+    background-color: lightgray;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 50px;
     padding: 10px;
 }
 
@@ -88,8 +78,26 @@ button.background-red:hover{
     color: white;
 }
 
+body{
+    font-family: 'Uber Move Text', sans-serif;
+    margin: 0px;
+    border: none;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+/*Main Document Body*/
+.bold-text{
+    font-weight: bold;
+}
+
 span.bold{
     font-weight: bold;
+}
+
+.hidden{
+    display: hidden;
 }
 
 .site-wrapper{
@@ -128,6 +136,11 @@ span.bold{
 button{
     cursor: pointer;
 }
+
+.small-padding {
+    padding: 5px;
+}
+
 
 /* Errors*/
 .errors-list{

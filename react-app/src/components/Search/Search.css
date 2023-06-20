@@ -5,16 +5,17 @@
     padding: 0px 5px;
     align-items: center;
     height: 40px;
+    background-color: #eeeeee;
 }
 
 .smaller-search-input{
-    background-color: transparent;
+    background-color: #eeeeee;
     border: none;
     color: black;
     width: 470px;
 }
 .search-input {
-    background-color: transparent;
+    background-color: #eeeeee;
     border: none;
     color: black;
     width: 500px;
