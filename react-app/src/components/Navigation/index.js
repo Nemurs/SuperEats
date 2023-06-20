@@ -15,8 +15,11 @@ function Navigation({ isLoaded }) {
 	const [itemCount, setItemCount] = useState(0);
 
 	useEffect(() => {
-		let theCarts = Object.values(carts);
-		setItemCount(theCarts.length)
+		let cartItems = 0;
+		for (let cart of Object.values(carts)){
+			cartItems += Object.values(cart).length
+		}
+		setItemCount(cartItems)
 	}, [carts])
 
 	const dispatch = useDispatch();
