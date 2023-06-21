@@ -130,7 +130,7 @@ const SearchIndex = () => {
     const storeCount = modifiedBusinesses && modifiedBusinesses.length ? modifiedBusinesses.length : businesses.length
     return (
         <div className="search-page-wrapper">
-            <h1>{storeCount} Store{`${storeCount > 1 ? "s": ""}`}</h1>
+            <h1>{storeCount} Store{`${storeCount === 1 ? "": "s"}`}</h1>
             <div className="search-wrapper">
                 <div className="search-options">
                     <div>
