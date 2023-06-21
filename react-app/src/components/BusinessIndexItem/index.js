@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom"
 import './BusinessIndexItem.css'
 
-const BusinessIndexItem = ({ business, interactive = true , imgUrl}) => {
+const BusinessIndexItem = ({ business, interactive = true , imgUrl, small = false}) => {
     if (!business) return (<></>)
     const previewImage = imgUrl ? imgUrl : business?.images?.filter(img => img.preview === true)[0].url
 
     if (interactive) {
         return (
-            <div className="business-item hoverable">
+            <div className={`business-item hoverable ${small ? "small": ""}`}>
                 <Link to={`/business/${business.id}`}>
-                    <img src={previewImage} alt={business.name} />
+                    <img className={`${small ? "small": ""}`} src={previewImage} alt={business.name} />
                     <div className="business-text">
                         <p className="business-name">{business.name}</p>
-                        <p className="business-rating">{business.businessRating.toFixed(2)}</p>
+                        {business.businessRating > 0 ? <p className="business-rating">{business.businessRating.toFixed(2)}</p> : <></>}
                     </div>
                 </Link>
             </div>

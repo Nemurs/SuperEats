@@ -28,6 +28,13 @@ class Business(db.Model):
                 avg_business_rating += review['rating']
             avg_business_rating /= len(business_reviews)
 
+        avg_item_price = 0
+        items = [item.to_dict() for item in self.items]
+        if len(items) >= 1:
+            for item in items:
+                avg_item_price += item['price']
+            avg_item_price /= len(items)
+
         return {
             'id': self.id,
             'email': self.email,
@@ -38,7 +45,8 @@ class Business(db.Model):
             'state':self.state,
             'category':self.category,
             'images': [image.to_dict_no_items() for image in self.images],
-            'items': [item.to_dict() for item in self.items],
+            'items': items,
+            'avgItemPrice': avg_item_price,
             'carts': [cart.to_dict_no_items() for cart in self.carts],
             'businessReviews': business_reviews,
             'businessRating': avg_business_rating

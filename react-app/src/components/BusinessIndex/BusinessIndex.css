@@ -11,6 +11,10 @@
     padding: 0px;
   }
 
+  .business-item.small {
+    width: 250px;
+  }
+
   .business-name.large{
     margin-left: 3%;
   }
@@ -34,6 +38,11 @@
   .business-item img.wide{
     width: 100%;
     cursor: default;
+  }
+
+  .business-item img.small{
+    width: 100%;
+    height: 75px;
   }
 
   .businessIndex {

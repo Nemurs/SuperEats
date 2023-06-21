@@ -40,7 +40,7 @@ const AccountStats = () => {
 
     return (
         <div className="account-stats-wrapper" >
-                <h1>Your Stats</h1>
+                <h1>About You</h1>
                 <div className="account-stats">
                     <div className="basic-account-stats-wrapper">
                         <ProfilePicture imgUrl={pfp} imgId={pfpId} userId={userId}/>

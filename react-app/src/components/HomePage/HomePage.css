@@ -4,3 +4,22 @@
     align-items: center;
     margin-top: 20px;
 }
+
+.home-page-wrapper-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    column-gap: 25px;
+    width: 87.5%;
+}
+
+.home-page-wrapper-bottom-left{
+    width: 10%;
+    box-sizing: border-box;
+}
+
+.price-button-wrapper{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}

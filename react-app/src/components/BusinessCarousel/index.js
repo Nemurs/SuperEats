@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BusinessIndex from "../BusinessIndex";
 import "./BusinessCarousel.css"
 
-const BusinessCarousel = ({ businesses, title, tileCount }) => {
+const BusinessCarousel = ({ businesses, title, tileCount, small }) => {
     const TILECOUNT = tileCount ? tileCount : 4;
     const [businessIndex, setBusinessIndex] = useState(0);
 
@@ -32,7 +32,7 @@ const BusinessCarousel = ({ businesses, title, tileCount }) => {
                 </div>
             </div>
             <div className="carousel">
-                <BusinessIndex businesses={businesses.slice(businessIndex, businessIndex + TILECOUNT)} />
+                <BusinessIndex businesses={businesses.slice(businessIndex, businessIndex + TILECOUNT)} small={small} />
             </div>
         </div>
     )

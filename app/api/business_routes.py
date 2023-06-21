@@ -18,10 +18,13 @@ def get_some_businesses():
     Return businesses that match search
     """
 
-    search = list(request.args.keys())[0]
-    search = search.split(" ")
+    search = list(request.args.keys())
+    print("search----->", search)
+    if len(search) < 1:
+        businesses = Business.query.all()
+        return {'Businesses': [bus.to_dict() for bus in businesses]}
+    search = search[0].split(" ")
     search = [term.lower() for term in search]
-    # print("search----->", search)
 
     businesses = db.session.query(Business).join(Item).filter(and_(func.lower(Business.name).like(f"%{term}%")  | func.lower(Business.category).like(f"%{term}%") | func.lower(Item.name).like(f"%{term}%") | func.lower(Item.category).like(f"%{term}%") for term in search)).all()
     return {'Businesses': [bus.to_dict() for bus in businesses]}
