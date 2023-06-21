@@ -20,9 +20,9 @@
 }
 
 .search-page-wrapper > h1 {
-    margin-left: 2.5%;
-    align-self: flex-start;
-    width: fit-content;
+    margin-left: 12.5%;
+    /* align-self: flex-start;
+    width: fit-content; */
 }
 
 .sortby-form{
