@@ -41,7 +41,7 @@
 }
 
 /*MEDIA QUERIES FOR SEARCH BAR*/
-@media (max-width: 900px) {
+@media (max-width: 950px) {
     .smaller-search-input{
         width: 270px;
     }

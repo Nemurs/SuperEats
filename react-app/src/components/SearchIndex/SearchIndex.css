@@ -2,6 +2,12 @@
     margin-left: 2.5%;
 }
 
+.sortby-button-wrapper{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+
 /*Media Queries*/
 @media (max-width:713px) {
     .search-index > h1{
