@@ -99,6 +99,10 @@ body{
     /* align-items: center; */
 }
 
+.site-wrapper.splash-page{
+    max-width: none;
+}
+
 .nav-wrapper{
     width: 100%;
     max-width: 1920px;
@@ -110,6 +114,8 @@ body{
 
 .nav-wrapper.splash-page{
     background-color: transparent;
+    margin: 0px 10%;
+    /* max-width: none; */
 }
 
 .main-content-wrapper{
