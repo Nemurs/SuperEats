@@ -95,12 +95,13 @@ body{
     margin: 0px;
     display: flex;
     flex-direction: column;
-    /* max-width: 1920px; */
+    max-width: 1920px;
     /* align-items: center; */
 }
 
 .nav-wrapper{
     width: 100%;
+    max-width: 1920px;
     height: 80px;
     position: fixed;
     z-index: 100;
