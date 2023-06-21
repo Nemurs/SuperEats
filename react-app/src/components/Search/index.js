@@ -1,6 +1,6 @@
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loadSomeBusinessesThunk } from "../../store/business";
 import "./Search.css"
 
@@ -9,6 +9,10 @@ const Search = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
+
+    useEffect(()=>{
+        setQuery(location.search.slice(1))
+    },[location.search])
 
     const handleSubmit = (e) => {
         e.preventDefault()
