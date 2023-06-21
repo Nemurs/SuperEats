@@ -7,10 +7,12 @@
 
 .home-page-wrapper-bottom{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    /* justify-content: center; */
     align-items: flex-start;
     column-gap: 25px;
     width: 87.5%;
+    max-width: 1680px;
 }
 
 .home-page-wrapper-bottom-left{
