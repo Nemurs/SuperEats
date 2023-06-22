@@ -40,7 +40,7 @@ function Navigation({ isLoaded }) {
 	if (location.pathname === "/login" || location.pathname === "/signup") {
 		return (
 			<ul className={'nav-list dark-background'}>
-				<div className='home-sidebar-wrapper'>
+				<div className='home-sidebar-wrapper dark-background'>
 					<li className='nav-list-item'>
 						<button className='home-button dark-background'>
 							<NavLink exact to="/">Super<span className='bold'>Eats</span></NavLink>

@@ -88,15 +88,22 @@ body{
     align-items: center; */
 }
 
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .site-wrapper{
     background-image: none;
     height: 100vh;
     width: 100%;
-    margin: 0px;
+    /* margin: 0px auto; */
     display: flex;
     flex-direction: column;
     max-width: 1920px;
-    /* align-items: center; */
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .site-wrapper.splash-page{
@@ -110,12 +117,15 @@ body{
     position: fixed;
     z-index: 100;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    /* left: 2.5%; */
 }
 
 .nav-wrapper.splash-page{
     background-color: transparent;
-    margin: 0px 10%;
-    /* max-width: none; */
+    margin: 0;
+    max-width: none;
 }
 
 .main-content-wrapper{
