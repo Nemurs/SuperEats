@@ -3,7 +3,7 @@ from flask_login import login_required, logout_user, current_user
 from sqlalchemy import func, desc
 from app.models import User, UserImage, Cart, Business, BusinessImage, Order, Item, ItemImage, db
 from app.forms import AddImageForm, EditAccountForm
-from app.util import upload_file_to_s3, get_unique_filename
+from app.util import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 
 user_routes = Blueprint('users', __name__)
 
@@ -84,10 +84,12 @@ def add_user_pic(id):
         requested_user = User.query.get(id)
         if current_user.is_authenticated:
             if requested_user.id == current_user.to_dict()["id"]:
+                if len(requested_user.images) > 0:
+                    deleted = [db.session.delete(img) for img in requested_user.images]
+                    s3_deleted = [remove_file_from_s3(img.url) for img in requested_user.images]
                 image = form.data["image"]
                 image.filename = get_unique_filename(image.filename)
                 upload = upload_file_to_s3(image)
-                print(upload)
                 if "url" in upload:
                     pfp = UserImage(
                         url=upload["url"],
@@ -97,6 +99,7 @@ def add_user_pic(id):
                     pfp.user = requested_user
                     db.session.commit()
                     return pfp.to_dict()
+                print(upload)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -111,6 +114,7 @@ def delete_user_pic(id, picId):
         if current_user.is_authenticated:
             if requested_user.id == current_user.to_dict()["id"]:
                 pic = UserImage.query.get(picId)
+                remove_file_from_s3(pic.url)
                 db.session.delete(pic)
                 db.session.commit()
                 return {'message': 'Successfully deleted picture!'}

@@ -38,17 +38,18 @@ const UpdateProfilePictureModal = ({ imgUrl, imgId, userId }) => {
 
     const handleSubmit = async (e, rmPic = false) => {
         e.preventDefault();
+        if(!image && !rmPic) return;
         const formData = new FormData();
         formData.append("image", image);
         formData.append("preview", true);
         formData.append("user_id", userId)
+        setImageLoading(true)
         if (rmPic) {
             if (!isDefPic) {
                 await dispatch(deleteProfilePicThunk(userId, imgId))
             } else return;
         } else {
             // if (imgUrl === picUrl) return;
-            setImageLoading(true)
             await dispatch(createProfilePicThunk(formData))
         }
         setImageLoading(false)
@@ -62,19 +63,12 @@ const UpdateProfilePictureModal = ({ imgUrl, imgId, userId }) => {
             <h1>Edit Profile Picture</h1>
             <img src={isDefPic && !imgUrl ? defUrl : image ? preview: imgUrl} alt="profile picture" className="profile-pic-preview" />
             <form onSubmit={handleSubmit} className="profile-pic-update-form" encType="multipart/form-data">
-                {/* <input
-                    type="text"
-                    value={picUrl }
-                    onChange={(e) => setPicUrl(e.target.value)}
-                    placeholder="Enter new profile picture url"
-                    required
-                /> */}
                 <input
                     type="file"
                     accept="image/*"
                     onChange={(e) => setImage(e.target.files[0])}
                 />
-                {(imageLoading) && <Loader/>}
+                {(imageLoading) && <Loader color={"#ff7b00"}/>}
                 <button type="submit" className="black-button-square background-green">Update Picture</button>
                 <button className="black-button-square background-red" onClick={(e) => handleSubmit(e, true)}>Delete Picture</button>
             </form>

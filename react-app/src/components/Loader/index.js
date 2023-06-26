@@ -1,10 +1,10 @@
 import { GridLoader } from 'react-spinners';
 import "./Loader.css";
 
-const Loader = () => {
+const Loader = ({color}) => {
     return (
         <div className="loader-wrapper">
-            <GridLoader color="#2dbe64" />
+            <GridLoader color={color ? color : "#2dbe64"} />
         </div>
     )
 }
