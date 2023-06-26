@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import { createProfilePicThunk, deleteProfilePicThunk } from "./profilePicThunks";
+import { useDispatch } from "react-redux";
+import { FileUploader } from "react-drag-drop-files";
+import Loader from "../Loader";
 import CloseModalButton from "../CloseModalButton";
 import "./UpdateProfilePictureModal.css";
-import { useDispatch } from "react-redux";
-import Loader from "../Loader";
+
+const FILETYPES = ["JPG","PNG", "JPEG"]
 
 const UpdateProfilePictureModal = ({ imgUrl, imgId, userId }) => {
     const { closeModal } = useModal();
@@ -63,11 +66,12 @@ const UpdateProfilePictureModal = ({ imgUrl, imgId, userId }) => {
             <h1>Edit Profile Picture</h1>
             <img src={isDefPic && !imgUrl ? defUrl : image ? preview: imgUrl} alt="profile picture" className="profile-pic-preview" />
             <form onSubmit={handleSubmit} className="profile-pic-update-form" encType="multipart/form-data">
-                <input
+                {/* <input
                     type="file"
                     accept="image/*"
                     onChange={(e) => setImage(e.target.files[0])}
-                />
+                /> */}
+                <FileUploader handleChange={(file) => setImage(file)} types={FILETYPES} minSize={0.01} maxSize={10} onSizeError={file=>alert("File cannot be larger than 10MB!")}/>
                 {(imageLoading) && <Loader color={"#ff7b00"}/>}
                 <button type="submit" className="black-button-square background-green">Update Picture</button>
                 <button className="black-button-square background-red" onClick={(e) => handleSubmit(e, true)}>Delete Picture</button>
