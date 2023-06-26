@@ -1,16 +1,9 @@
 import { authenticate } from "../../store/session";
 
-export const createProfilePicThunk = (userId, url) => async (dispatch) => {
-    const response = await fetch(`/api/users/${userId}/images`, {
+export const createProfilePicThunk = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/users/${payload.get("user_id")}/images`, {
         method: "POST",
-        headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-            url,
-            "preview": true,
-            "user_id":userId
-        }),
+        body: payload
     });
 
     if (response.ok) {

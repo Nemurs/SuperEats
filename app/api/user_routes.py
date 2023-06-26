@@ -1,10 +1,12 @@
 from flask import Blueprint, request
 from flask_login import login_required, logout_user, current_user
+from sqlalchemy import func, desc
 from app.models import User, UserImage, Cart, Business, BusinessImage, Order, Item, ItemImage, db
 from app.forms import AddImageForm, EditAccountForm
-from sqlalchemy import func, desc
+from app.util import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 
 user_routes = Blueprint('users', __name__)
+
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -26,6 +28,7 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+
 @user_routes.route('/current/favorite_business')
 @login_required
 def get_fav_business():
@@ -34,15 +37,18 @@ def get_fav_business():
     """
     if current_user.is_authenticated:
         id = current_user.to_dict()["id"]
-        carts  = db.session.query(func.count(Cart.business_id).label('count'), Cart.business_id).filter(Cart.user_id == id).group_by(Cart.business_id).order_by(desc('count')).all()
+        carts = db.session.query(func.count(Cart.business_id).label('count'), Cart.business_id).filter(
+            Cart.user_id == id).group_by(Cart.business_id).order_by(desc('count')).all()
 
         fav_business = Business.query.get(carts[0][1])
-        fav_business_img = BusinessImage.query.filter(BusinessImage.business_id == fav_business.id).first()
+        fav_business_img = BusinessImage.query.filter(
+            BusinessImage.business_id == fav_business.id).first()
 
         out = fav_business.to_dict_no_items()
         out["imgUrl"] = fav_business_img.to_dict_no_items()["url"]
         return {"favoriteBusiness": out}
     return {'errors': ['Unauthorized']}, 403
+
 
 @user_routes.route('/current/favorite_item')
 @login_required
@@ -52,9 +58,11 @@ def get_fav_item():
     """
     if current_user.is_authenticated:
         id = current_user.to_dict()["id"]
-        orders  = db.session.query(func.count(Order.item_id).label('count'), Order.item_id).filter(Order.user_id == id).group_by(Order.item_id).order_by(desc('count')).all()
+        orders = db.session.query(func.count(Order.item_id).label('count'), Order.item_id).filter(
+            Order.user_id == id).group_by(Order.item_id).order_by(desc('count')).all()
         fav_item = Item.query.get(orders[0][1])
-        fav_item_img = ItemImage.query.filter(ItemImage.item_id == fav_item.id).first()
+        fav_item_img = ItemImage.query.filter(
+            ItemImage.item_id == fav_item.id).first()
         print(orders)
 
         out = fav_item.to_dict_no_items()
@@ -65,42 +73,53 @@ def get_fav_item():
 
 @user_routes.route('/<int:id>/images', methods=['POST'])
 @login_required
-def add_user_pic (id):
+def add_user_pic(id):
     """
     Add a user image
     """
     form = AddImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if id > 9 and form.validate_on_submit(): #Protect seeded data
+    if id > 9 and form.validate_on_submit():  # Protect seeded data
         requested_user = User.query.get(id)
         if current_user.is_authenticated:
             if requested_user.id == current_user.to_dict()["id"]:
-                pfp = UserImage(
-                    url=form.data["url"],
-                    preview=form.data["preview"],
-                    user_id=form.data["user_id"],
-                )
-                pfp.user = requested_user
-                db.session.commit()
-                return pfp.to_dict()
+                if len(requested_user.images) > 0:
+                    deleted = [db.session.delete(img) for img in requested_user.images]
+                    s3_deleted = [remove_file_from_s3(img.url) for img in requested_user.images]
+                image = form.data["image"]
+                image.filename = get_unique_filename(image.filename)
+                upload = upload_file_to_s3(image)
+                if "url" in upload:
+                    pfp = UserImage(
+                        url=upload["url"],
+                        preview=form.data["preview"],
+                        user_id=form.data["user_id"],
+                    )
+                    pfp.user = requested_user
+                    db.session.commit()
+                    return pfp.to_dict()
+                print(upload)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @user_routes.route('/<int:id>/images/<int:picId>', methods=['DELETE'])
 @login_required
-def delete_user_pic (id, picId):
+def delete_user_pic(id, picId):
     """
     Delete a user image
     """
-    if id > 9: #Protect seeded data
+    if id > 9:  # Protect seeded data
         requested_user = User.query.get(id)
         if current_user.is_authenticated:
             if requested_user.id == current_user.to_dict()["id"]:
-                pic  = UserImage.query.get(picId)
+                pic = UserImage.query.get(picId)
+                remove_file_from_s3(pic.url)
                 db.session.delete(pic)
                 db.session.commit()
                 return {'message': 'Successfully deleted picture!'}
     return {'errors': ['Unauthorized']}, 403
+
 
 @user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
@@ -108,7 +127,7 @@ def delete_user(id):
     """
     Delete a user
     """
-    if id > 9:  #Protect seeded data
+    if id > 9:  # Protect seeded data
         requested_user = User.query.get(id)
 
         if current_user.is_authenticated:
@@ -116,8 +135,9 @@ def delete_user(id):
                 db.session.delete(requested_user)
                 db.session.commit()
                 logout_user()
-                return {"message":"success"}
+                return {"message": "success"}
     return {'errors': ['Unauthorized']}, 403
+
 
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -128,7 +148,7 @@ def edit_user(id):
     form = EditAccountForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if id > 9 and form.validate_on_submit(): #Protect seeded data
+    if id > 9 and form.validate_on_submit():  # Protect seeded data
         requested_user = User.query.get(id)
         if current_user.is_authenticated:
             if requested_user.id == current_user.to_dict()["id"]:
@@ -142,6 +162,7 @@ def edit_user(id):
                 db.session.commit()
                 return requested_user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @user_routes.route('/<int:id>')
 @login_required
