@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadAllBusinessesThunk } from "../../store/business";
-import CartIndexItem from "../CartIndexItem";
-import "./OrderPage.css";
-import OrderIndexItem from "../OrderIndexItem";
-import OrderIndex from "../OrderIndex";
-import { authenticate } from "../../store/session";
 import { isTimestampOld } from "../../utils";
-import { useLocation } from "react-router-dom";
+import { authenticate } from "../../store/session";
+import { loadAllBusinessesThunk } from "../../store/business";
+import OrderIndex from "../OrderIndex";
+import OrderIndexItem from "../OrderIndexItem";
+import "./OrderPage.css";
 
 const OrderPage = ({ shouldRefresh, timer }) => {
     const dispatch = useDispatch();
@@ -26,11 +24,10 @@ const OrderPage = ({ shouldRefresh, timer }) => {
 
     useEffect(() => {
         if (!userOrders || !businesses) return (<></>)
-        console.log("something is going on with this useEffect")
+
         //Format orders by cartId
         let categorized_items = {};
         for (let order of Object.values(userOrders)) {
-            // console.log("OG ORDER-->", order)
             let new_item = { ...order.item, ...{ orderId: order.id } }
             if (!(order.cartId in categorized_items)) {
                 categorized_items[order.cartId] = { "items": [new_item], "prices": [new_item.price], "businessName": order.cartInfo.businessName, "businessId": order.cartInfo.businessId, "timeCreated": order.cartInfo.timeCreated, "timeUpdated": order.cartInfo.timeUpdated }
@@ -46,8 +43,6 @@ const OrderPage = ({ shouldRefresh, timer }) => {
         let mostRecentOrders = {};
         for (let [cartId, order] of Object.entries(categorized_items)) {
             if (!isTimestampOld(order.timeCreated, 0.9) || (order.timeUpdated && !isTimestampOld(order.timeUpdated, 0.9))) {
-                // console.log(order)
-                // console.log(pastOrders)
                 delete pastOrders[cartId]
                 delete categories[cartId]
                 mostRecentOrders[cartId] = order
@@ -58,11 +53,8 @@ const OrderPage = ({ shouldRefresh, timer }) => {
         mostRecentOrders = Object.entries(mostRecentOrders);
         mostRecentOrders.reverse()
 
-        // console.log(mostRecentOrders)
-
         pastOrders = Object.entries(pastOrders);
         pastOrders.reverse()
-        // console.log(pastOrders)
 
         setMostRecentOrdersActive(mostRecentOrders)
         setPastOrdersActive(pastOrders)
@@ -71,18 +63,11 @@ const OrderPage = ({ shouldRefresh, timer }) => {
 
     useEffect(() => {
         if (shouldRefresh) {
-            // Perform any refreshing logic here
-            console.log('Refreshing order page ...');
-
             setPastOrdersActive(prev => ([...mostRecentOrdersActive, ...prev]))
             setMostRecentOrdersActive([])
             setTimestampCheckActive(true)
         }
     }, [shouldRefresh]);
-
-
-
-
 
     return (
         <div className="order-page-wrapper">

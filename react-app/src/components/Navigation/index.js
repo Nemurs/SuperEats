@@ -33,7 +33,6 @@ function Navigation({ isLoaded }) {
 			await dispatch(clearItems());
 		}
 		history.push(newPath);
-		console.log("Successfully logged out");
 		return;
 	}
 
@@ -73,12 +72,12 @@ function Navigation({ isLoaded }) {
 			{isLoaded && !sessionUser ? (
 				<div className='login-signup-wrapper'>
 					<li className='nav-list-item'>
-						<button className="white-button-round" onClick={(e) => clickToRedirect(e, "/login")}>
+						<button className="white-button-round background-green" onClick={(e) => clickToRedirect(e, "/login")}>
 							Log in
 						</button>
 					</li>
 					<li >
-						<button className="black-button-round" onClick={(e) => clickToRedirect(e, "/signup")}>
+						<button className="black-button-round background-orange" onClick={(e) => clickToRedirect(e, "/signup")}>
 							Sign Up
 						</button>
 					</li>

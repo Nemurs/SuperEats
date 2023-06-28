@@ -19,16 +19,14 @@ const AccountStats = () => {
         ).then(
             data => {
                 setFavBus(()=>data.favoriteBusiness)
-            }
-        ).catch(console.error)
+            }).catch()
 
         fetch(`/api/users/current/favorite_item`).then(
             response => response.ok ? response.json() : ["An error occurred. Please try again."]
         ).then(
             data => {
                 setFavItem(()=>data.favoriteItem)
-            }
-        ).catch(console.error)
+            }).catch()
 
     },[])
 

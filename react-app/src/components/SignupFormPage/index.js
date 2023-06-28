@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { signUp, login, editAccountThunk } from "../../store/session";
-import './SignupForm.css';
 import isEmail from "validator/lib/isEmail";
 import isMobilePhone from "validator/lib/isMobilePhone";
 import isLength from "validator/lib/isLength";
 import isNumeric from "validator/lib/isNumeric";
+import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();

@@ -19,13 +19,12 @@ const CategoryButtonIndex = () => {
         'pizza',
         'retail',
         'specialty foods',
-        'sushi',
-        'top eats',
+        'sushi'
     ]
     return (
         <div className="category-button-index-wrapper">
             {categories.map(text => (
-                <div className="category-button-wrapper">
+                <div className="category-button-wrapper" key={`category-button-wrapper-${text}`}>
                     <Link to={`/search?${text}`}>
                         <img src={process.env.PUBLIC_URL + `/home-page-icons/${text.replace(" ", "-")}.png`}/>
                     </Link>

@@ -31,7 +31,6 @@ const UpdateOrderModal = ({ order, business, cartId }) => {
     const removeItem = (e, orderId) =>{
         e.preventDefault()
         setDeleteIds(prev => [...prev, orderId])
-        console.log(deleteIds)
         return;
     }
 
@@ -44,7 +43,6 @@ const UpdateOrderModal = ({ order, business, cartId }) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log("ids to be deleted:", deleteIds)
         for(let id of deleteIds){
             await dispatch(deleteItem(id));
         }

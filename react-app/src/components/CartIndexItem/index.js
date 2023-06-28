@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux'
 import './CartIndexItem.css'
 
 const CartIndexItem = ({ item, includeImg }) => {
-    const dispatch = useDispatch();
+
     if (!item) return (<></>)
     let previewImage;
     if (includeImg){

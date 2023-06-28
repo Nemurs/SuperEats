@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal.js";
 import { useHistory } from "react-router-dom";
-// import { createNewReviewThunk, loadAllReviewsThunk } from "../../store/singleSpotReviews.js";
-// import { loadOneThunk } from "../../store/singleSpot.js";
 import { authenticate } from "../../store/session";
 import StarRatingInput from "../StarRatingInput";
 import CloseModalButton from "../CloseModalButton";
@@ -20,7 +18,6 @@ const deleteReviewThunk = (reviewId) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors;
         }
     } else {
@@ -49,7 +46,6 @@ const createReviewThunk = (rating, reviewText, userId, businessId, cartId) => as
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors;
         }
     } else {
@@ -75,7 +71,6 @@ const editReviewThunk = (reviewId, rating, reviewText) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors;
         }
     } else {
@@ -102,12 +97,10 @@ const ReviewModal = ({ order, businessId, cartId, isEdit, review }) => {
             if (isEdit) {
                 if (await dispatch(editReviewThunk(review.id, rating, reviewText))){
                     closeModal();
-                    console.log("edit review went through!")
                 }
             } else {
                 if (await dispatch(createReviewThunk(rating, reviewText, user.id, businessId, cartId))){
                     closeModal();
-                    console.log("create review went through!")
                 }
             }
         }
