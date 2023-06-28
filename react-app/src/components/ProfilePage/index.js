@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import ProfilePicture from "../ProfilePicture";
@@ -9,7 +9,6 @@ import "./ProfilePage.css";
 const ProfilePage = () => {
     const user = useSelector(state => state.session.user);
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const editAccount = (e) => {
         e.preventDefault();

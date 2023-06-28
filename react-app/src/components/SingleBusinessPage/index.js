@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams, useLocation } from "react-router-dom";
 import { loadOneBusinessThunk } from "../../store/business";
 import BusinessIndexItem from "../BusinessIndexItem";
 import ItemIndex from "../ItemIndex";
 import "./SingleBusinessPage.css";
-import { useParams, useLocation } from "react-router-dom";
 
 function SingleBusinessPage() {
     const dispatch = useDispatch();
@@ -32,7 +32,6 @@ function SingleBusinessPage() {
     const categories = Object.keys(categorized_items);
 
     const scrollTo = (id) => {
-        console.log(id)
         const section = document.getElementById(`${id}`);
         section.scrollIntoView( { behavior: 'smooth', block: 'center' } );
       };

@@ -1,30 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { shuffle } from "../../utils";
 import { loadAllBusinessesThunk, loadSomeBusinessesThunk } from "../../store/business";
 import BusinessIndex from "../BusinessIndex";
 import Loader from "../Loader";
 import "./SearchIndex.css"
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-}
 
-function shuffle(arr) {
-    let out = [];
-    let visited = new Set([]);
-    let max = arr.length;
-    while (out.length < max) {
-        let idx = getRandomInt(0, max)
-        if (!visited.has(idx)) {
-            visited.add(idx)
-            out.push(arr[idx])
-        }
-    }
-    return out;
-}
 
 const SearchIndex = () => {
     const location = useLocation();
@@ -66,19 +49,14 @@ const SearchIndex = () => {
                 setModifiedBusinesses(prev => {
                     if (prev) {
                         return prev.toSorted((a, b) => Object.values(b.carts).length - Object.values(a.carts).length)
-                    }
-                    return busses.toSorted((a, b) => Object.values(b.carts).length - Object.values(a.carts).length)
+                    }else return busses.toSorted((a, b) => Object.values(b.carts).length - Object.values(a.carts).length)
                 })
                 break;
             case 'Rating':
                 setModifiedBusinesses(prev => {
-                    console.log(prev)
                     if (prev) {
-                        let test = prev.toSorted((a, b) => b.businessRating - a.businessRating)
-                        console.log("after sorting>>>>>", test)
-                        return test
-                    }
-                    return busses.toSorted((a, b) => b.businessRating - a.businessRating)
+                        return prev.toSorted((a, b) => b.businessRating - a.businessRating)
+                    } else return busses.toSorted((a, b) => b.businessRating - a.businessRating)
                 })
                 break;
             case 'Random':

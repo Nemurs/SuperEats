@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import './LoginForm.css';
 import isEmail from "validator/lib/isEmail";
 import isLength from "validator/lib/isLength";
+import './LoginForm.css';
 
 function LoginFormPage() {
   const dispatch = useDispatch();

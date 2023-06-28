@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteOrder } from "../../store/cart";
@@ -8,7 +9,6 @@ import CartIndexItem from "../CartIndexItem";
 import StarRatingInput from "../StarRatingInput";
 import ReviewModal from "../ReviewModal";
 import "./OrderIndexItem.css";
-import { useEffect, useState } from "react";
 
 const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) => {
     const history = useHistory();
@@ -31,11 +31,9 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
         e.preventDefault();
         await dispatch(deleteOrder(cartId));
         await dispatch(authenticate());
-        // history.push(`/orders`);
         return;
     }
 
-    // console.log(review)
 
     return (
         <div className="order-wrapper">
@@ -44,7 +42,6 @@ const OrderIndexItem = ({ order, business, isMostRecent, cartId, reviewProp }) =
                 <div className="order-wrapper-left-text">
                     <div className="order-wrapper-left-top-text">
                         <h3>{order.businessName}</h3>
-                        {/* {console.log(review)} */}
                         {review ? (<StarRatingInput rating={review.rating} disabled={true} />) : (<StarRatingInput rating={0} disabled={true} />)}
 
                     </div>
