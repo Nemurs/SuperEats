@@ -7,6 +7,17 @@ Please visit my website at:
 
 ![Splash Page](https://github.com/Nemurs/SuperEats/assets/118857412/0f8fb9c5-fdd9-4f57-8c2b-6cd90034a46e)
 
+## \~Home Page~
+<img width="1678" alt="Screen Shot 2023-06-29 at 9 19 46 PM" src="https://github.com/Nemurs/SuperEats/assets/118857412/7060a872-5812-4d04-9431-9315187b7a84">
+
+
+## \~Orders~
+<img width="1678" alt="Screen Shot 2023-06-29 at 9 21 09 PM" src="https://github.com/Nemurs/SuperEats/assets/118857412/e18c02cf-90e2-40b8-8ea8-99809ed63b71">
+
+
+## \~User Profile Page~
+<img width="1678" alt="Screen Shot 2023-06-29 at 9 20 39 PM" src="https://github.com/Nemurs/SuperEats/assets/118857412/1bc31783-2d11-4c8c-98d6-acdf4c376fc1">
+
 
 For more info about this project please check out my [wiki]!
 
