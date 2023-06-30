@@ -401,6 +401,7 @@ Error Response 403: Unauthorized
 {
     "errors": "can only delete your own cart"
 }
+```
 
 ________________
 ### DELETE api/order/:orderId
