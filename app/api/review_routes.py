@@ -15,7 +15,7 @@ def make_review():
     data = request.get_json()
     # print("THIS IS THE REQUEST ------->", data)
     if (server_id != data["user_id"]):
-        return {'errors': "bad user_id"}, 401
+        return {'errors': "bad user_id"}, 403
 
     #create review
     form = ReviewForm()
@@ -43,7 +43,7 @@ def edit_review(review_id):
     rev = Review.query.get(review_id)
     #Check that user owns the review
     if (server_id != rev.user_id):
-        return {'errors': "bad user_id"}, 401
+        return {'errors': "can only edit your own review"}, 403
 
     #Edit review
     form = ReviewEditForm()
@@ -70,7 +70,7 @@ def delete_review(review_id):
     if not server_review:
         return {'errors': "review not found"}, 400
     if (server_id != server_review.user_id):
-        return {'errors': "can only delete your own review"}, 401
+        return {'errors': "can only delete your own review"}, 403
 
     #delete review
     db.session.delete(server_review)

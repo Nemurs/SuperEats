@@ -41,6 +41,8 @@ def delete_cart(cart_id):
     # print("THIS IS THE REQUEST ------->", data)
     if (not server_cart):
         return {'errors': "cart not found"}, 400
+    if (server_id != server_cart.user_id):
+        return {'errors': "can only delete your own cart"}, 403
 
     #delete cart
     db.session.delete(server_cart)
@@ -60,7 +62,7 @@ def delete_order(order_id):
     if not server_order:
         return {'errors': "order not found"}, 400
     if (server_id != server_order.cart_info.user_id):
-        return {'errors': "can only delete your own order"}, 400
+        return {'errors': "can only delete your own order"}, 403
 
     #delete order
     db.session.delete(server_order)
